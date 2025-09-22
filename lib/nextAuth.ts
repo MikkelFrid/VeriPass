@@ -217,15 +217,8 @@ if (isAuthProviderEnabled('idp-initiated')) {
 if (isAuthProviderEnabled('email')) {
   providers.push(
     EmailProvider({
-      server: {
-        host: env.smtp.host,
-        port: env.smtp.port,
-        auth: {
-          user: env.smtp.user,
-          pass: env.smtp.password,
-        },
-      },
-      from: env.smtp.from,
+      // No SMTP; we send via Resend API inside sendMagicLink()
+      from: env.email.from,
       maxAge: 1 * 60 * 60, // 1 hour
       sendVerificationRequest: async ({ identifier, url }) => {
         await sendMagicLink(identifier, url);

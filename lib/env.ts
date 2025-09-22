@@ -1,3 +1,4 @@
+// lib/env.ts
 import type { SessionStrategy } from 'next-auth';
 
 const env = {
@@ -6,13 +7,22 @@ const env = {
   redirectIfAuthenticated: '/dashboard',
   securityHeadersEnabled: process.env.SECURITY_HEADERS_ENABLED ?? false,
 
-  // SMTP configuration for NextAuth
+  // SMTP configuration (legacy; no longer used for magic links, but keep for other mailers if any)
   smtp: {
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
     user: process.env.SMTP_USER,
     password: process.env.SMTP_PASSWORD,
     from: process.env.SMTP_FROM,
+  },
+
+  // ✨ Resend (API) + generic email "from" (preferred for magic links)
+  resend: {
+    apiKey: process.env.RESEND_API_KEY || '',
+  },
+  email: {
+    // Prefer EMAIL_FROM; fall back to SMTP_FROM if you want to reuse the same value
+    from: process.env.EMAIL_FROM || process.env.SMTP_FROM || '',
   },
 
   // NextAuth configuration
@@ -82,6 +92,7 @@ const env = {
   disableNonBusinessEmailSignup:
     process.env.DISABLE_NON_BUSINESS_EMAIL_SIGNUP === 'true',
 
+  // NOTE: default kept as-is; you’ll enable "email" via AUTH_PROVIDERS in .env
   authProviders: process.env.AUTH_PROVIDERS || 'github,credentials',
 
   otel: {
