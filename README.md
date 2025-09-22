@@ -1,271 +1,291 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/boxyhq/jackson/assets/66887028/871d9c0f-d351-49bb-9458-2542830d7910">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/boxyhq/jackson/assets/66887028/4073c181-0653-4d5b-b74f-e7e84fe79da8">
-  <img alt="BoxyHQ Banner" src="https://github.com/boxyhq/jackson/assets/66887028/b40520b7-dbce-400b-88d3-400d1c215ea1">
-</picture>
-
-# ⭐ Enterprise SaaS Starter Kit
+VeriPass ProductLink
 
-<p>
-    <a href="https://github.com/boxyhq/saas-starter-kit/stargazers"><img src="https://img.shields.io/github/stars/boxyhq/saas-starter-kit" alt="Github stargazers"></a>
-    <a href="https://github.com/boxyhq/saas-starter-kit/issues"><img src="https://img.shields.io/github/issues/boxyhq/saas-starter-kit" alt="Github issues"></a>
-    <a href="https://github.com/boxyhq/saas-starter-kit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/boxyhq/saas-starter-kit" alt="license"></a>
-    <a href="https://twitter.com/BoxyHQ"><img src="https://img.shields.io/twitter/follow/BoxyHQ?style=social" alt="Twitter"></a>
-    <a href="https://www.linkedin.com/company/boxyhq"><img src="https://img.shields.io/badge/LinkedIn-blue" alt="LinkedIn"></a>
-    <a href="https://discord.gg/uyb7pYt4Pa"><img src="https://img.shields.io/discord/877585485235630130" alt="Discord"></a>
-</p>
+Digital Product Passport (DPP) platform for SMEs — built on Next.js 15, Prisma + Postgres (Neon), NextAuth (Resend magic link), Tailwind v4 + shadcn/ui. Deployed on Vercel.
 
-The Open Source Next.js SaaS boilerplate for Enterprise SaaS app development.
+Focus: product data handling → standardization → QR/NFC → public/private pages.
+Not an ESG calculator.
 
-Please star ⭐ the repo if you want us to continue developing and improving the SaaS Starter Kit! 😀
+⸻
 
-## 📖 Additional Resources
+🧭 Project Structure (high level)
 
-Video - [BoxyHQ's SaaS Starter Kit: Your Ultimate Enterprise-Compliant Boilerplate](https://www.youtube.com/watch?v=oF8QIwQIhyo) <br>
-Blog - [Enterprise-ready Saas Starter Kit](https://boxyhq.com/blog/enterprise-ready-saas-starter-kit)
+src/
+  app/                 # App Router (Next.js 15)
+  components/          # UI + shared components (shadcn/Catalyst-inspired)
+  lib/                 # server/client helpers
+  styles/              # Tailwind, globals
+prisma/
+  schema.prisma        # DB schema
+  migrations/          # Prisma migrations
+  seed.ts              # (Milestone 1) idempotent seed script
+public/                # static assets
+prompts/               # reusable prompts for new chats
+README.md
+commands.md            # quick command cheatsheet (optional)
+
+
+⸻
+
+🚦 Ways of Working
+	1.	One feature = one branch + one PR
+	•	Start with a short file map + schema/types outline.
+	•	Implement step-by-step; keep PRs shippable.
+	2.	Assistant helps plan & review
+	•	File-by-file outlines, Zod schemas, shadcn component choices.
+	•	Catch a11y issues, type-safety gaps, Tailwind bloat.
+	•	Focused refactors only (no sweeping rewrites).
+	3.	Standards
+	•	Type-safe props everywhere.
+	•	Use src/components/link.tsx for internal navigation.
+	•	Prefer shadcn/Catalyst components with Tailwind classes.
+	•	Minimal external deps; justify additions in PR description.
+	4.	Deployment
+	•	Vercel auto-deploys preview for PRs, main → production.
+	•	Every PR should look correct on its preview URL.
+	5.	Docs
+	•	Keep README.md and commands.md current.
+	•	Store reusable chat prompts in /prompts.
 
-Next.js-based SaaS starter kit saves you months of development by starting you off with all the features that are the same in every product, so you can focus on what makes your app unique.
+⸻
 
-## 🛠️ Built With
+⚙️ Requirements
+	•	Node.js 20+ (or 18+, but we standardize on 20)
+	•	pnpm (recommended) or npm
+	•	Postgres (Neon recommended)
+	•	Vercel account (for deploy + env)
 
-- [Next.js](https://nextjs.org)
-  This is a React framework that provides features such as server-side rendering and static site generation. It's used for building the user interface of your application. The main configuration for Next.js can be found in `next.config.js`.
-- [Tailwind CSS](https://tailwindcss.com)
-  This is a utility-first CSS framework for rapidly building custom user interfaces. It's used for styling the application. The configuration for Tailwind CSS can be found in `postcss.config.js`.
-- [Postgres](https://www.postgresql.org)
-  This is a powerful, open source object-relational database system. It's used for storing application data. The connection to Postgres is likely managed through Prisma.
-- [React](https://reactjs.org)
-  This is a JavaScript library for building user interfaces. It's used for creating the interactive elements of your application. The React components are located in the components directory.
-- [Prisma](https://www.prisma.io)
-  This is an open-source database toolkit. It's used for object-relational mapping, which simplifies the process of writing database queries. Prisma configuration and schema can be found in the prisma directory.
-- [TypeScript](https://www.typescriptlang.org)
-  This is a typed superset of JavaScript that compiles to plain JavaScript. It's used to make the code more robust and maintainable. TypeScript definitions and configurations can be found in files like `next-env.d.ts` and `i18next.d.ts`.
-- [SAML Jackson](https://github.com/boxyhq/jackson) (Provides SAML SSO, Directory Sync)
-  This is a service for handling SAML SSO (Single Sign-On). It's used to allow users to sign in with a single ID and password to any of several related systems i.e (using a single set of credentials). The implementation of SAML Jackson is primarily located within the files associated with authentication.
-- [Svix](https://www.svix.com/) (Provides Webhook Orchestration)
-  This is a service for handling webhooks. It's used to emit events on user/team CRUD operations, which can then be caught and handled by other parts of the application or external services. The integration of Svix is distributed throughout the codebase, primarily in areas where Create, Read, Update, and Delete (CRUD) operations are executed.
-- [Retraced](https://github.com/retracedhq/retraced) (Provides Audit Logs Service)
-  This is a service for audit logging and data visibility. It helps track user activities within the application i.e (who did what and when in the application). The usage of Retraced would be dispersed throughout the codebase, likely in the files where important actions are performed.
-- [Stripe](https://stripe.com) (Provides Payments)
-  This is a service for handling payments. It's used to process payments for the application. The integration of Stripe is likely found in the files associated with billing and subscriptions.
-- [Playwright](https://playwright.dev) (Provides E2E tests)
-  This is a Node.js library for automating browsers. It's used to run end-to-end tests on the application. The Playwright configuration and tests can be found in the tests directory.
-- [Docker](https://www.docker.com) (Provides Docker Compose)
-  This is a platform for developing, shipping, and running applications. It's used to containerize the application and its dependencies. The Docker configuration can be found in the Dockerfile and docker-compose.yml.
-- [NextAuth.js](https://next-auth.js.org) (Provides Authentication)
-  This is a complete open-source authentication solution for Next.js applications. It's used to handle user authentication and authorization. The NextAuth.js configuration and providers can be found in the `pages/api/auth/[...nextauth].ts` file.
+⸻
 
-## 🚀 Deployment
+🔐 Environment Variables
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fboxyhq%2Fsaas-starter-kit&env=NEXTAUTH_SECRET,SMTP_HOST,SMTP_PORT,SMTP_USER,SMTP_PASSWORD,SMTP_FROM,DATABASE_URL,APP_URL">
-<img width="90" alt="Deploy with Vercel" src="https://vercel.com/button" />
-</a>
+Create .env.local for local dev (Vercel manages prod/stage env). Example:
 
-<a href="https://heroku.com/deploy" alt="Deploy to Heroku">
-<img alt="Deploy to Heroku" src="https://www.herokucdn.com/deploy/button.svg" />
-</a>
+# App
+APP_URL=http://localhost:3000
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=change-me # openssl rand -base64 32
 
-<a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/boxyhq/saas-starter-kit/tree/main" alt="Deploy to DO">
-<img width="200" alt="Deploy to DO" src="https://www.deploytodo.com/do-btn-blue-ghost.svg" />
-</a>
+# Database (Neon)
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DB?sslmode=require
 
-## ✨ Getting Started
+# Email (Resend)
+RESEND_API_KEY=re_********************************
+EMAIL_FROM="VeriPass <login@veripass.dev>"
 
-Please follow these simple steps to get a local copy up and running.
+# Optional (branding toggles, analytics, etc.)
+# NEXT_PUBLIC_BRAND_NAME=VeriPass
 
-### Prerequisites
+Vercel: set the same variables in the Project → Settings → Environment Variables (preview & production).
 
-- Node.js (Version: >=18.x)
-- PostgreSQL
-- NPM
-- Docker compose
+⸻
 
-### Development
+🛠️ Install & Run (Local)
 
-#### 1. Setup
+# 1) Install deps
+pnpm install
 
-- [Fork](https://github.com/boxyhq/saas-starter-kit/fork) the repository
-- Clone the repository by using this command:
+# 2) Generate Prisma client
+pnpm prisma:generate
 
-```bash
-git clone https://github.com/<your_github_username>/saas-starter-kit.git
-```
+# 3) Run migrations (or baseline first if starting fresh)
+pnpm prisma:migrate
 
-#### 2. Go to the project folder
+# 4) (Milestone 1) Seed demo data (SUPERADMIN + Demo org + products)
+pnpm prisma:seed
 
-```bash
-cd saas-starter-kit
-```
+# 5) Start dev server (Turbopack)
+pnpm dev
 
-#### 3. Install dependencies
+# open http://localhost:3000
 
-```bash
-npm install
-```
+Common package.json scripts (expected):
 
-#### 4. Set up your .env file
+{
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "tsx prisma/seed.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}
 
-Duplicate `.env.example` to `.env`.
+If you prefer Prisma’s native hook, add "prisma": { "seed": "tsx prisma/seed.ts" } and run pnpm prisma db seed.
 
-```bash
-cp .env.example .env
-```
+⸻
 
-#### 5. Create a database (Optional)
+🧾 Database Workflow (Prisma)
+	•	Edit prisma/schema.prisma
+	•	Create a migration (local dev):
 
-To make the process of installing dependencies easier, we offer a `docker-compose.yml` with a Postgres container.
+pnpm prisma:migrate
 
-```bash
-docker-compose up -d
-```
 
-#### 6. Set up database schema
+	•	Push to prod/stage (Vercel):
+	•	Add migration to repo and merge to main.
+	•	Vercel build runs; then run:
 
-```bash
-npx prisma db push
-```
+pnpm prisma:deploy
 
-#### 7. Start the server
+(either via Vercel job/cron/action or a one-off shell on your managed DB runner)
 
-In a development environment:
+	•	Inspect data with Prisma Studio:
 
-```bash
-npm run dev
-```
+pnpm prisma:studio
 
-#### 8. Start the Prisma Studio
 
-Prisma Studio is a visual editor for the data in your database.
 
-```bash
-npx prisma studio
-```
+⸻
 
-#### 9. Testing
+🔑 Auth (NextAuth) — Email Magic Link via Resend
+	•	NEXTAUTH_SECRET set (generate with openssl rand -base64 32).
+	•	Resend configured:
+	•	Set RESEND_API_KEY and EMAIL_FROM (domain authenticated in Resend).
+	•	For local dev, use a dev.veripass.local sender or similar.
+	•	(Optional) Add social providers later (GitHub/Google) if needed.
 
-We are using [Playwright](https://playwright.dev/) to execute E2E tests. Add all tests inside the `/tests` folder.
+⸻
 
-Update `playwright.config.ts` to change the playwright configuration.
+✉️ Email (Resend)
+	•	Domain setup in Resend (SPF/DKIM/Return-Path).
+	•	Magic link templates live in src/lib/email (or similar).
+	•	In dev, inspect logs for magic link URLs.
+	•	In prod, links use APP_URL (set per environment).
 
-##### Install Playwright dependencies
+⸻
 
-```bash
-npm run playwright:update
-```
+🧩 UI & Styling
+	•	Tailwind v4 with project tokens:
+	•	Use brand tokens like bg-brand, text-brand-strong, bg-muted.
+	•	shadcn/ui for primitives.
+	•	Follow our design preferences:
+	•	Clean, minimal, rounded-2xl, single-pixel rings.
+	•	High-contrast focus states.
+	•	Dark mode supported.
 
-##### Run E2E tests
+⸻
 
-```bash
-npm run test:e2e
-```
+🚀 Deployment (Vercel)
+	•	Repo connected to Vercel.
+	•	PR → Preview, main → Production.
+	•	Ensure ENV vars are present for preview & prod.
+	•	After schema changes merged to main, run pnpm prisma:deploy against prod DB.
 
-_Note: HTML test report is generated inside the `report` folder. Currently supported browsers for test execution `chromium` and `firefox`_
+⸻
 
-## ⚙️ Feature configuration
+🌱 Seeding (Milestone 1)
+	•	prisma/seed.ts (idempotent):
+	•	Creates SUPERADMIN user (email from SEED_SUPERADMIN_EMAIL or default).
+	•	Creates demo org “Demo Bikes A/S”.
+	•	Seeds a couple of sample products.
+	•	Run:
 
-To get started you only need to configure the database by following the steps above. For more advanced features, you can configure the following:
+pnpm prisma:seed
 
-### Authentication with NextAuth.js
 
-The default login options are email and GitHub. Configure below:
 
-1. Generate a secret key for NextAuth.js by running `openssl rand -base64 32` and adding it to the `.env` file as `NEXTAUTH_SECRET`.
-2. For email login, configure the `SMTP_*` environment variables in the `.env` file to send magic link login emails. You can use services like [AWS SES](https://aws.amazon.com/ses/), [Sendgrid](https://sendgrid.com/) or [Resend](https://resend.com/).
-3. For social login with GitHub and Google, you need to create OAuth apps in the respective developer consoles and add the client ID and secret to the `.env` file. The default is email login and For GitHub, follow the instructions [here](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app). For Google, follow the instructions [here](https://support.google.com/cloud/answer/6158849?hl=en).
+⸻
 
-### Svix Webhooks
+🔀 Branching & PRs
+	•	Create a branch per feature:
 
-1. Create an account on [Svix](https://www.svix.com/)
-2. The authenticaton token and add `SVIX_API_KEY` to the `.env` file.
+git checkout -b feature/<short-name>
 
-### Stripe Payments
 
-1. Create an account on [Stripe](https://stripe.com/)
-2. Add the [Stripe API secret key](https://dashboard.stripe.com/apikeys) to the `.env` file as `STRIPE_SECRET_KEY`.
-3. Create a webhook in the [Stripe dashboard](https://dashboard.stripe.com/webhooks). The URL is your app hostname plus `/api/webhooks/stripe`. If you want to set this up locally you will need to use the [Stripe CLI forwarder](https://docs.stripe.com/webhooks#test-webhook).
-4. Once created, add the signing secret to the `.env` file as `STRIPE_WEBHOOK_SECRET`.
+	•	Keep changes focused; include migration if schema changes.
+	•	Push and open a PR; verify the Vercel preview.
+	•	Merge via squash/merge; main auto-deploys.
 
-### Recaptcha
+PR checklist
+	•	File map & rationale in description
+	•	Types & Zod schemas added/updated
+	•	a11y (labels, roles, keyboard nav)
+	•	Tailwind classes tidy; no unused styles
+	•	README.md / commands.md updated if needed
+	•	Works on Vercel preview
 
-1. Create an account on [Google reCAPTCHA](https://www.google.com/recaptcha/admin/enterprise). This will create a Google Cloud account if you don't have one.
-2. From the Key Details in the [Google Cloud Console](https://console.cloud.google.com/security/recaptcha), add the reCAPTCHA ID to the `.env` file as `RECAPTCHA_SITE_KEY`.
-3. Click Key Details > Integration then click Use legacy key to get the secret key and add it to the `.env` file as `RECAPTCHA_SECRET_KEY`.
+⸻
 
-### Sentry
+🧹 Code Quality
 
-1. Create an account on [Sentry](https://sentry.io/), skip the onboarding and create a new Next.js project.
-2. At the bottom of the page, get the DSN and add it to the `.env` file as `SENTRY_DSN`. The other variables are optional.
+pnpm typecheck
+pnpm lint
+pnpm format
 
-#### Fully customizable boilerplate out of the box, see images below 👇👇👇
+	•	Prefer small, composable components.
+	•	Avoid global mutable state; prefer server actions or tRPC/REST modules with clear boundaries.
+	•	Error handling with toasts + inline form messages.
 
-![saas-starter-kit-poster](/public/saas-starter-kit-poster.png)
+⸻
 
-## 🥇 Features
+🧪 Testing (optional to start)
+	•	Add tests under tests/ as we grow.
+	•	Consider Playwright for E2E and Vitest/Jest for unit tests.
 
-- Create account
-- Sign in with Email and Password
-- Sign in with Magic Link
-- Sign in with SAML SSO
-- Sign in with Google [[Setting up Google OAuth](https://support.google.com/cloud/answer/6158849?hl=en)]
-- Sign in with GitHub [[Creating a Github OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)]
-- Directory Sync (SCIM)
-- Update account
-- Create team
-- Delete team
-- Invite users to the team
-- Manage team members
-- Update team settings
-- Webhooks & Events
-- Internationalization
-- Audit logs
-- Roles and Permissions
-- Dark mode
-- Email notifications
-- E2E tests
-- Docker compose
-- Prisma Studio
-- Update member role
-- Directory Sync Events
-- Avatar Upload
-- SAML SSO
-- Audit Log
-- Webhook
-- Payments
-- Security Headers
+⸻
 
-## ➡️ Coming Soon
+🩺 Troubleshooting
 
-- Billing & subscriptions
-- Unit and integration tests
+I can’t log in (no email received).
+	•	Check RESEND_API_KEY / domain verification.
+	•	In dev, check server logs for magic link URL.
 
-## ✨ Contributing
+Prisma migration errors.
+	•	Ensure local DATABASE_URL points to the right Neon branch.
+	•	Regenerate client: pnpm prisma:generate.
+	•	If you changed models, create a new migration: pnpm prisma:migrate.
 
-Thanks for taking the time to contribute! Contributions make the open-source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+Vercel build fails.
+	•	Missing env var → set in Vercel Project Settings → redeploy.
+	•	Type errors → run pnpm typecheck locally.
 
-Please try to create bug reports that are:
+⸻
 
-- _Reproducible._ Include steps to reproduce the problem.
-- _Specific._ Include as much detail as possible: which version, what environment, etc.
-- _Unique._ Do not duplicate existing opened issues.
-- _Scoped to a Single Bug._ One bug per report.
+📁 Prompts
 
-[Contributing Guide](https://github.com/boxyhq/saas-starter-kit/blob/main/CONTRIBUTING.md)
+Reusable starter prompts live in /prompts.
+Use them to bootstrap new chats with the exact project context & workflow.
 
-## 🤩 Community
+⸻
 
-- [Discord](https://discord.gg/uyb7pYt4Pa) (For live discussion with the Open-Source Community and BoxyHQ team)
-- [Twitter](https://twitter.com/BoxyHQ) / [LinkedIn](https://www.linkedin.com/company/boxyhq) (Follow us)
-- [Youtube](https://www.youtube.com/@boxyhq) (Watch community events and tutorials)
-- [GitHub Issues](https://github.com/boxyhq/saas-starter-kit/issues) (Contributions, report issues, and product ideas)
+📜 License
 
-## 🌍 Contributors
+Private (© VeriPass). Do not distribute.
 
-<a href="https://github.com/boxyhq/saas-starter-kit/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=boxyhq/saas-starter-kit" />
-</a>
+⸻
 
-Made with [contrib.rocks](https://contrib.rocks).
+(Optional) commands.md
 
-## 🛡️ License
+If you want a quick cheatsheet, create commands.md with:
 
-[Apache 2.0 License](https://github.com/boxyhq/saas-starter-kit/blob/main/LICENSE)
+# Commands
+
+## Dev
+pnpm install
+pnpm dev
+
+## Prisma
+pnpm prisma:generate
+pnpm prisma:migrate
+pnpm prisma:deploy
+pnpm prisma:studio
+pnpm prisma:seed
+
+## Quality
+pnpm typecheck
+pnpm lint
+pnpm format
+
+## Build/Start
+pnpm build
+pnpm start
+
