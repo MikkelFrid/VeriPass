@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox } from 'react-daisyui';
+import { Checkbox } from '@/components/ui/daisy';
 
 const CheckboxComponent = ({
   onChange,

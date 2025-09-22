@@ -1,47 +1,101 @@
-import React from 'react';
+import * as React from 'react';
+import clsx from 'clsx';
 
-const Card = ({ children }: { children: React.ReactNode }) => {
+type DivProps = React.HTMLAttributes<HTMLDivElement>;
+
+interface RootProps extends DivProps {}
+
+const Root = ({ children, className, ...props }: RootProps) => {
   return (
-    <div className="card w-full border border-rounded dark:bg-black dark:border-gray-600">
+    <div
+      className={clsx(
+        'card w-full rounded border bg-base-100 shadow',
+        // your previous dark styles
+        'dark:bg-black dark:border-gray-600',
+        className
+      )}
+      {...props}
+    >
       {children}
     </div>
   );
 };
 
-const Title = ({ children }: { children: React.ReactNode }) => {
+interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  tag?: keyof JSX.IntrinsicElements; // support <Card.Title tag="h2" />
+}
+
+const Title = ({ children, className, tag = 'h2', ...props }: TitleProps) => {
+  const Comp = tag as any;
   return (
-    <h2 className="card-title text-xl font-medium leading-none tracking-tight">
+    <Comp
+      className={clsx(
+        'card-title text-xl font-medium leading-none tracking-tight',
+        className
+      )}
+      {...props}
+    >
       {children}
-    </h2>
+    </Comp>
   );
 };
 
-const Description = ({ children }: { children: React.ReactNode }) => {
+const Description = ({
+  children,
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className="text-gray-600 dark:text-gray-400 text-sm">{children}</div>
-  );
-};
-
-const Header = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex gap-2 flex-col">{children}</div>;
-};
-
-const Body = ({ children }: { children: React.ReactNode }) => {
-  return <div className="card-body dark:bg-black gap-4 p-6">{children}</div>;
-};
-
-const Footer = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="card-actions justify-end dark:border-gray-600 p-2 border-t bg-gray-50 dark:bg-black">
+    <div
+      className={clsx('text-gray-600 dark:text-gray-400 text-sm', className)}
+      {...props}
+    >
       {children}
     </div>
   );
 };
 
-Card.Body = Body;
-Card.Title = Title;
-Card.Description = Description;
-Card.Header = Header;
-Card.Footer = Footer;
+const Header = ({ children, className, ...props }: DivProps) => {
+  return (
+    <div className={clsx('flex flex-col gap-2', className)} {...props}>
+      {children}
+    </div>
+  );
+};
+
+const Body = ({ children, className, ...props }: DivProps) => {
+  return (
+    <div
+      className={clsx('card-body gap-4 p-6 dark:bg-black', className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+const Footer = ({ children, className, ...props }: DivProps) => {
+  return (
+    <div
+      className={clsx(
+        'card-actions justify-end border-t bg-gray-50 p-2',
+        'dark:border-gray-600 dark:bg-black',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Namespace export for Card.Body, Card.Title, etc.
+export const Card = Object.assign(Root, {
+  Body,
+  Title,
+  Description,
+  Header,
+  Footer,
+});
 
 export default Card;

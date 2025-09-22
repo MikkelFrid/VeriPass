@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { Button } from 'react-daisyui';
+import { Button } from '@/components/ui/daisy';
 import { useTranslation } from 'next-i18next';
 
 import useTeam from 'hooks/useTeam';

@@ -1,10 +1,9 @@
 import { useTranslation } from 'next-i18next';
-import { Card } from 'react-daisyui';
-
 import faqs from './data/faq.json';
 
 const FAQSection = () => {
   const { t } = useTranslation('common');
+
   return (
     <section className="py-6">
       <div className="flex flex-col justify-center space-y-6">
@@ -15,18 +14,20 @@ const FAQSection = () => {
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.
         </p>
+
         <div className="flex items-center justify-center">
-          <div className="grid grid-cols-1 gap-2">
-            {faqs.map((faq, index) => {
-              return (
-                <Card key={index} className="border-none">
-                  <Card.Body className="items-left dark:border-gray-200 border border-gray-300">
-                    <Card.Title tag="h2">Q. {faq.question}</Card.Title>
-                    <p>A. {faq.answer}</p>
-                  </Card.Body>
-                </Card>
-              );
-            })}
+          <div className="grid grid-cols-1 gap-2 w-full max-w-2xl">
+            {faqs.map((faq, index) => (
+              <article
+                key={index}
+                className="card bg-base-100 shadow border border-gray-300 dark:border-gray-200"
+              >
+                <div className="card-body">
+                  <h3 className="card-title">Q. {faq.question}</h3>
+                  <p>A. {faq.answer}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>

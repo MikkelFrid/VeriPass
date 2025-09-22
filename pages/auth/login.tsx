@@ -6,11 +6,11 @@ import type {
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { useFormik } from 'formik';
-import { Button } from 'react-daisyui';
+import { Button } from '@/components/ui/daisy';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { type ReactElement, useEffect, useState, useRef } from 'react';
-import type { ComponentStatus } from 'react-daisyui/dist/types';
+import type { Status } from '@/components/ui/daisy';
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -30,7 +30,7 @@ import { maxLengthPolicies } from '@/lib/common';
 
 interface Message {
   text: string | null;
-  status: ComponentStatus | null;
+  status: Status | null;
 }
 
 const Login: NextPageWithLayout<

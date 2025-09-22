@@ -1,7 +1,7 @@
-import { Button } from 'react-daisyui';
+import { Button } from '@/components/ui/daisy';
 import type { GetServerSidePropsContext } from 'next';
 import { useState, type ReactElement, useEffect } from 'react';
-import type { ComponentStatus } from 'react-daisyui/dist/types';
+import type { Status } from '@/components/ui/daisy';
 import { useTranslation } from 'next-i18next';
 
 import {
@@ -24,7 +24,7 @@ interface UnlockAccountProps {
 
 interface Message {
   text: string | null;
-  status: ComponentStatus | null;
+  status: Status | null;
 }
 
 const UnlockAccount = ({

@@ -165,12 +165,17 @@ pnpm prisma:studio
 
 🧩 UI & Styling
 	•	Tailwind v4 with project tokens:
+	 	- `styles/globals.css` uses `@import "tailwindcss";` and `@plugin "daisyui";`
+  		- Minimal `tailwind.config.js` (no DaisyUI plugin require)
+	•   DaisyUI v5 themes via `data-theme` (`corporate`/`black`). See `pages/_app.tsx` & `pages/_document.tsx`.
+	•   Removed `react-daisyui`. A light shim lives at `components/ui/daisy.tsx`.
 	•	Use brand tokens like bg-brand, text-brand-strong, bg-muted.
 	•	shadcn/ui for primitives.
 	•	Follow our design preferences:
 	•	Clean, minimal, rounded-2xl, single-pixel rings.
 	•	High-contrast focus states.
 	•	Dark mode supported.
+
 
 ⸻
 
@@ -289,3 +294,8 @@ pnpm format
 pnpm build
 pnpm start
 
+Local dev:
+- `pnpm dev`
+
+CI/Deploy:
+- Tailwind v4 needs build-script approval. We run `pnpm approve-builds -y` via `postinstall`.

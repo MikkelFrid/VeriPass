@@ -3,7 +3,7 @@ import { mutate } from 'swr';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import React, { useState } from 'react';
-import { Button, Input } from 'react-daisyui';
+import { Button, Input } from '@/components/ui/daisy';
 import { useTranslation } from 'next-i18next';
 
 import type { ApiResponse } from 'types';

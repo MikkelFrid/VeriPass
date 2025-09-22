@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui";
 
 :root {
   color-scheme: dark light;
@@ -36,7 +35,7 @@ a {
 @layer base {
   input:not([type='checkbox']):not([type='radio']),
   textarea {
-    @apply rounded !important;
+    @apply !rounded;
   }
 }
 

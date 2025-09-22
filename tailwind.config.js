@@ -1,14 +1,15 @@
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-  darkMode: 'class',
+  // v4 doesn’t need mode: 'jit' or darkMode here unless you want 'media' vs 'class'
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    'node_modules/daisyui/dist/**/*.js',
-    'node_modules/react-daisyui/dist/**/*.js',
+    './app/**/*.{ts,tsx,js,jsx}',
+    './src/**/*.{ts,tsx,js,jsx}',
+    './components/**/*.{ts,tsx,js,jsx}',
   ],
-  daisyui: {
-    themes: ['corporate', 'black'],
+  theme: {
+    extend: {},
   },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  // IMPORTANT: no require('daisyui') here on v5 — plugin is added in CSS via @plugin
+  plugins: [],
 };

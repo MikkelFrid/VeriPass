@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { BadgeProps, Badge as BaseBadge } from 'react-daisyui';
+import { BadgeProps, Badge as BaseBadge } from '@/components/ui/daisy';
 
 const Badge = (props: BadgeProps) => {
   const { children, className } = props;

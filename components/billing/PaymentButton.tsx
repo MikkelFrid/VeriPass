@@ -1,4 +1,4 @@
-import { Button } from 'react-daisyui';
+import { Button } from '@/components/ui/daisy';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 import { Price, Prisma, Service } from '@prisma/client';

@@ -7,8 +7,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, type ReactElement, useEffect } from 'react';
-import { Button } from 'react-daisyui';
-import type { ComponentStatus } from 'react-daisyui/dist/types';
+import { Button } from '@/components/ui/daisy';
+import type { Status } from '@/components/ui/daisy';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { ApiResponse, NextPageWithLayout } from 'types';
@@ -21,7 +21,7 @@ const VerifyAccount: NextPageWithLayout<
   const { t } = useTranslation('common');
   const [message, setMessage] = useState<{
     text: string | null;
-    status: ComponentStatus | null;
+    status: Status | null;
   }>({
     text: null,
     status: null,

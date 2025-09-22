@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { Button, Input } from 'react-daisyui';
+import { Button, Input } from '@/components/ui/daisy';
 
 import type { ApiResponse } from 'types';
 import { Card } from '@/components/shared';

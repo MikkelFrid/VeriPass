@@ -1,4 +1,4 @@
-import { Input, InputProps } from 'react-daisyui';
+import { Input, InputProps } from '@/components/ui/daisy';
 
 import { CopyToClipboardButton } from '@/components/shared';
 

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
-import { Button } from 'react-daisyui';
+import { Button } from '@/components/ui/daisy';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 

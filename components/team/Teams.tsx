@@ -5,7 +5,7 @@ import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Button } from 'react-daisyui';
+import { Button } from '@/components/ui/daisy';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import { useRouter } from 'next/router';
