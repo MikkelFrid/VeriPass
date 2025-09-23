@@ -6,21 +6,20 @@ import { Loader2 } from 'lucide-react';
 import * as React from 'react';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium shadow-sm ring-1 ring-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60 disabled:pointer-events-none active:translate-y-px data-[state=open]:bg-muted',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium shadow-sm ring-1 ring-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60 disabled:pointer-events-none active:translate-y-px data-[state=open]:bg-muted [&_*]:text-inherit',
   {
     variants: {
       variant: {
-        brand:
-          'bg-brand text-brand-foreground hover:bg-brand/90 focus-visible:ring-brand',
+        brand: 'bg-brand text-white hover:bg-brand/90 focus-visible:ring-brand',
         primary:
-          'bg-brand text-brand-foreground hover:bg-brand/90 focus-visible:ring-brand',
+          'bg-brand text-white hover:bg-brand/90 focus-visible:ring-brand',
         secondary:
-          'bg-muted text-foreground hover:bg-muted/80 focus-visible:ring-muted',
+          'bg-muted text-muted-foreground hover:bg-muted/80 focus-visible:ring-muted',
         outline:
           'bg-transparent text-foreground border border-border hover:bg-muted/60',
         ghost: 'bg-transparent text-foreground hover:bg-muted/60',
         destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive',
+          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive',
         link: 'bg-transparent underline underline-offset-4 text-foreground hover:no-underline',
       },
       size: {

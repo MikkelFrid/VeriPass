@@ -208,6 +208,19 @@ a {
   #__next {
     @apply h-full;
   }
+
+  /* Ensure readable text on buttons even when rendered as <a> via asChild */
+  a[data-variant='brand'],
+  button[data-variant='brand'],
+  a[data-variant='primary'],
+  button[data-variant='primary'] {
+    color: #fff !important;
+  }
+
+  a[data-variant='destructive'],
+  button[data-variant='destructive'] {
+    color: var(--destructive-foreground) !important;
+  }
 }
 
 /* Helpers */

@@ -1,7 +1,7 @@
 import micromatch from 'micromatch';
 import { getToken } from 'next-auth/jwt';
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import env from './lib/env';
 
@@ -57,6 +57,8 @@ const generateCSP = (): string => {
 
 // Add routes that don't require authentication
 const unAuthenticatedRoutes = [
+  '/landing',
+  '/',
   '/api/hello',
   '/api/health',
   '/api/auth/**',
