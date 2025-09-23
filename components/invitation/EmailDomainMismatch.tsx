@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { useTranslation } from 'next-i18next';
 
 import { Invitation } from '@prisma/client';
@@ -31,7 +31,6 @@ const EmailDomainMismatch = ({
         {t('accept-invitation-email-domain-instruction')}
       </p>
       <Button
-        size="default"
         variant="destructive"
         onClick={signOut}
         className="w-full"

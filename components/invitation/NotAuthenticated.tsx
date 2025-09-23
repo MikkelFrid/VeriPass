@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
@@ -20,7 +20,6 @@ const NotAuthenticated = ({ invitation }: NotAuthenticatedProps) => {
         onClick={() => {
           router.push(`/auth/join?token=${invitation.token}`);
         }}
-        size="default"
         className="w-full"
       >
         {t('create-a-new-account')}
@@ -30,7 +29,6 @@ const NotAuthenticated = ({ invitation }: NotAuthenticatedProps) => {
         onClick={() => {
           router.push(`/auth/login?token=${invitation.token}`);
         }}
-        size="default"
         className="w-full"
       >
         {t('login')}

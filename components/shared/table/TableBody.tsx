@@ -1,4 +1,5 @@
-import { Button, type ButtonProps } from '@/components/ui';
+import { Button } from '@/components/ui/button';
+import { type ButtonProps } from '@/components/ui/button';
 import Badge from '@/components/shared/Badge';
 import { useTranslation } from 'next-i18next';
 

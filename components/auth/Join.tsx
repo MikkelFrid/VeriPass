@@ -4,8 +4,7 @@ import { defaultHeaders, passwordPolicies } from '@/lib/common';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
@@ -137,12 +136,9 @@ const Join = ({ recaptchaSiteKey }: JoinProps) => {
         <Button
           type="submit"
           disabled={formik.isSubmitting}
-          size="default"
           className="w-full"
+          isLoading={formik.isSubmitting}
         >
-          {formik.isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          )}
           {t('create-account')}
         </Button>
         <AgreeMessage text={t('create-account')} />

@@ -7,9 +7,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, type ReactElement, useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
-import type { Status } from '@/components/ui';
+import { Button } from '@/components/ui/button';
+import type { Status } from '@/components/ui/types';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
 import { ApiResponse, NextPageWithLayout } from 'types';
@@ -88,12 +87,9 @@ const VerifyAccount: NextPageWithLayout<
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              size="default"
               className="w-full"
+              isLoading={formik.isSubmitting}
             >
-              {formik.isSubmitting && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
               {t('resend-link')}
             </Button>
           </div>

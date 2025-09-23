@@ -6,11 +6,11 @@ import type {
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { useFormik } from 'formik';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { type ReactElement, useEffect, useState, useRef } from 'react';
-import type { Status } from '@/components/ui'; // ✅ switched away from daisy
+import type { Status } from '@/components/ui/types'; // ✅ switched away from daisy
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -180,7 +180,6 @@ const Login: NextPageWithLayout<
             <div className="mt-3 space-y-3">
               <Button
                 type="submit"
-                size="default"
                 className="w-full"
                 disabled={formik.isSubmitting}
               >

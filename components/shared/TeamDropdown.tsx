@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { maxLengthPolicies } from "@/lib/common";
-import { Button } from "@/components/ui";
+import { Button } from "@/components/ui/button";
 
 type MenuItem = {
   id: string | number;

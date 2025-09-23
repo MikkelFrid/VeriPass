@@ -1,6 +1,5 @@
 import toast from 'react-hot-toast';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect, useCallback } from 'react';
 import { ArrowUpCircleIcon } from '@heroicons/react/24/outline';
@@ -160,10 +159,9 @@ const UploadAvatar = ({ user }: { user: Partial<User> }) => {
         <Card.Footer>
           <Button
             type="submit"
-            size="default"
             disabled={!image || image === user.image || loading}
+            isLoading={loading}
           >
-            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {t('save-changes')}
           </Button>
         </Card.Footer>

@@ -1,7 +1,6 @@
-import { Button } from '@/components/ui'; // ✅ shadcn button
+import { Button } from '@/components/ui/button';
 import type { GetServerSidePropsContext } from 'next';
 import { useState, type ReactElement, useEffect } from 'react';
-import { Loader2 } from 'lucide-react';   // ✅ spinner
 import { useTranslation } from 'next-i18next';
 
 import {
@@ -85,8 +84,8 @@ const UnlockAccount = ({
           variant="outline"
           className="w-full mt-4"
           disabled={loading}
+          isLoading={loading}
         >
-          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {t('request-new-link')}
         </Button>
       )}

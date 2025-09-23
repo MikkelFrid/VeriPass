@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'next-i18next';
-import { Loader2 } from 'lucide-react';
-import { Button, Input } from '@/components/ui';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 import type { ApiResponse } from 'types';
 import { Card } from '@/components/shared';
@@ -69,17 +69,16 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
             className="w-full max-w-md"
             required
           />
+          <div className="h-8 w-8 rounded bg-brand" />
         </Card.Body>
         <Card.Footer>
+          
           <Button
             type="submit"
             variant='primary'
             disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-            size="default"
+            isLoading={formik.isSubmitting}
           >
-            {formik.isSubmitting && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            )}
             {t('save-changes')}
           </Button>
         </Card.Footer>

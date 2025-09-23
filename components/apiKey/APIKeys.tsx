@@ -3,7 +3,7 @@ import ConfirmationDialog from '@/components/shared/ConfirmationDialog';
 import type { ApiKey, Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { toast } from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import NewAPIKey from './NewAPIKey';
@@ -62,10 +62,7 @@ const APIKeys = ({ team }: APIKeysProps) => {
               {t('api-keys-description')}
             </p>
           </div>
-          <Button
-            size="default"
-            onClick={() => setCreateModalVisible(true)}
-          >
+          <Button onClick={() => setCreateModalVisible(true)}>
             {t('create-api-key')}
           </Button>
         </div>

@@ -8,8 +8,7 @@ import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
@@ -87,12 +86,9 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              size="default"
               className="w-full"
+              isLoading={formik.isSubmitting}
             >
-              {formik.isSubmitting && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
               {t('send-magic-link')}
             </Button>
           </div>

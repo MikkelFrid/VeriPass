@@ -2,8 +2,7 @@ import { InputWithCopyButton, InputWithLabel } from '@/components/shared';
 import type { Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { toast } from 'react-hot-toast';
 import { useSWRConfig } from 'swr';
 import type { ApiResponse } from 'types';
@@ -104,17 +103,14 @@ const CreateAPIKeyForm = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button type="button" variant="outline" onClick={closeModal} size="default">
+        <Button type="button" variant="outline" onClick={closeModal}>
           {t('close')}
         </Button>
         <Button
           type="submit"
           disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          size="default"
+          isLoading={formik.isSubmitting}
         >
-          {formik.isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          )}
           {t('create-api-key')}
         </Button>
       </Modal.Footer>
@@ -138,7 +134,7 @@ const DisplayAPIKey = ({ apiKey, closeModal }: DisplayAPIKeyProps) => {
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button type="button" variant="outline" onClick={closeModal} size="default">
+        <Button type="button" variant="outline" onClick={closeModal}>
           {t('close')}
         </Button>
       </Modal.Footer>

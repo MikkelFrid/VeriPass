@@ -3,8 +3,7 @@ import type { FormikConfig } from 'formik';
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import type { WebhookFormSchema } from 'types';
 import * as Yup from 'yup';
 import Modal from '../shared/Modal';
@@ -96,18 +95,14 @@ const Form = ({
             onClick={() => {
               setVisible(!visible);
             }}
-            size="default"
           >
             {t('close')}
           </Button>
           <Button
             type="submit"
             disabled={formik.isSubmitting}
-            size="default"
+            isLoading={formik.isSubmitting}
           >
-            {formik.isSubmitting && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            )}
             {editMode ? t('update-webhook') : t('create-webhook')}
           </Button>
         </Modal.Footer>

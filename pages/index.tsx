@@ -28,7 +28,7 @@ const Home: NextPageWithLayout = () => {
         <header className="flex items-center justify-between py-3 px-0 sm:px-1">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-semibold no-underline">
-              BoxyHQ
+              VeryPass
             </Link>
           </div>
           <nav className="flex items-center gap-2 sm:gap-4">

@@ -1,7 +1,7 @@
 // components/shared/Alert.tsx
 import * as React from 'react';
 import clsx from 'clsx';
-import type { Status } from '@/components/ui';
+import type { Status } from '@/components/ui/types';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   status?: Status; // 'success' | 'error' | 'warning' | 'info'

@@ -22,7 +22,7 @@ const HeroSection = () => {
           </p>
 
           <div className="mt-10 flex items-center justify-center gap-3">
-            <Button asChild className="px-8" variant="brand">
+            <Button asChild className="px-8" variant="destructive">
               <Link href="/auth/join">{t('get-started')}</Link>
             </Button>
             <Button asChild variant="outline" className="px-8">

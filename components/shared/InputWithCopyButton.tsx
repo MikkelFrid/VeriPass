@@ -1,4 +1,5 @@
-import { Input, type InputProps } from '@/components/ui';
+import { Input } from '@/components/ui/input';
+import { type InputProps } from '@/components/ui/input';
 
 import { CopyToClipboardButton } from '@/components/shared';
 

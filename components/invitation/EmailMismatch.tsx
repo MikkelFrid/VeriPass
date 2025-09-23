@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { useTranslation } from 'next-i18next';
 import { useCustomSignOut } from 'hooks/useCustomSignout';
 
@@ -19,7 +19,6 @@ const EmailMismatch = ({ email }: EmailMismatchProps) => {
         {t('accept-invitation-email-instruction')}
       </p>
       <Button
-        size="default"
         variant="destructive"
         onClick={signOut}
         className="w-full"

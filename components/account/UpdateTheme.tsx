@@ -2,7 +2,7 @@ import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Card } from '@/components/shared';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import useTheme from 'hooks/useTheme';
 import { useTranslation } from 'next-i18next';
 import { Check } from 'lucide-react';

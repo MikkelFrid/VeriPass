@@ -3,8 +3,7 @@ import { Team } from '@prisma/client';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
 
 import ConfirmationDialog from '../shared/ConfirmationDialog';
@@ -61,11 +60,8 @@ const RemoveTeam = ({ team, allowDelete }: RemoveTeamProps) => {
               variant="destructive"
               onClick={() => setAskConfirmation(true)}
               disabled={loading}
-              size="default"
+              isLoading={loading}
             >
-              {loading && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
               {t('remove-team')}
             </Button>
           </Card.Footer>

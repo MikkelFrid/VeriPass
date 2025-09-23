@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 import { Price, Prisma, Service } from '@prisma/client';
@@ -32,7 +32,6 @@ const PaymentButton = ({
     <Button
       key={`${plan.id}-${price.id}`}
       variant="outline"
-      size="default"
       onClick={() => {
         initiateCheckout(
           price.id,
