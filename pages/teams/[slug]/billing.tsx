@@ -85,5 +85,4 @@ export async function getServerSideProps({
 
 Payments.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
-
 export default Payments;

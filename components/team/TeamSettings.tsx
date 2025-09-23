@@ -92,7 +92,9 @@ const TeamSettings = ({ team }: { team: Team }) => {
               <div className="flex justify-end">
                 <Button
                   type="submit"
-                  disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                  disabled={
+                    !formik.isValid || !formik.dirty || formik.isSubmitting
+                  }
                   isLoading={formik.isSubmitting}
                 >
                   {t('save-changes')}

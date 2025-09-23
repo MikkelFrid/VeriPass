@@ -10,18 +10,18 @@ Digital Product Passport (DPP) platform for SMEs — built on Next.js 15, Prisma
 ## 🧭 Project Structure
 
 src/
-app/                 # App Router (Next.js 15)
-components/          # UI primitives (Button, Input, Checkbox) + shared components
-lib/                 # server/client helpers
-styles/              # Tailwind tokens, globals.css
+app/ # App Router (Next.js 15)
+components/ # UI primitives (Button, Input, Checkbox) + shared components
+lib/ # server/client helpers
+styles/ # Tailwind tokens, globals.css
 prisma/
-schema.prisma        # DB schema
-migrations/          # Prisma migrations
-seed.ts              # SUPERADMIN + demo org + sample products
-public/                # static assets
-prompts/               # reusable prompts for assistant
+schema.prisma # DB schema
+migrations/ # Prisma migrations
+seed.ts # SUPERADMIN + demo org + sample products
+public/ # static assets
+prompts/ # reusable prompts for assistant
 README.md
-commands.md            # quick cheatsheet
+commands.md # quick cheatsheet
 
 ---
 
@@ -191,3 +191,4 @@ Private (© VeriPass). Do not distribute.
 ---
 
 Want me to also update your **assistant prompt** right after this, or keep that for a separate step?
+```

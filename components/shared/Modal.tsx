@@ -17,7 +17,12 @@ const Modal = ({ open, close, children }: ModalProps) => {
   useTranslation('common'); // keep namespace loaded (no text here)
 
   return (
-    <Dialog open={open} onOpenChange={(v) => { if (!v) close(); }}>
+    <Dialog
+      open={open}
+      onOpenChange={(v) => {
+        if (!v) close();
+      }}
+    >
       <DialogContent className="dark:border dark:border-gray-100">
         <Button
           variant="ghost"

@@ -55,7 +55,9 @@ const UpdateTheme = () => {
                 >
                   {theme.icon ? <theme.icon className="w-4 h-4" /> : null}
                   <span className="flex-1">{theme.name}</span>
-                  {isSelected(theme.id) && <Check className="h-4 w-4" aria-hidden="true" />}
+                  {isSelected(theme.id) && (
+                    <Check className="h-4 w-4" aria-hidden="true" />
+                  )}
                 </DropdownMenu.Item>
               ))}
 

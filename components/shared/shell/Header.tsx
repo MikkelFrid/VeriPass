@@ -28,14 +28,14 @@ const Header = () => {
   const { user } = data;
 
   return (
-<header
-  className={[
-    'sticky top-0 z-0 flex h-14 shrink-0 items-center gap-3',
-    'border-b border-[rgb(var(--color-border))]',
-    'bg-[rgb(var(--color-background))] text-[rgb(var(--color-foreground))]',
-    'px-4 sm:px-6 lg:px-8',
-  ].join(' ')}
->
+    <header
+      className={[
+        'sticky top-0 z-0 flex h-14 shrink-0 items-center gap-3',
+        'border-b border-[rgb(var(--color-border))]',
+        'bg-[rgb(var(--color-background))] text-[rgb(var(--color-foreground))]',
+        'px-4 sm:px-6 lg:px-8',
+      ].join(' ')}
+    >
       <SidebarTrigger />
 
       <Link href="/" className="inline-flex items-center">
@@ -52,11 +52,17 @@ const Header = () => {
       <div className="ml-auto flex items-center gap-x-3 lg:gap-x-6">
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
-            <Button variant="ghost" className="hidden sm:inline-flex items-center">
+            <Button
+              variant="ghost"
+              className="hidden sm:inline-flex items-center"
+            >
               <span className="ml-1 text-sm font-semibold leading-6">
                 {user.name}
               </span>
-              <ChevronDownIcon className="ml-2 h-5 w-5 opacity-60" aria-hidden="true" />
+              <ChevronDownIcon
+                className="ml-2 h-5 w-5 opacity-60"
+                aria-hidden="true"
+              />
             </Button>
           </DropdownMenu.Trigger>
 

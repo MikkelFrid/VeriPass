@@ -64,12 +64,12 @@ const ProductPricing = ({ plans, subscriptions }: ProductPricingProps) => {
               <div className="flex justify-center flex-col gap-2 border-gray-200 px-8 h-10">
                 {plan.prices.map((price: Price) =>
                   hasActiveSubscription(price) ? (
-                  <Button
-                    key={price.id}
-                    variant="outline"
-                    disabled
-                    className="w-full rounded-full"
-                  >
+                    <Button
+                      key={price.id}
+                      variant="outline"
+                      disabled
+                      className="w-full rounded-full"
+                    >
                       {t('current')}
                     </Button>
                   ) : (

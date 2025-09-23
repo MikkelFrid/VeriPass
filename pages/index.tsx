@@ -39,18 +39,16 @@ const Home: NextPageWithLayout = () => {
                 className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] hover:bg-[rgb(var(--color-muted))]"
                 onClick={toggleTheme}
               >
-                {selectedTheme?.icon ? <selectedTheme.icon className="w-5 h-5" /> : null}
+                {selectedTheme?.icon ? (
+                  <selectedTheme.icon className="w-5 h-5" />
+                ) : null}
               </button>
             )}
             <Button asChild>
-              <Link href="/auth/join">
-                {t('sign-up')}
-              </Link>
+              <Link href="/auth/join">{t('sign-up')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/auth/login">
-                {t('sign-in')}
-              </Link>
+              <Link href="/auth/login">{t('sign-in')}</Link>
             </Button>
           </nav>
         </header>

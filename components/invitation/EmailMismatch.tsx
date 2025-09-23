@@ -18,11 +18,7 @@ const EmailMismatch = ({ email }: EmailMismatchProps) => {
       <p className="text-sm text-center">
         {t('accept-invitation-email-instruction')}
       </p>
-      <Button
-        variant="destructive"
-        onClick={signOut}
-        className="w-full"
-      >
+      <Button variant="destructive" onClick={signOut} className="w-full">
         {t('logout')}
       </Button>
     </>

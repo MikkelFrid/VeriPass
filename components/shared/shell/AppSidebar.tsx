@@ -32,8 +32,8 @@ export default function AppSidebar() {
 
   return (
     <Sidebar
-      variant="sidebar"        // <— PUSHES content instead of overlay
-      collapsible="icon"       // icon-only when collapsed
+      variant="sidebar" // <— PUSHES content instead of overlay
+      collapsible="icon" // icon-only when collapsed
       className="border-r border-[rgb(var(--sidebar-border))]"
     >
       <SidebarHeader>

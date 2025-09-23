@@ -1,7 +1,7 @@
-import * as React from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { twMerge } from "tailwind-merge";
-import { X } from "lucide-react";
+import * as React from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { twMerge } from 'tailwind-merge';
+import { X } from 'lucide-react';
 
 export const Dialog = DialogPrimitive.Root;
 export const DialogTrigger = DialogPrimitive.Trigger;
@@ -17,7 +17,7 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={twMerge(
-        "fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] p-4 shadow-xl outline-none",
+        'fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] p-4 shadow-xl outline-none',
         className
       )}
       {...props}
@@ -30,4 +30,4 @@ export const DialogContent = React.forwardRef<
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
-DialogContent.displayName = "DialogContent";
+DialogContent.displayName = 'DialogContent';

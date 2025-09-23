@@ -1,16 +1,14 @@
+import { AccountLayout } from '@/components/layouts';
 import { Error, Loading } from '@/components/shared';
+import { BOXYHQ_UI_CSS } from '@/components/styles';
 import { TeamTab } from '@/components/team';
+import env from '@/lib/env';
+import { DirectoriesWrapper } from '@boxyhq/react-ui/dsync';
 import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { toast } from 'react-hot-toast';
-import env from '@/lib/env';
-import { DirectoriesWrapper } from '@boxyhq/react-ui/dsync';
-import { BOXYHQ_UI_CSS } from '@/components/styles';
-import { AccountLayout } from '@/components/layouts';
-import directorySync from '@boxyhq/saml-jackson/dist/directory-sync';
-
 
 const DirectorySync = ({ teamFeatures }) => {
   const { isLoading, isError, team } = useTeam();

@@ -119,5 +119,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 Events.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
-
 export default Events;

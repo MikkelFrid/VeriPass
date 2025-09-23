@@ -1,19 +1,19 @@
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import {
   ChevronUpDownIcon,
   FolderIcon,
   FolderPlusIcon,
   RectangleStackIcon,
   UserCircleIcon,
-} from "@heroicons/react/24/outline";
-import useTeams from "hooks/useTeams";
-import { useSession } from "next-auth/react";
-import { useTranslation } from "next-i18next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import { maxLengthPolicies } from "@/lib/common";
-import { Button } from "@/components/ui/button";
+} from '@heroicons/react/24/outline';
+import useTeams from 'hooks/useTeams';
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { maxLengthPolicies } from '@/lib/common';
+import { Button } from '@/components/ui/button';
 
 type MenuItem = {
   id: string | number;
@@ -26,7 +26,7 @@ const TeamDropdown = () => {
   const router = useRouter();
   const { teams } = useTeams();
   const { data } = useSession();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   const currentTeam = (teams || []).find(
     (team) => team.slug === router.query.slug
@@ -35,7 +35,7 @@ const TeamDropdown = () => {
   const groups: Array<{ id: number; name?: string; items: MenuItem[] }> = [
     {
       id: 2,
-      name: t("teams"),
+      name: t('teams'),
       items: (teams || []).map((team) => ({
         id: team.id,
         name: team.name,
@@ -45,12 +45,12 @@ const TeamDropdown = () => {
     },
     {
       id: 1,
-      name: t("profile"),
+      name: t('profile'),
       items: [
         {
-          id: data?.user.id || "me",
-          name: data?.user?.name || "—",
-          href: "/settings/account",
+          id: data?.user.id || 'me',
+          name: data?.user?.name || '—',
+          href: '/settings/account',
           icon: UserCircleIcon,
         },
       ],
@@ -59,15 +59,15 @@ const TeamDropdown = () => {
       id: 3,
       items: [
         {
-          id: "all-teams",
-          name: t("all-teams"),
-          href: "/teams",
+          id: 'all-teams',
+          name: t('all-teams'),
+          href: '/teams',
           icon: RectangleStackIcon,
         },
         {
-          id: "new-team",
-          name: t("new-team"),
-          href: "/teams?newTeam=true",
+          id: 'new-team',
+          name: t('new-team'),
+          href: '/teams?newTeam=true',
           icon: FolderPlusIcon,
         },
       ],
@@ -77,13 +77,16 @@ const TeamDropdown = () => {
   const label =
     currentTeam?.name ??
     data?.user?.name?.substring(0, maxLengthPolicies.nameShortDisplay) ??
-    "";
+    '';
 
   return (
     <div className="w-full">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <Button variant="outline" className="w-full h-10 justify-between font-bold">
+          <Button
+            variant="outline"
+            className="w-full h-10 justify-between font-bold"
+          >
             <span className="truncate">{label}</span>
             <ChevronUpDownIcon className="h-5 w-5 shrink-0" />
           </Button>
@@ -108,7 +111,10 @@ const TeamDropdown = () => {
                     className="rounded px-2 py-2 outline-none data-[highlighted]:bg-[rgb(var(--color-muted))]"
                     asChild
                   >
-                    <Link href={item.href} className="flex items-center gap-2 text-sm">
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-2 text-sm"
+                    >
                       <item.icon className="h-5 w-5" />
                       <span className="truncate">{item.name}</span>
                     </Link>

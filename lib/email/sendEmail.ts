@@ -6,13 +6,20 @@ import env from '@/lib/env';
 type SendEmailArgs = {
   to: string | string[];
   subject: string;
-  from?: string;            // optional override
-  react?: ReactElement;     // send as React email template
-  html?: string;            // or send raw html/text
+  from?: string; // optional override
+  react?: ReactElement; // send as React email template
+  html?: string; // or send raw html/text
   text?: string;
 };
 
-export async function sendEmail({ to, subject, from, react, html, text }: SendEmailArgs) {
+export async function sendEmail({
+  to,
+  subject,
+  from,
+  react,
+  html,
+  text,
+}: SendEmailArgs) {
   if (!env.resend.apiKey) throw new Error('RESEND_API_KEY is not set');
 
   const sender = from || env.email.from;
@@ -40,7 +47,9 @@ export async function sendEmail({ to, subject, from, react, html, text }: SendEm
       ...(text ? { text } : {}),
     } as any);
   } else {
-    throw new Error('sendEmail requires either `react` or `html`/`text` content');
+    throw new Error(
+      'sendEmail requires either `react` or `html`/`text` content'
+    );
   }
 
   if ((result as any)?.error) {

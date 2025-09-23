@@ -69,7 +69,9 @@ const Webhooks = ({ team }: { team: Team }) => {
               {t('webhooks-description')}
             </p>
           </div>
-          <Button onClick={() => setCreateWebhookVisible(!createWebhookVisible)}>
+          <Button
+            onClick={() => setCreateWebhookVisible(!createWebhookVisible)}
+          >
             {t('add-webhook')}
           </Button>
         </div>

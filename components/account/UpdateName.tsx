@@ -72,10 +72,9 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
           <div className="h-8 w-8 rounded bg-brand" />
         </Card.Body>
         <Card.Footer>
-          
           <Button
             type="submit"
-            variant='primary'
+            variant="primary"
             disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             isLoading={formik.isSubmitting}
           >

@@ -10,6 +10,8 @@
     "dev": "next dev --port 4002",
     "build": "prisma generate && prisma db push && next build",
     "start": "next start --port 4002",
+    "lint": "eslint -c eslint.config.cjs .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint -c eslint.config.cjs ./",
@@ -25,7 +27,8 @@
     "sync-stripe": "node --env-file .env sync-stripe.js",
     "check-locale": "node check-locale.js",
     "delete-team": "node --env-file .env delete-team.js",
-    "postinstall": "pnpm approve-builds -y || true"
+    "postinstall": "pnpm approve-builds -y || true",
+    "lint:fix": "eslint -c eslint.config.cjs . --fix"
   },
   "dependencies": {
     "@boxyhq/metrics": "0.2.10",

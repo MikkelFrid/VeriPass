@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
-import { twMerge } from "tailwind-merge";
+import * as React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { twMerge } from 'tailwind-merge';
 
 export const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
@@ -8,8 +8,8 @@ export const Label = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={twMerge("text-sm font-medium", className)}
+    className={twMerge('text-sm font-medium', className)}
     {...props}
   />
 ));
-Label.displayName = "Label";
+Label.displayName = 'Label';

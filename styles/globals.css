@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
 
@@ -11,26 +11,26 @@
 
   /* ------- Core Palette (RGB components for Tailwind v4 rgb(var(--x))) ------- */
   /* Brand */
-  --color-brand: 19 42 85;            /* #132A55 (primary) */
-  --color-brand-strong: 47 109 147;   /* #2F6D93 (hover/active) */
+  --color-brand: 19 42 85; /* #132A55 (primary) */
+  --color-brand-strong: 47 109 147; /* #2F6D93 (hover/active) */
   --color-brand-foreground: 255 255 255;
 
   /* Accent (use sparingly) */
-  --color-accent: 46 35 43;           /* #2E232B */
+  --color-accent: 46 35 43; /* #2E232B */
 
   /* Neutrals */
-  --color-background: 255 255 255;    /* #FFFFFF */
-  --color-panel: 249 250 251;         /* #F9FAFB for cards/panels */
-  --color-foreground: 23 23 23;       /* near-black text */
-  --color-muted: 244 244 245;         /* gray-100 surface / subtle bg */
-  --color-border: 228 228 231;        /* zinc-200 borders */
+  --color-background: 255 255 255; /* #FFFFFF */
+  --color-panel: 249 250 251; /* #F9FAFB for cards/panels */
+  --color-foreground: 23 23 23; /* near-black text */
+  --color-muted: 244 244 245; /* gray-100 surface / subtle bg */
+  --color-border: 228 228 231; /* zinc-200 borders */
 
   /* Accents */
-  --color-highlight: 152 193 231;     /* #98C1E7 hover/focus glow */
-  --color-gold: 176 141 87;           /* #B08D57 premium markers */
+  --color-highlight: 152 193 231; /* #98C1E7 hover/focus glow */
+  --color-gold: 176 141 87; /* #B08D57 premium markers */
 
   /* Radii & shadcn-style semantic colors (oklch/hsl are fine here) */
-  --radius: 0.625rem;                 /* 10px default corner radius */
+  --radius: 0.625rem; /* 10px default corner radius */
   --ring: oklch(0.708 0 0);
 
   --background: oklch(1 0 0);
@@ -81,11 +81,11 @@
    ──────────────────────────────────────────────────────────────────────────── */
 
 html.dark {
-  --color-background: 23 23 23;       /* #171717 */
-  --color-panel: 38 38 38;            /* #262626 */
-  --color-foreground: 255 255 255;    /* #FFFFFF */
-  --color-muted: 63 63 70;            /* zinc-700 */
-  --color-border: 82 82 91;           /* zinc-600 */
+  --color-background: 23 23 23; /* #171717 */
+  --color-panel: 38 38 38; /* #262626 */
+  --color-foreground: 255 255 255; /* #FFFFFF */
+  --color-muted: 63 63 70; /* zinc-700 */
+  --color-border: 82 82 91; /* zinc-600 */
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -133,18 +133,33 @@ html.dark {
    Global element resets
    ──────────────────────────────────────────────────────────────────────────── */
 
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
   font-family:
-    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
   background: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
 }
 
-a { color: inherit; text-decoration: none; }
-* { box-sizing: border-box; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+* {
+  box-sizing: border-box;
+}
 
 /* ──────────────────────────────────────────────────────────────────────────────
    Base layer helpers
@@ -190,17 +205,32 @@ a { color: inherit; text-decoration: none; }
 }
 
 @layer components {
-  #__next { @apply h-full; }
+  #__next {
+    @apply h-full;
+  }
 }
 
 /* Helpers */
-.btn-md { @apply min-h-8 h-10; }
+.btn-md {
+  @apply min-h-8 h-10;
+}
 
-.scrollbar { scrollbar-width: thin; scrollbar-color: #555555 #f0f0f0; }
-.scrollbar::-webkit-scrollbar { width: 8px; }
-.scrollbar::-webkit-scrollbar-thumb { background-color: #555555; }
-.scrollbar::-webkit-scrollbar-track { background-color: #f0f0f0; }
-.scrollbar::-webkit-scrollbar-button { display: none; }
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #555555 #f0f0f0;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #555555;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+.scrollbar::-webkit-scrollbar-button {
+  display: none;
+}
 
 /* ──────────────────────────────────────────────────────────────────────────────
    Tailwind v4 theme bridge

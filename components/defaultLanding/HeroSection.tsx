@@ -26,7 +26,11 @@ const HeroSection = () => {
               <Link href="/auth/join">{t('get-started')}</Link>
             </Button>
             <Button asChild variant="outline" className="px-8">
-              <Link href="https://github.com/boxyhq/saas-starter-kit" target="_blank" rel="noreferrer">
+              <Link
+                href="https://github.com/boxyhq/saas-starter-kit"
+                target="_blank"
+                rel="noreferrer"
+              >
                 GitHub
               </Link>
             </Button>

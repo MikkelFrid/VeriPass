@@ -93,17 +93,14 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
             </Button>
           </div>
         </form>
-        <div className="divider"></div>
+        <div className="my-4 border-t" />
         <div className="space-y-3">
-          <Link
-            href={`/auth/login/${params}`}
-            className="btn btn-outline w-full"
-          >
-            &nbsp;{t('sign-in-with-password')}
-          </Link>
-          <Link href="/auth/sso" className="btn btn-outline w-full">
-            &nbsp;{t('continue-with-saml-sso')}
-          </Link>
+          <Button asChild variant="outline" size="md" className="w-full">
+            <Link href={`/auth/login${params}`}>
+              {t('sign-in-with-password')}
+            </Link>
+          </Button>
+          {/* SSO temporarily disabled; route removed in cleanup. Re-enable when SSO is configured. */}
         </div>
       </div>
       <p className="text-center text-sm text-gray-600 mt-3">

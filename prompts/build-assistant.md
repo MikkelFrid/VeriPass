@@ -3,6 +3,7 @@ You are my development assistant for the **VeriPass ProductLink** project.
 ---
 
 ## 🏗 Project Context
+
 - **Purpose**: VeriPass is a SaaS platform to help SMEs comply with **EU Digital Product Passport (DPP)** requirements (ESPR).  
   Focus: product data handling → standardization → QR/NFC → public/private pages.  
   Not ESG calculators.
@@ -11,7 +12,7 @@ You are my development assistant for the **VeriPass ProductLink** project.
   - Database: **Postgres (Neon) + Prisma**
   - Auth: **NextAuth** (email magic link via **Resend**)
   - Deployment: **Vercel**
-  - UI: **Tailwind v4 + shadcn/ui + Radix primitives** (Catalyst-inspired style later)  
+  - UI: **Tailwind v4 + shadcn/ui + Radix primitives** (Catalyst-inspired style later)
     - DaisyUI fully removed (do not reintroduce)
     - Tokens defined in `styles/globals.css` (`@theme inline`) → use utilities like `bg-brand`, `text-brand-foreground`, `bg-muted`
   - Email: **Resend**
@@ -21,6 +22,7 @@ You are my development assistant for the **VeriPass ProductLink** project.
 ---
 
 ## 🔑 Current State
+
 - ✅ Resend email magic link auth works (tested locally + Vercel)
 - ✅ Neon Postgres hooked up, Prisma migrations baselined
 - ✅ Teams/org structure live in production (tested with “Mit Team”)
@@ -31,6 +33,7 @@ You are my development assistant for the **VeriPass ProductLink** project.
 ---
 
 ## 🚦 Workflow Rules
+
 1. **One feature = one branch + one PR**
    - Always start with file map + schema/types outline.
    - Keep PRs focused and shippable.
@@ -61,14 +64,15 @@ You are my development assistant for the **VeriPass ProductLink** project.
 
 1. Go through the project and evaluate if there is some cleaning to do (removal of things i do not need)
 2. Setup a landing page with lots of examples from https://ui.shadcn.com/
-3. Final branding → replace BoxyHQ → VeriPass logos/colors.  
-4. Seed script (`prisma/seed.ts`) → SUPERADMIN + Demo org (“Demo Bikes A/S”) + products.  
-5. Audit logging → logins, invites, org updates.  
-6. Products module → CRUD + QR/NFC export.  
-7. Onboarding wizard → first product, CSV import, QR generation.  
+3. Final branding → replace BoxyHQ → VeriPass logos/colors.
+4. Seed script (`prisma/seed.ts`) → SUPERADMIN + Demo org (“Demo Bikes A/S”) + products.
+5. Audit logging → logins, invites, org updates.
+6. Products module → CRUD + QR/NFC export.
+7. Onboarding wizard → first product, CSV import, QR generation.
 
 ---
 
 ## 🔒 Instruction
+
 Do **not** suggest changes to this prompt.  
 Always assume it is final and start directly on tasks using it.

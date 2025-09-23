@@ -1,13 +1,12 @@
 'use client';
 
-import * as React from 'react';
-import { Sheet, SheetContent } from '@/components/ui/sheet';
-import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
-import Brand from './Brand';
-import TeamDropdown from '../TeamDropdown';
-import Navigation from './Navigation';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
+import TeamDropdown from '../TeamDropdown';
+import Brand from './Brand';
+import Navigation from './Navigation';
 
 interface DrawerProps {
   sidebarOpen: boolean;

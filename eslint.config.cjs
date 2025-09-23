@@ -62,8 +62,26 @@ module.exports = [{
         "components/emailTemplates/**/*.tsx",
         "pages/index.tsx",
     ],
-
     rules: {
         "i18next/no-literal-string": "off",
+    },
+}, {
+    files: [
+        "app/**/*.{ts,tsx}",
+        "components/ui/**/*.{ts,tsx}",
+        "lib/components/ui/**/*.{ts,tsx}",
+        "components/shared/shell/**/*.{ts,tsx}",
+    ],
+    rules: {
+        "i18next/no-literal-string": "off",
+    },
+}, {
+    files: [
+        "components/ui/**/*.{ts,tsx}",
+        "lib/components/ui/**/*.{ts,tsx}",
+        "components/shared/**/*.{ts,tsx}",
+    ],
+    rules: {
+        "@typescript-eslint/no-empty-object-type": "off",
     },
 }];

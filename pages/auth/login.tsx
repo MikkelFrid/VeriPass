@@ -205,9 +205,7 @@ const Login: NextPageWithLayout<
 
           {authProviders.saml && (
             <Button asChild variant="outline" className="w-full">
-              <Link href="/auth/sso">
-                &nbsp;{t('continue-with-saml-sso')}
-              </Link>
+              <Link href="/auth/sso">&nbsp;{t('continue-with-saml-sso')}</Link>
             </Button>
           )}
         </div>

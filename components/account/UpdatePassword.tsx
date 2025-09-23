@@ -88,7 +88,9 @@ const UpdatePassword = () => {
             <div className="flex justify-end">
               <Button
                 type="submit"
-                disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+                disabled={
+                  !formik.dirty || !formik.isValid || formik.isSubmitting
+                }
                 isLoading={formik.isSubmitting}
               >
                 {t('change-password')}

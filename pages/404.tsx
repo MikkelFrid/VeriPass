@@ -21,7 +21,12 @@ const Custom404 = () => {
         {t('sorry-not-found')}
       </p>
       <div className="mt-8 flex items-center justify-center gap-3">
-        <Button asChild variant="primary" size="md" className="py-3 px-2 sm:px-4">
+        <Button
+          asChild
+          variant="primary"
+          size="md"
+          className="py-3 px-2 sm:px-4"
+        >
           <Link href="/">{t('go-home')}</Link>
         </Button>
         <Button

@@ -36,11 +36,7 @@ const ConfirmationDialog = ({
         <Button type="button" variant="outline" onClick={onCancel}>
           {cancelText || t('cancel')}
         </Button>
-        <Button
-          type="button"
-          variant="destructive"
-          onClick={handleConfirm}
-        >
+        <Button type="button" variant="destructive" onClick={handleConfirm}>
           {confirmText || t('delete')}
         </Button>
       </Modal.Footer>

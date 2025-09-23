@@ -4,3 +4,7 @@ node_modules
 .next
 out
 eslint.config.cjs
+dist
+coverage
+pnpm-lock.yaml
+package-lock.json

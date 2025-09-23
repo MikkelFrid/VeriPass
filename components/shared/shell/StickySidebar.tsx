@@ -1,8 +1,8 @@
 'use client';
 
-import * as React from 'react';
-import { cn } from '@/lib/lib/utils';
 import { useSidebar } from '@/lib/components/ui/sidebar'; // context only
+import { cn } from '@/lib/lib/utils';
+import * as React from 'react';
 
 type StickySidebarProps = React.ComponentProps<'div'> & {
   side?: 'left' | 'right';
@@ -23,7 +23,7 @@ export default function StickySidebar({
   children,
   ...props
 }: StickySidebarProps) {
-  const { state, isMobile, openMobile, setOpenMobile } = useSidebar();
+  const { state, isMobile } = useSidebar();
 
   // Mobile: delegate to the stock sidebar via a simple Sheet-like portal.
   // Keep overlay behavior on mobile (unchanged from the lib).

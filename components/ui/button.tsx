@@ -1,9 +1,9 @@
 'use client';
 
-import * as React from 'react';
+import { cn } from '@/lib/lib/utils'; // adjust path if needed
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Loader2 } from 'lucide-react';
-import { cn } from '@/lib/lib/utils'; // adjust path if needed
+import * as React from 'react';
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium shadow-sm ring-1 ring-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60 disabled:pointer-events-none active:translate-y-px data-[state=open]:bg-muted',
@@ -18,12 +18,10 @@ const buttonVariants = cva(
           'bg-muted text-foreground hover:bg-muted/80 focus-visible:ring-muted',
         outline:
           'bg-transparent text-foreground border border-border hover:bg-muted/60',
-        ghost:
-          'bg-transparent text-foreground hover:bg-muted/60',
+        ghost: 'bg-transparent text-foreground hover:bg-muted/60',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive',
-        link:
-          'bg-transparent underline underline-offset-4 text-foreground hover:no-underline',
+        link: 'bg-transparent underline underline-offset-4 text-foreground hover:no-underline',
       },
       size: {
         default: 'h-10 px-4 py-2 text-sm',
@@ -77,7 +75,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         'data-variant': variant,
         'data-size': size,
         'aria-busy': isLoading ? 'true' : undefined,
-        'aria-disabled': (disabled || isLoading) ? true : undefined,
+        'aria-disabled': disabled || isLoading ? true : undefined,
         'data-loading': isLoading ? '' : undefined,
         // Merge onClick behaviour safely
         onClick: (e: any) => {
@@ -120,9 +118,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...rest}
       >
         {isLoading && (
-          <Loader2 className="mr-2 h-4 w-4 animate-spin text-current" aria-hidden="true" />
+          <Loader2
+            className="mr-2 h-4 w-4 animate-spin text-current"
+            aria-hidden="true"
+          />
         )}
-        {children}
+        {children as React.ReactNode}
       </button>
     );
   }

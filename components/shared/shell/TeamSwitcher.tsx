@@ -34,7 +34,8 @@ export default function TeamSwitcher({ className }: { className?: string }) {
 
   const items = (teams || []) as Team[];
   const currentTeam =
-    items.find((t) => t.slug === (router.query.slug as string)) || (current as Team | undefined);
+    items.find((t) => t.slug === (router.query.slug as string)) ||
+    (current as Team | undefined);
 
   const label =
     currentTeam?.name ??
@@ -43,7 +44,9 @@ export default function TeamSwitcher({ className }: { className?: string }) {
 
   // Popover width adapts: anchor width when expanded; fixed width when collapsed.
   const contentWidth =
-    state === 'collapsed' ? 'w-[22rem]' : 'w-[--radix-popper-anchor-width] max-w-[28rem]';
+    state === 'collapsed'
+      ? 'w-[22rem]'
+      : 'w-[--radix-popper-anchor-width] max-w-[28rem]';
 
   // Trigger styles: full button expanded; compact icon when collapsed
   const triggerExpanded =
@@ -55,7 +58,10 @@ export default function TeamSwitcher({ className }: { className?: string }) {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button
-          className={cn(state === 'collapsed' ? triggerCollapsed : triggerExpanded, className)}
+          className={cn(
+            state === 'collapsed' ? triggerCollapsed : triggerExpanded,
+            className
+          )}
           aria-label="Select team"
         >
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-muted">
@@ -68,9 +74,14 @@ export default function TeamSwitcher({ className }: { className?: string }) {
                 <span className="block truncate text-sm font-medium">
                   {isLoading ? 'Loading…' : label || 'Select team'}
                 </span>
-                <span className="block text-xs text-sidebar-foreground/60">Team</span>
+                <span className="block text-xs text-sidebar-foreground/60">
+                  Team
+                </span>
               </span>
-              <ChevronDownIcon className="h-4 w-4 opacity-60" aria-hidden="true" />
+              <ChevronDownIcon
+                className="h-4 w-4 opacity-60"
+                aria-hidden="true"
+              />
             </>
           )}
         </button>
@@ -85,7 +96,9 @@ export default function TeamSwitcher({ className }: { className?: string }) {
             contentWidth
           )}
         >
-          <div className="px-2 pb-2 pt-1 text-sm font-semibold text-sidebar-foreground">Teams</div>
+          <div className="px-2 pb-2 pt-1 text-sm font-semibold text-sidebar-foreground">
+            Teams
+          </div>
 
           <div className="max-h-[60vh] overflow-auto">
             {items.map((t, idx) => {
@@ -107,8 +120,12 @@ export default function TeamSwitcher({ className }: { className?: string }) {
                   </span>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm font-medium">{t.name ?? '—'}</div>
-                    <div className="truncate text-xs text-sidebar-foreground/60">{t.slug}</div>
+                    <div className="truncate text-sm font-medium">
+                      {t.name ?? '—'}
+                    </div>
+                    <div className="truncate text-xs text-sidebar-foreground/60">
+                      {t.slug}
+                    </div>
                   </div>
 
                   <div className="hidden sm:flex items-center gap-1 text-xs text-sidebar-foreground/60">
@@ -137,7 +154,9 @@ export default function TeamSwitcher({ className }: { className?: string }) {
               </span>
               <div className="min-w-0">
                 <div className="text-sm font-medium">Account</div>
-                <div className="text-xs text-sidebar-foreground/60">Profile &amp; settings</div>
+                <div className="text-xs text-sidebar-foreground/60">
+                  Profile &amp; settings
+                </div>
               </div>
             </Link>
           </DropdownMenu.Item>
@@ -157,7 +176,9 @@ export default function TeamSwitcher({ className }: { className?: string }) {
               </span>
               <div className="min-w-0">
                 <div className="text-sm font-medium">All teams</div>
-                <div className="text-xs text-sidebar-foreground/60">Browse teams</div>
+                <div className="text-xs text-sidebar-foreground/60">
+                  Browse teams
+                </div>
               </div>
             </Link>
           </DropdownMenu.Item>
@@ -175,7 +196,9 @@ export default function TeamSwitcher({ className }: { className?: string }) {
               </span>
               <div className="min-w-0">
                 <div className="text-sm font-medium">Add team</div>
-                <div className="text-xs text-sidebar-foreground/60">Create a new workspace</div>
+                <div className="text-xs text-sidebar-foreground/60">
+                  Create a new workspace
+                </div>
               </div>
             </Link>
           </DropdownMenu.Item>

@@ -37,10 +37,7 @@ const AcceptInvitation = ({ invitation }: AcceptInvitationProps) => {
   return (
     <>
       <h3 className="text-center">{t('accept-invite')}</h3>
-      <Button
-        onClick={acceptInvitation}
-        className="w-full"
-      >
+      <Button onClick={acceptInvitation} className="w-full">
         {t('accept-invitation')}
       </Button>
     </>

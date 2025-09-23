@@ -29,7 +29,10 @@ const UnlockAccount = ({
 }: UnlockAccountProps) => {
   const [loading, setLoading] = useState(false);
   const [displayResendLink, setDisplayResendLink] = useState(false);
-  const [message, setMessage] = useState<{ text: string | null; status: 'success' | 'error' | null }>({ text: null, status: null });
+  const [message, setMessage] = useState<{
+    text: string | null;
+    status: 'success' | 'error' | null;
+  }>({ text: null, status: null });
   const { t } = useTranslation('common');
 
   useEffect(() => {
