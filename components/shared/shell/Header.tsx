@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import {
@@ -32,83 +33,114 @@ const Header = ({ setSidebarOpen }: HeaderProps) => {
   const { user } = data;
 
   return (
-    <div className="sticky top-0 z-40 flex h-14 shrink-0 items-center border-b px-4 sm:gap-x-6 sm:px-6 lg:px-8 bg-white dark:bg-black dark:text-white">
+    <header
+      className={[
+        'sticky top-0 z-40 flex h-14 shrink-0 items-center',
+        'border-b border-[rgb(var(--color-border))]',
+        'bg-[rgb(var(--color-background))] text-[rgb(var(--color-foreground))]',
+        'px-4 sm:gap-x-6 sm:px-6 lg:px-8',
+      ].join(' ')}
+    >
       {/* Mobile: open sidebar */}
       <button
         type="button"
-        className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-50 lg:hidden"
+        className="-m-2.5 p-2.5 lg:hidden"
         onClick={() => setSidebarOpen(true)}
       >
         <span className="sr-only">{t('open-sidebar')}</span>
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
       </button>
 
-      <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        <div className="relative flex flex-1" />
-        <div className="flex items-center gap-x-4 lg:gap-x-6">
-          {/* Profile menu (Radix) */}
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild>
-              <Button variant="ghost" className="hidden lg:inline-flex items-center">
-                <span className="ml-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50">
-                  {user.name}
-                </span>
-                <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-              </Button>
-            </DropdownMenu.Trigger>
-
-            <DropdownMenu.Portal>
-              <DropdownMenu.Content
-                align="end"
-                sideOffset={8}
-                className="z-50 min-w-[10rem] rounded-[calc(var(--radius)*0.75)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] p-2 shadow-md"
-              >
-                <DropdownMenu.Item asChild>
-                  <Link
-                    href="/settings/account"
-                    className="flex items-center rounded px-2 py-2 text-sm leading-6 text-[rgb(var(--color-foreground))] outline-none data-[highlighted]:bg-[rgb(var(--color-muted))]"
-                  >
-                    <UserCircleIcon className="w-5 h-5 mr-2" />
-                    {t('account')}
-                  </Link>
-                </DropdownMenu.Item>
-
-                {env.darkModeEnabled && (
-                  <>
-                    <DropdownMenu.Separator className="my-2 h-px bg-[rgb(var(--color-border))]" />
-                    <DropdownMenu.Item
-                      onSelect={(e) => {
-                        e.preventDefault();
-                        toggleTheme();
-                      }}
-                      className="flex cursor-pointer items-center rounded px-2 py-2 text-sm leading-6 text-[rgb(var(--color-foreground))] outline-none data-[highlighted]:bg-[rgb(var(--color-muted))]"
-                    >
-                      <SunIcon className="w-5 h-5 mr-2" />
-                      {t('switch-theme')}
-                    </DropdownMenu.Item>
-                  </>
-                )}
-
-                <DropdownMenu.Separator className="my-2 h-px bg-[rgb(var(--color-border))]" />
-
-                <DropdownMenu.Item
-                  onSelect={(e) => {
-                    e.preventDefault();
-                    signOut();
-                  }}
-                  className="flex cursor-pointer items-center rounded px-2 py-2 text-sm leading-6 text-[rgb(var(--color-foreground))] outline-none data-[highlighted]:bg-[rgb(var(--color-muted))]"
-                >
-                  <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
-                  {t('logout')}
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Arrow className="fill-[rgb(var(--color-background))]" />
-              </DropdownMenu.Content>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Root>
-        </div>
+      {/* Brand */}
+      <div className="flex items-center gap-2">
+        <Link href="/" className="inline-flex items-center">
+          <Image
+            src="/brand/veripass-wordmark.svg"
+            alt="VeriPass"
+            width={112}
+            height={20}
+            priority
+            className="h-5 w-auto"
+          />
+        </Link>
       </div>
-    </div>
+
+      <div className="ml-auto flex items-center gap-x-3 lg:gap-x-6">
+        {/* Profile menu (Radix) */}
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger asChild>
+            <Button variant="ghost" className="hidden lg:inline-flex items-center">
+              <span className="ml-1 text-sm font-semibold leading-6">
+                {user.name}
+              </span>
+              <ChevronDownIcon className="ml-2 h-5 w-5 opacity-60" aria-hidden="true" />
+            </Button>
+          </DropdownMenu.Trigger>
+
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content
+              align="end"
+              sideOffset={8}
+              className={[
+                'z-50 min-w-[12rem] rounded-[calc(var(--radius)*0.75)]',
+                'border border-[rgb(var(--color-border))]',
+                'bg-[rgb(var(--color-background))] p-2 shadow-md',
+              ].join(' ')}
+            >
+              <DropdownMenu.Item asChild>
+                <Link
+                  href="/settings/account"
+                  className={[
+                    'flex items-center rounded px-2 py-2 text-sm leading-6',
+                    'outline-none data-[highlighted]:bg-[rgb(var(--color-panel))]',
+                  ].join(' ')}
+                >
+                  <UserCircleIcon className="w-5 h-5 mr-2" />
+                  {t('account')}
+                </Link>
+              </DropdownMenu.Item>
+
+              {env.darkModeEnabled && (
+                <>
+                  <DropdownMenu.Separator className="my-2 h-px bg-[rgb(var(--color-border))]" />
+                  <DropdownMenu.Item
+                    onSelect={(e) => {
+                      e.preventDefault();
+                      toggleTheme();
+                    }}
+                    className={[
+                      'flex cursor-pointer items-center rounded px-2 py-2 text-sm leading-6',
+                      'outline-none data-[highlighted]:bg-[rgb(var(--color-panel))]',
+                    ].join(' ')}
+                  >
+                    <SunIcon className="w-5 h-5 mr-2" />
+                    {t('switch-theme')}
+                  </DropdownMenu.Item>
+                </>
+              )}
+
+              <DropdownMenu.Separator className="my-2 h-px bg-[rgb(var(--color-border))]" />
+
+              <DropdownMenu.Item
+                onSelect={(e) => {
+                  e.preventDefault();
+                  signOut();
+                }}
+                className={[
+                  'flex cursor-pointer items-center rounded px-2 py-2 text-sm leading-6',
+                  'outline-none data-[highlighted]:bg-[rgb(var(--color-panel))]',
+                ].join(' ')}
+              >
+                <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
+                {t('logout')}
+              </DropdownMenu.Item>
+
+              <DropdownMenu.Arrow className="fill-[rgb(var(--color-background))]" />
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
+      </div>
+    </header>
   );
 };
 

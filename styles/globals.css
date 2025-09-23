@@ -2,28 +2,44 @@
 /* REMOVE daisyui plugin */
 /* @plugin "daisyui"; */
 
-/* Local shim for legacy daisy classes (btn, card, etc.) */
-@import "./daisy-shim.css";
 
 :root {
   color-scheme: dark light;
 
-  /* Brand & tokens (RGB components for Tailwind v4 rgb(var(--xx))) */
-  --color-background: 255 255 255;
-  --color-foreground: 15 23 42;
-  --color-muted: 248 250 252;
-  --color-border: 226 232 240;
+  /* ------- Core Palette (RGB components for Tailwind v4 rgb(var(--x))) ------- */
+  /* Brand */
+  --color-brand: 19 42 85;          /* #132A55 (primary) */
+  --color-brand-strong: 47 109 147;  /* #2F6D93 (hover/active) */
 
-  /* Indigo accent (your preference) */
-  --color-brand: 79 70 229;        /* indigo-600 */
-  --color-brand-strong: 67 56 202; /* indigo-700 */
+  /* Accent (use sparingly) */
+  --color-accent: 46 35 43;          /* #2E232B */
 
-  --radius: 0.75rem; /* 12px default corner radius */
+  /* Neutrals */
+  --color-background: 255 255 255;   /* #FFFFFF */
+  --color-panel: 249 250 251;        /* #F9FAFB for cards/panels */
+  --color-foreground: 23 23 23;      /* near-black text */
+  --color-muted: 244 244 245;        /* gray-100 surface / subtle bg */
+  --color-border: 228 228 231;       /* zinc-200 borders */
+
+  /* Accents */
+  --color-highlight: 152 193 231;    /* #98C1E7 hover/focus glow */
+  --color-gold: 176 141 87;          /* #B08D57 premium markers */
+
+  /* Radii & focus */
+  --radius: 0.75rem;                 /* 12px default corner radius */
   --ring: var(--color-brand);
 }
 
-html,
-body {
+html.dark {
+  /* Dark tokens */
+  --color-background: 23 23 23;      /* #171717 */
+  --color-panel: 38 38 38;           /* #262626 */
+  --color-foreground: 255 255 255;   /* #FFFFFF */
+  --color-muted: 63 63 70;           /* zinc-700 */
+  --color-border: 82 82 91;          /* zinc-600 */
+}
+
+html, body {
   padding: 0;
   margin: 0;
   font-family:
@@ -38,23 +54,26 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
 }
 
 a { color: inherit; text-decoration: none; }
 * { box-sizing: border-box; }
 
-/* Dark mode tokens via html.dark */
-html.dark {
-  --color-background: 10 10 12;
-  --color-foreground: 226 232 240;
-  --color-muted: 17 24 39;
-  --color-border: 38 38 45;
-}
-
 @layer base {
+  /* Normalize inputs to rounded by default */
   input:not([type='checkbox']):not([type='radio']),
   textarea {
     @apply !rounded;
+    border-radius: var(--radius);
+  }
+
+  /* Panels & cards default */
+  .panel {
+    background-color: rgb(var(--color-panel));
+    border: 1px solid rgb(var(--color-border));
+    border-radius: var(--radius);
   }
 }
 
@@ -62,7 +81,7 @@ html.dark {
   #__next { @apply h-full; }
 }
 
-/* Keep your helpers */
+/* Helpers */
 .btn-md { @apply min-h-8 h-10; }
 
 .scrollbar { scrollbar-width: thin; scrollbar-color: #555555 #f0f0f0; }

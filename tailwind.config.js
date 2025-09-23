@@ -1,15 +1,35 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // v4 doesn’t need mode: 'jit' or darkMode here unless you want 'media' vs 'class'
   content: [
     './app/**/*.{ts,tsx,js,jsx}',
     './src/**/*.{ts,tsx,js,jsx}',
     './components/**/*.{ts,tsx,js,jsx}',
+    './pages/**/*.{ts,tsx,js,jsx}',
+    './styles/**/*.{css}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      borderRadius: {
+        lg: 'var(--radius)',
+        xl: 'calc(var(--radius) + 0.25rem)',
+        '2xl': 'calc(var(--radius) + 0.5rem)',
+      },
+      colors: {
+        /* Map semantic tokens to CSS variables so you can use classes like bg-brand */
+        brand: {
+          DEFAULT: 'rgb(var(--color-brand) / <alpha-value>)',
+          strong: 'rgb(var(--color-brand-strong) / <alpha-value>)',
+        },
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        panel: 'rgb(var(--color-panel) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+        highlight: 'rgb(var(--color-highlight) / <alpha-value>)',
+        gold: 'rgb(var(--color-gold) / <alpha-value>)',
+        background: 'rgb(var(--color-background) / <alpha-value>)',
+        foreground: 'rgb(var(--color-foreground) / <alpha-value>)',
+      },
+    },
   },
-  // IMPORTANT: no require('daisyui') here on v5 — plugin is added in CSS via @plugin
   plugins: [],
 };
