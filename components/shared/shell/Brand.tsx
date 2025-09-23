@@ -1,20 +1,33 @@
-import app from '@/lib/app';
+'use client';
+
 import Image from 'next/image';
-import useTheme from 'hooks/useTheme';
+import Link from 'next/link';
+import { useSidebar } from '@/lib/components/ui/sidebar';
 
-const Brand = () => {
-  const { theme } = useTheme();
+export default function Brand() {
+  const { open } = useSidebar();
+
   return (
-    <div className="flex pt-6 shrink-0 items-center text-xl font-bold gap-2 dark:text-gray-100">
-      <Image
-        src={theme !== 'dark' ? app.logoUrl : '/logowhite.png'}
-        alt={app.name}
-        width={30}
-        height={30}
-      />
-      {app.name}
-    </div>
+    <Link href="/" className="inline-flex items-center justify-center">
+      {open ? (
+        <Image
+          src="/brand/veripass-wordmark.svg"
+          alt="VeriPass"
+          width={112}
+          height={20}
+          priority
+          className="h-5 w-auto"
+        />
+      ) : (
+        <Image
+          src="/brand/veripass-mark.svg"
+          alt="VeriPass"
+          width={28}
+          height={28}
+          priority
+          className="h-7 w-7"
+        />
+      )}
+    </Link>
   );
-};
-
-export default Brand;
+}

@@ -1,36 +1,38 @@
-import { useState } from 'react';
-import { Loading } from '@/components/shared';
-import { useSession } from 'next-auth/react';
-import React from 'react';
-import Header from './Header';
-import Drawer from './Drawer';
-import { useRouter } from 'next/navigation';
+'use client';
 
-export default function AppShell({ children }) {
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Loading } from '@/components/shared';
+
+import Header from './Header';
+import AppSidebar from './AppSidebar';
+
+import { SidebarProvider, SidebarInset } from '@/lib/components/ui/sidebar';
+
+export default function AppShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { status } = useSession();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (status === 'loading') {
-    return <Loading />;
-  }
+  useEffect(() => {
+    if (status === 'unauthenticated') router.push('/auth/login');
+  }, [status, router]);
 
-  if (status === 'unauthenticated') {
-    router.push('/auth/login');
-    return;
-  }
+  if (status === 'loading') return <Loading />;
+  if (status === 'unauthenticated') return null;
 
   return (
-    <div>
-      <Drawer sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className="lg:pl-64">
-        <Header setSidebarOpen={setSidebarOpen} />
+    <SidebarProvider defaultOpen>
+      {/* Push-style sidebar */}
+      <AppSidebar />
+      {/* This region auto-adds the correct left offset based on sidebar state */}
+      <div data-probe="inside-provider" />
+      <SidebarInset>
+        <Header />
         <main className="py-5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            {children}
-          </div>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
         </main>
-      </div>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
