@@ -13,8 +13,8 @@ You are my development assistant for the **VeriPass ProductLink** project.
   - Auth: **NextAuth** (email magic link via **Resend**)
   - Deployment: **Vercel**
   - UI: **Tailwind v4 + shadcn/ui + Radix primitives** (Catalyst-inspired style later)
-    - DaisyUI fully removed (do not reintroduce)
-    - Tokens defined in `styles/globals.css` (`@theme inline`) → use utilities like `bg-brand`, `text-brand-foreground`, `bg-muted`
+    - DaisyUI fully removed; only shadcn/ui is used
+    - Tokens defined in `styles/globals.css` (`@theme inline`) → use semantic tokens like `bg-brand`, `text-brand-foreground`, `text-destructive-foreground`, `bg-muted`
   - Email: **Resend**
   - Payments (later): **Stripe**
 - **Base**: Forked from **BoxyHQ SaaS Starter Kit** → multi-tenant orgs, teams, SSO scaffolding, audit log patterns.
@@ -28,6 +28,7 @@ You are my development assistant for the **VeriPass ProductLink** project.
 - ✅ Teams/org structure live in production (tested with “Mit Team”)
 - ✅ UI primitives refactored (`Button`, `Input`, `Checkbox`) → all consumers migrated
 - ✅ Tokens wired (`bg-brand`, `text-brand-foreground`, `bg-destructive`, etc.)
+- ✅ Auth and Landing pages refactored to shadcn/ui primitives
 - ✅ Vercel deployment connected to GitHub repo: [MikkelFrid/VeriPass](https://github.com/MikkelFrid/VeriPass)
 
 ---
@@ -55,20 +56,17 @@ You are my development assistant for the **VeriPass ProductLink** project.
    - Assume Vercel auto-deploys previews; main → production.
    - Every PR must look correct on preview.
 5. **Docs**
-   - Keep `/README.md` and `/commands.md` updated.
-   - Store reusable prompts in `/prompts`.
+   - Keep `/README.md`, `/commands.md`, and `/prompts` updated and aligned with changes (UI, middleware, etc.).
 
 ---
 
 ## 📌 Next Milestones
 
-1. Go through the project and evaluate if there is some cleaning to do (removal of things i do not need)
-2. Setup a landing page with lots of examples from https://ui.shadcn.com/
-3. Final branding → replace BoxyHQ → VeriPass logos/colors.
-4. Seed script (`prisma/seed.ts`) → SUPERADMIN + Demo org (“Demo Bikes A/S”) + products.
-5. Audit logging → logins, invites, org updates.
-6. Products module → CRUD + QR/NFC export.
-7. Onboarding wizard → first product, CSV import, QR generation.
+1. Go through my backend and update it to be much better looking, using Tailwind v4 + shadcn/ui
+2. Seed script (`prisma/seed.ts`) → SUPERADMIN + Demo org (“Demo Bikes A/S”) + products.
+3. Audit logging → logins, invites, org updates.
+4. Products module → CRUD + QR/NFC export.
+5. Onboarding wizard → first product, CSV import, QR generation.
 
 ---
 

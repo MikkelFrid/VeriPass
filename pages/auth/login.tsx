@@ -3,35 +3,51 @@ import type {
   InferGetServerSidePropsType,
 } from 'next';
 
-import * as Yup from 'yup';
-import Link from 'next/link';
-import { useFormik } from 'formik';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import React, { type ReactElement, useEffect, useState, useRef } from 'react';
-import type { Status } from '@/components/ui/types'; // ✅ switched away from daisy
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import type { Status } from '@/components/ui/types';
+import { useFormik } from 'formik';
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { type ReactElement, useEffect, useRef, useState } from 'react';
+import * as Yup from 'yup';
 
-import env from '@/lib/env';
-import type { NextPageWithLayout } from 'types';
-import { AuthLayout } from '@/components/layouts';
+import AgreeMessage from '@/components/auth/AgreeMessage';
 import GithubButton from '@/components/auth/GithubButton';
 import GoogleButton from '@/components/auth/GoogleButton';
-import { Alert, InputWithLabel, Loading } from '@/components/shared';
-import { authProviderEnabled } from '@/lib/auth';
-import Head from 'next/head';
-import TogglePasswordVisibility from '@/components/shared/TogglePasswordVisibility';
-import AgreeMessage from '@/components/auth/AgreeMessage';
+import { AuthLayout } from '@/components/layouts';
+import { Alert, Loading } from '@/components/shared';
 import GoogleReCAPTCHA from '@/components/shared/GoogleReCAPTCHA';
-import ReCAPTCHA from 'react-google-recaptcha';
+import TogglePasswordVisibility from '@/components/shared/TogglePasswordVisibility';
+import { authProviderEnabled } from '@/lib/auth';
 import { maxLengthPolicies } from '@/lib/common';
+import env from '@/lib/env';
+import Head from 'next/head';
+import ReCAPTCHA from 'react-google-recaptcha';
+import type { NextPageWithLayout } from 'types';
 
 interface Message {
   text: string | null;
   status: Status | null;
 }
+
+const FieldError: React.FC<{ error?: string }> = ({ error }) =>
+  error ? <p className="mt-1 text-xs text-destructive">{error}</p> : null;
+
+const Divider: React.FC<{ label?: string }> = ({ label }) => (
+  <div className="relative my-6">
+    <div className="h-px w-full bg-border" />
+    <div className="absolute inset-0 flex items-center justify-center">
+      <span className="rounded bg-background px-2 text-xs text-muted-foreground">
+        {label}
+      </span>
+    </div>
+  </div>
+);
 
 const Login: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -45,9 +61,9 @@ const Login: NextPageWithLayout<
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const { error, success, token } = router.query as {
-    error: string;
-    success: string;
-    token: string;
+    error?: string;
+    success?: string;
+    token?: string;
   };
 
   const handlePasswordVisibility = () => {
@@ -55,13 +71,8 @@ const Login: NextPageWithLayout<
   };
 
   useEffect(() => {
-    if (error) {
-      setMessage({ text: error, status: 'error' });
-    }
-
-    if (success) {
-      setMessage({ text: success, status: 'success' });
-    }
+    if (error) setMessage({ text: error, status: 'error' });
+    if (success) setMessage({ text: success, status: 'success' });
   }, [error, success]);
 
   const redirectUrl = token
@@ -79,7 +90,6 @@ const Login: NextPageWithLayout<
     }),
     onSubmit: async (values) => {
       const { email, password } = values;
-
       setMessage({ text: null, status: null });
 
       const response = await signIn('credentials', {
@@ -91,11 +101,14 @@ const Login: NextPageWithLayout<
         recaptchaToken,
       });
 
-      formik.resetForm();
+      formik.setSubmitting(false);
       recaptchaRef.current?.reset();
 
       if (response && !response.ok) {
-        setMessage({ text: response.error, status: 'error' });
+        setMessage({
+          text: response.error ?? 'unknown-error',
+          status: 'error',
+        });
         return;
       }
     },
@@ -106,7 +119,7 @@ const Login: NextPageWithLayout<
   }
 
   if (status === 'authenticated') {
-    router.push(redirectUrl);
+    void router.push(redirectUrl);
   }
 
   const params = token ? `?token=${token}` : '';
@@ -116,72 +129,121 @@ const Login: NextPageWithLayout<
       <Head>
         <title>{t('login-title')}</title>
       </Head>
+
       {message.text && message.status && (
         <Alert status={message.status} className="mb-5">
           {t(message.text)}
         </Alert>
       )}
-      <div className="rounded p-6 border">
-        <div className="flex gap-2 flex-wrap">
-          {authProviders.github && <GithubButton />}
-          {authProviders.google && <GoogleButton />}
-        </div>
+
+      <div className="mx-auto w-full max-w-md rounded-xl border bg-card p-6 shadow-sm">
+        {/* OAuth providers */}
+        {(authProviders.github || authProviders.google) && (
+          <div className="flex flex-col gap-2 sm:flex-row">
+            {authProviders.github && <GithubButton className="flex-1" />}
+            {authProviders.google && <GoogleButton className="flex-1" />}
+          </div>
+        )}
 
         {(authProviders.github || authProviders.google) &&
-          authProviders.credentials && <div className="divider">{t('or')}</div>}
+          authProviders.credentials && <Divider label={t('or')} />}
 
+        {/* Credentials form */}
         {authProviders.credentials && (
-          <form onSubmit={formik.handleSubmit}>
-            <div className="space-y-3">
-              <InputWithLabel
-                type="email"
-                label="Email"
-                name="email"
-                placeholder={t('email')}
-                value={formik.values.email}
-                error={formik.touched.email ? formik.errors.email : undefined}
-                onChange={formik.handleChange}
-              />
-              <div className="relative flex">
-                <InputWithLabel
-                  type={isPasswordVisible ? 'text' : 'password'}
-                  name="password"
-                  placeholder={t('password')}
-                  value={formik.values.password}
-                  label={
-                    <label className="label">
-                      <span className="label-text">{t('password')}</span>
-                      <span className="label-text-alt">
-                        <Link
-                          href="/auth/forgot-password"
-                          className="text-sm text-[rgb(var(--color-brand))] hover:text-[rgb(var(--color-brand-strong))]"
-                        >
-                          {t('forgot-password')}
-                        </Link>
-                      </span>
-                    </label>
-                  }
-                  error={
-                    formik.touched.password ? formik.errors.password : undefined
-                  }
+          <form onSubmit={formik.handleSubmit} noValidate>
+            <div className="space-y-4">
+              {/* Email */}
+              <div>
+                <Label htmlFor="email">{t('email')}</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder={t('email')}
+                  value={formik.values.email}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  aria-invalid={
+                    formik.touched.email && formik.errors.email
+                      ? 'true'
+                      : 'false'
+                  }
+                  aria-describedby={
+                    formik.touched.email && formik.errors.email
+                      ? 'email-error'
+                      : undefined
+                  }
                 />
-                <TogglePasswordVisibility
-                  isPasswordVisible={isPasswordVisible}
-                  handlePasswordVisibility={handlePasswordVisibility}
+                <FieldError
+                  error={
+                    formik.touched.email
+                      ? (formik.errors.email as string)
+                      : undefined
+                  }
                 />
               </div>
+
+              {/* Password + forgot */}
+              <div>
+                <div className="mb-1 flex items-center justify-between">
+                  <Label htmlFor="password">{t('password')}</Label>
+                  <Link
+                    href="/auth/forgot-password"
+                    className="text-xs text-brand hover:underline"
+                  >
+                    {t('forgot-password')}
+                  </Link>
+                </div>
+
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={isPasswordVisible ? 'text' : 'password'}
+                    name="password"
+                    placeholder={t('password')}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    aria-invalid={
+                      formik.touched.password && formik.errors.password
+                        ? 'true'
+                        : 'false'
+                    }
+                    aria-describedby={
+                      formik.touched.password && formik.errors.password
+                        ? 'password-error'
+                        : undefined
+                    }
+                  />
+                  <TogglePasswordVisibility
+                    isPasswordVisible={isPasswordVisible}
+                    handlePasswordVisibility={handlePasswordVisibility}
+                  />
+                </div>
+
+                <FieldError
+                  error={
+                    formik.touched.password
+                      ? (formik.errors.password as string)
+                      : undefined
+                  }
+                />
+              </div>
+
+              {/* reCAPTCHA */}
               <GoogleReCAPTCHA
                 recaptchaRef={recaptchaRef}
                 onChange={setRecaptchaToken}
                 siteKey={recaptchaSiteKey}
               />
             </div>
-            <div className="mt-3 space-y-3">
+
+            <div className="mt-4 space-y-3">
               <Button
                 type="submit"
                 className="w-full"
                 disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
               >
                 {t('sign-in')}
               </Button>
@@ -191,30 +253,31 @@ const Login: NextPageWithLayout<
         )}
 
         {(authProviders.email || authProviders.saml) && (
-          <div className="divider"></div>
+          <Divider label={t('or')} />
         )}
 
-        <div className="space-y-3">
+        {/* Magic link & SAML */}
+        <div className="space-y-2">
           {authProviders.email && (
             <Button asChild variant="outline" className="w-full">
               <Link href={`/auth/magic-link${params}`}>
-                &nbsp;{t('sign-in-with-email')}
+                {t('sign-in-with-email')}
               </Link>
             </Button>
           )}
-
           {authProviders.saml && (
             <Button asChild variant="outline" className="w-full">
-              <Link href="/auth/sso">&nbsp;{t('continue-with-saml-sso')}</Link>
+              <Link href="/auth/sso">{t('continue-with-saml-sso')}</Link>
             </Button>
           )}
         </div>
       </div>
-      <p className="text-center text-sm text-gray-600 mt-3">
+
+      <p className="mt-3 text-center text-sm text-muted-foreground">
         {t('dont-have-an-account')}
         <Link
           href={`/auth/join${params}`}
-          className="font-medium text-[rgb(var(--color-brand))] hover:text-[rgb(var(--color-brand-strong))]"
+          className="font-medium text-brand hover:underline"
         >
           &nbsp;{t('create-a-free-account')}
         </Link>

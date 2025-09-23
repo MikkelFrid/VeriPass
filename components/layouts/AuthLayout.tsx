@@ -16,29 +16,35 @@ export default function AuthLayout({
   const { t } = useTranslation('common');
 
   return (
-    <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="flex min-h-screen flex-col items-center justify-center px-6 py-12">
+      <div className="w-full max-w-md space-y-6">
+        {/* Logo + Title */}
+        <div className="flex flex-col items-center text-center space-y-2">
           <Image
             src={app.logoUrl}
-            className="mx-auto h-12"
             alt={app.name}
-            width={48}
-            height={48}
+            width={56}
+            height={56}
+            className="h-14 w-14"
+            priority
           />
           {heading && (
-            <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 className="text-2xl font-semibold tracking-tight">
               {t(heading)}
             </h2>
           )}
           {description && (
-            <p className="text-center text-gray-600 dark:text-white">
+            <p className="text-sm text-muted-foreground max-w-sm">
               {t(description)}
             </p>
           )}
         </div>
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">{children}</div>
+
+        {/* Auth Card */}
+        <div className="rounded-xl border bg-card p-6 shadow-sm">
+          {children}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -90,6 +90,10 @@ pnpm prisma:seed   # creates SUPERADMIN + Demo org + products
 pnpm dev
 # → http://localhost:3000
 
+# Lint fix and format
+pnpm lint:fix
+pnpm format
+
 
 ⸻
 
@@ -112,6 +116,10 @@ pnpm prisma:studio
 	•	RESEND_API_KEY + EMAIL_FROM required.
 	•	Domain must be verified in Resend (SPF/DKIM/Return-Path).
 
+⚖️ Middleware
+	•	middleware.ts whitelists `/`, `/landing`, and all `/auth/*` routes.
+	•	Other routes require authentication (JWT or DB strategy).
+
 ⸻
 
 ✉️ Email
@@ -123,9 +131,9 @@ pnpm prisma:studio
 
 🎨 UI & Styling
 	•	Tailwind v4 — tokens in styles/globals.css (@theme inline).
-	•	Minimal tailwind.config.js (no DaisyUI).
+	•	No DaisyUI. All UI primitives are shadcn/ui based.
 	•	UI primitives: components/ui/button.tsx, input.tsx, checkbox.tsx.
-	•	Brand tokens: bg-brand, text-brand-strong, bg-muted, etc.
+	•	Brand tokens: bg-brand, text-brand-foreground, text-destructive-foreground, bg-muted, etc.
 	•	Style guide:
 	•	Rounded corners, single-pixel rings.
 	•	High-contrast focus states.

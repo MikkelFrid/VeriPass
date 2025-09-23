@@ -1,28 +1,25 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
-import React from 'react';
-import { useSession } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
+import { SidebarTrigger } from '@/lib/components/ui/sidebar';
+import env from '@/lib/env';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import {
   ArrowRightOnRectangleIcon,
   SunIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import useTheme from 'hooks/useTheme';
-import env from '@/lib/env';
-import { useTranslation } from 'next-i18next';
-import { useCustomSignOut } from 'hooks/useCustomSignout';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { SidebarTrigger } from '@/lib/components/ui/sidebar';
+import useTheme from 'hooks/useTheme';
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Header = () => {
   const { toggleTheme } = useTheme();
   const { status, data } = useSession();
   const { t } = useTranslation('common');
-  const signOut = useCustomSignOut();
 
   if (status === 'loading' || !data) return null;
   const { user } = data;
@@ -100,15 +97,14 @@ const Header = () => {
 
               <DropdownMenu.Separator className="my-2 h-px bg-[rgb(var(--color-border))]" />
 
-              <DropdownMenu.Item
-                onSelect={(e) => {
-                  e.preventDefault();
-                  signOut();
-                }}
-                className="flex cursor-pointer items-center rounded px-2 py-2 text-sm leading-6 outline-none data-[highlighted]:bg-[rgb(var(--color-panel))]"
-              >
-                <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
-                {t('logout')}
+              <DropdownMenu.Item asChild>
+                <Link
+                  href="/auth/logout"
+                  className="flex items-center rounded px-2 py-2 text-sm leading-6 outline-none data-[highlighted]:bg-[rgb(var(--color-panel))]"
+                >
+                  <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
+                  {t('logout')}
+                </Link>
               </DropdownMenu.Item>
 
               <DropdownMenu.Arrow className="fill-[rgb(var(--color-background))]" />

@@ -11,16 +11,23 @@
 ├── .prettierignore
 ├── .prettierrc.js
 ├── .release-it.json
+├── .vscode
+│   └── settings.json
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── Procfile
 ├── README.md
-├── __daisy-usage.txt
 ├── __project-tree.txt
 ├── __tests__
 │   └── lib
 │       └── server-common.spec.ts
+├── app
+│   ├── (marketing)
+│   │   └── landing
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── providers.tsx
 ├── app.json
 ├── check-locale.js
 ├── components
@@ -171,17 +178,10 @@
 │   ├── errors.ts
 │   ├── fetcher.ts
 │   ├── guards
-│   │   ├── team-api-key.ts
-│   │   ├── team-dsync.ts
-│   │   └── team-sso.ts
+│   │   └── team-api-key.ts
 │   ├── hooks
 │   │   └── use-mobile.ts
 │   ├── inferSSRProps.ts
-│   ├── jackson
-│   │   ├── config.ts
-│   │   ├── dsync
-│   │   ├── dsyncEvents.ts
-│   │   └── sso
 │   ├── jackson.ts
 │   ├── lib
 │   │   └── utils.ts
@@ -234,8 +234,6 @@
 │   │   ├── auth
 │   │   ├── health.ts
 │   │   ├── hello.ts
-│   │   ├── idp.ts
-│   │   ├── import-hack.ts
 │   │   ├── invitations
 │   │   ├── oauth
 │   │   ├── password.ts
@@ -253,23 +251,19 @@
 │   │   ├── magic-link.tsx
 │   │   ├── resend-email-token.tsx
 │   │   ├── reset-password
-│   │   ├── sso
 │   │   ├── unlock-account.tsx
 │   │   ├── verify-email-token.tsx
 │   │   └── verify-email.tsx
 │   ├── dashboard.tsx
-│   ├── index.tsx
 │   ├── invitations
 │   │   └── [token].tsx
 │   ├── settings
 │   │   ├── account.tsx
 │   │   └── security.tsx
-│   ├── teams
-│   │   ├── [slug]
-│   │   ├── index.tsx
-│   │   └── switch.tsx
-│   └── well-known
-│       └── saml-configuration.tsx
+│   └── teams
+│       ├── [slug]
+│       ├── index.tsx
+│       └── switch.tsx
 ├── playwright.config.ts
 ├── postcss.config.js
 ├── prisma
@@ -323,4 +317,4 @@
     ├── next-auth.d.ts
     └── next.ts
 
-79 directories, 245 files
+78 directories, 240 files
