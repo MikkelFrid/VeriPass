@@ -1,0 +1,309 @@
+.
+├── .do
+│   └── deploy.template.yaml
+├── .env
+├── .env.example
+├── .github
+│   ├── dependabot.yml
+│   └── workflows
+│       └── main.yml
+├── .gitignore
+├── .prettierignore
+├── .prettierrc.js
+├── .release-it.json
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── Procfile
+├── README.md
+├── __project-tree.txt
+├── __tests__
+│   └── lib
+│       └── server-common.spec.ts
+├── app.json
+├── check-locale.js
+├── components
+│   ├── account
+│   │   ├── ManageSessions.tsx
+│   │   ├── UpdateAccount.tsx
+│   │   ├── UpdateEmail.tsx
+│   │   ├── UpdateName.tsx
+│   │   ├── UpdatePassword.tsx
+│   │   ├── UpdateTheme.tsx
+│   │   ├── UploadAvatar.tsx
+│   │   └── index.ts
+│   ├── apiKey
+│   │   ├── APIKeys.tsx
+│   │   ├── APIKeysContainer.tsx
+│   │   └── NewAPIKey.tsx
+│   ├── auth
+│   │   ├── AgreeMessage.tsx
+│   │   ├── GithubButton.tsx
+│   │   ├── GoogleButton.tsx
+│   │   ├── Join.tsx
+│   │   ├── JoinWithInvitation.tsx
+│   │   ├── MagicLink.tsx
+│   │   ├── ResetPassword.tsx
+│   │   └── index.ts
+│   ├── billing
+│   │   ├── Help.tsx
+│   │   ├── LinkToPortal.tsx
+│   │   ├── PaymentButton.tsx
+│   │   ├── ProductPricing.tsx
+│   │   └── Subscriptions.tsx
+│   ├── defaultLanding
+│   │   ├── FAQSection.tsx
+│   │   ├── FeatureSection.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── PricingSection.tsx
+│   │   └── data
+│   ├── emailTemplates
+│   │   ├── AccountLocked.tsx
+│   │   ├── EmailLayout.tsx
+│   │   ├── MagicLink.tsx
+│   │   ├── ResetPassword.tsx
+│   │   ├── TeamInvite.tsx
+│   │   ├── VerificationEmail.tsx
+│   │   ├── WelcomeEmail.tsx
+│   │   └── index.ts
+│   ├── invitation
+│   │   ├── AcceptInvitation.tsx
+│   │   ├── EmailDomainMismatch.tsx
+│   │   ├── EmailMismatch.tsx
+│   │   ├── InviteMember.tsx
+│   │   ├── InviteViaEmail.tsx
+│   │   ├── InviteViaLink.tsx
+│   │   ├── NotAuthenticated.tsx
+│   │   ├── PendingInvitations.tsx
+│   │   └── index.ts
+│   ├── layouts
+│   │   ├── AccountLayout.tsx
+│   │   ├── AuthLayout.tsx
+│   │   └── index.ts
+│   ├── shared
+│   │   ├── AccessControl.tsx
+│   │   ├── Alert.tsx
+│   │   ├── Badge.tsx
+│   │   ├── Card.tsx
+│   │   ├── Checkbox.tsx
+│   │   ├── ConfirmationDialog.tsx
+│   │   ├── CopyToClipboardButton.tsx
+│   │   ├── EmptyState.tsx
+│   │   ├── Error.tsx
+│   │   ├── GoogleReCAPTCHA.tsx
+│   │   ├── InputWithCopyButton.tsx
+│   │   ├── InputWithLabel.tsx
+│   │   ├── LetterAvatar.tsx
+│   │   ├── Loading.tsx
+│   │   ├── Modal.tsx
+│   │   ├── TeamDropdown.tsx
+│   │   ├── TogglePasswordVisibility.tsx
+│   │   ├── WithLoadingAndError.tsx
+│   │   ├── index.ts
+│   │   ├── shell
+│   │   └── table
+│   ├── styles.ts
+│   ├── team
+│   │   ├── CreateTeam.tsx
+│   │   ├── Members.tsx
+│   │   ├── RemoveTeam.tsx
+│   │   ├── TeamSettings.tsx
+│   │   ├── TeamTab.tsx
+│   │   ├── Teams.tsx
+│   │   ├── UpdateMemberRole.tsx
+│   │   └── index.ts
+│   ├── ui
+│   │   └── daisy.tsx
+│   └── webhook
+│       ├── CreateWebhook.tsx
+│       ├── EditWebhook.tsx
+│       ├── EventTypes.tsx
+│       ├── Form.tsx
+│       ├── Webhooks.tsx
+│       └── index.ts
+├── delete-team.js
+├── docker-compose.yml
+├── eslint.config.cjs
+├── find-dupe-locale.js
+├── hooks
+│   ├── useAPIKeys.ts
+│   ├── useCanAccess.ts
+│   ├── useCustomSignout.ts
+│   ├── useInvitation.ts
+│   ├── useInvitations.ts
+│   ├── usePermissions.ts
+│   ├── useTeam.ts
+│   ├── useTeamMembers.ts
+│   ├── useTeams.ts
+│   ├── useTheme.ts
+│   ├── useWebhook.ts
+│   └── useWebhooks.ts
+├── i18next.d.ts
+├── instrumentation.ts
+├── jest.config.js
+├── jest.setup.js
+├── lib
+│   ├── accountLock.ts
+│   ├── app.ts
+│   ├── auth.ts
+│   ├── common.ts
+│   ├── email
+│   │   ├── freeEmailService.json
+│   │   ├── sendEmail.ts
+│   │   ├── sendMagicLink.ts
+│   │   ├── sendPasswordResetEmail.ts
+│   │   ├── sendTeamInviteEmail.ts
+│   │   ├── sendVerificationEmail.ts
+│   │   ├── sendWelcomeEmail.ts
+│   │   └── utils.ts
+│   ├── env.ts
+│   ├── errors.ts
+│   ├── fetcher.ts
+│   ├── guards
+│   │   ├── team-api-key.ts
+│   │   ├── team-dsync.ts
+│   │   └── team-sso.ts
+│   ├── inferSSRProps.ts
+│   ├── jackson
+│   │   ├── config.ts
+│   │   ├── dsync
+│   │   ├── dsyncEvents.ts
+│   │   └── sso
+│   ├── jackson.ts
+│   ├── metrics.ts
+│   ├── nextAuth.ts
+│   ├── permissions.ts
+│   ├── prisma.ts
+│   ├── rbac.ts
+│   ├── recaptcha.ts
+│   ├── retraced.ts
+│   ├── server-common.ts
+│   ├── session.ts
+│   ├── slack.ts
+│   ├── stripe.ts
+│   ├── svix.ts
+│   ├── theme.ts
+│   └── zod
+│       ├── index.ts
+│       ├── primitives.ts
+│       └── schema.ts
+├── locales
+│   └── en
+│       └── common.json
+├── middleware.ts
+├── models
+│   ├── account.ts
+│   ├── apiKey.ts
+│   ├── invitation.ts
+│   ├── passwordReset.ts
+│   ├── price.ts
+│   ├── service.ts
+│   ├── session.ts
+│   ├── subscription.ts
+│   ├── team.ts
+│   ├── teamMember.ts
+│   ├── user.ts
+│   └── verificationToken.ts
+├── next-env.d.ts
+├── next-i18next.config.js
+├── next.config.js
+├── package-lock.json
+├── package.json
+├── pages
+│   ├── 404.tsx
+│   ├── 500.tsx
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   ├── api
+│   │   ├── auth
+│   │   ├── health.ts
+│   │   ├── hello.ts
+│   │   ├── idp.ts
+│   │   ├── import-hack.ts
+│   │   ├── invitations
+│   │   ├── oauth
+│   │   ├── password.ts
+│   │   ├── scim
+│   │   ├── sessions
+│   │   ├── teams
+│   │   ├── users.ts
+│   │   ├── webhooks
+│   │   └── well-known
+│   ├── auth
+│   │   ├── forgot-password.tsx
+│   │   ├── idp-login.tsx
+│   │   ├── join.tsx
+│   │   ├── login.tsx
+│   │   ├── magic-link.tsx
+│   │   ├── resend-email-token.tsx
+│   │   ├── reset-password
+│   │   ├── sso
+│   │   ├── unlock-account.tsx
+│   │   ├── verify-email-token.tsx
+│   │   └── verify-email.tsx
+│   ├── dashboard.tsx
+│   ├── index.tsx
+│   ├── invitations
+│   │   └── [token].tsx
+│   ├── settings
+│   │   ├── account.tsx
+│   │   └── security.tsx
+│   ├── teams
+│   │   ├── [slug]
+│   │   ├── index.tsx
+│   │   └── switch.tsx
+│   └── well-known
+│       └── saml-configuration.tsx
+├── playwright.config.ts
+├── postcss.config.js
+├── prisma
+│   ├── migrations
+│   │   ├── 20230625203909_init
+│   │   ├── 20230703084002_add_api_keys
+│   │   ├── 20230703084117_add_index_user
+│   │   ├── 20230720113226_make_password_optional
+│   │   ├── 20231109082527_add_account_lockout
+│   │   ├── 20240109041326_columns_for_invitation_link
+│   │   ├── 20240212105842_stripe
+│   │   ├── 20240213160517_indices
+│   │   ├── 20240226091046_add_jackson_schema
+│   │   ├── 20240316224800_add_index_billing_id
+│   │   ├── 20240531124127_expand_jackson_namespace_column
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   └── seed.ts
+├── prompts
+│   ├── bootstrap.md
+│   ├── build-assistant.md
+│   └── tree.md
+├── public
+│   ├── brand
+│   │   ├── veripass-logo.svg
+│   │   ├── veripass-mark.svg
+│   │   └── veripass-wordmark.svg
+│   ├── home-hero.svg
+│   ├── logo.png
+│   ├── logowhite.png
+│   ├── saas-starter-kit-poster.png
+│   ├── user-default-profile.jpeg
+│   └── vercel.svg
+├── sentry.client.config.ts
+├── styles
+│   ├── globals.css
+│   └── sdk-override.module.css
+├── sync-stripe.js
+├── tailwind.config.js
+├── tests
+│   └── e2e
+│       ├── auth
+│       ├── session
+│       ├── settings
+│       └── support
+├── tsconfig.json
+└── types
+    ├── base.ts
+    ├── index.ts
+    ├── next-auth.d.ts
+    └── next.ts
+
+75 directories, 232 files

@@ -1,8 +1,25 @@
 @import "tailwindcss";
-@plugin "daisyui";
+/* REMOVE daisyui plugin */
+/* @plugin "daisyui"; */
+
+/* Local shim for legacy daisy classes (btn, card, etc.) */
+@import "./daisy-shim.css";
 
 :root {
   color-scheme: dark light;
+
+  /* Brand & tokens (RGB components for Tailwind v4 rgb(var(--xx))) */
+  --color-background: 255 255 255;
+  --color-foreground: 15 23 42;
+  --color-muted: 248 250 252;
+  --color-border: 226 232 240;
+
+  /* Indigo accent (your preference) */
+  --color-brand: 79 70 229;        /* indigo-600 */
+  --color-brand-strong: 67 56 202; /* indigo-700 */
+
+  --radius: 0.75rem; /* 12px default corner radius */
+  --ring: var(--color-brand);
 }
 
 html,
@@ -23,13 +40,15 @@ body {
     sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
+* { box-sizing: border-box; }
 
-* {
-  box-sizing: border-box;
+/* Dark mode tokens via html.dark */
+html.dark {
+  --color-background: 10 10 12;
+  --color-foreground: 226 232 240;
+  --color-muted: 17 24 39;
+  --color-border: 38 38 45;
 }
 
 @layer base {
@@ -40,48 +59,14 @@ a {
 }
 
 @layer components {
-  #__next {
-    @apply h-full;
-  }
-
-  .btn {
-    @apply rounded normal-case;
-  }
-
-  .modal-box {
-    @apply rounded;
-  }
-
-  .btn-primary:focus-visible {
-    @apply outline-primary;
-  }
-
-  .btn-error:focus-visible {
-    @apply outline-error;
-  }
+  #__next { @apply h-full; }
 }
 
-.btn-md {
-  @apply min-h-8 h-10;
-}
+/* Keep your helpers */
+.btn-md { @apply min-h-8 h-10; }
 
-.scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #555555 #f0f0f0;
-}
-
-.scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-  background-color: #555555;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-  background-color: #f0f0f0;
-}
-
-.scrollbar::-webkit-scrollbar-button {
-  display: none;
-}
+.scrollbar { scrollbar-width: thin; scrollbar-color: #555555 #f0f0f0; }
+.scrollbar::-webkit-scrollbar { width: 8px; }
+.scrollbar::-webkit-scrollbar-thumb { background-color: #555555; }
+.scrollbar::-webkit-scrollbar-track { background-color: #f0f0f0; }
+.scrollbar::-webkit-scrollbar-button { display: none; }

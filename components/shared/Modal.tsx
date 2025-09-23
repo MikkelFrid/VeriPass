@@ -1,5 +1,5 @@
-import { Button, Modal as DModal } from '@/components/ui/daisy';
 import { useTranslation } from 'next-i18next';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 interface ModalProps {
   open: boolean;
@@ -13,22 +13,14 @@ interface BodyProps {
 }
 
 const Modal = ({ open, close, children }: ModalProps) => {
-  const { t } = useTranslation('common');
+  useTranslation('common'); // keep namespace loaded (no text here)
 
   return (
-    <DModal open={open} className="dark:border dark:border-gray-100">
-      <Button
-        type="button"
-        size="sm"
-        shape="circle"
-        className="btn absolute right-2 top-2 btn-ghost rounded-full"
-        onClick={close}
-        aria-label="close"
-      >
-        {t('x')}
-      </Button>
-      <div>{children}</div>
-    </DModal>
+    <Dialog open={open} onOpenChange={(v) => { if (!v) close(); }}>
+      <DialogContent className="dark:border dark:border-gray-100">
+        {children}
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -41,7 +33,7 @@ const Description = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Body = ({ children, className }: BodyProps) => {
-  return <div className={`py-3 ${className}`}>{children}</div>;
+  return <div className={`py-3 ${className ?? ''}`}>{children}</div>;
 };
 
 const Footer = ({ children }: { children: React.ReactNode }) => {

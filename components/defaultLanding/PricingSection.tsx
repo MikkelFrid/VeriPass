@@ -1,6 +1,6 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { useTranslation } from 'next-i18next';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import plans from './data/pricing.json';
 
 const PricingSection = () => {
@@ -46,9 +46,9 @@ const PricingSection = () => {
                   </div>
 
                   <div className="card-actions justify-center mt-4">
-                    <Button color="primary" size="md" className="w-3/4 md:w-full rounded-md">
-                      {t('buy-now')}
-                    </Button>
+                  <Button size="md" className="w-3/4 md:w-full rounded-md">
+  {t('buy-now')}
+</Button>
                   </div>
                 </div>
               </article>

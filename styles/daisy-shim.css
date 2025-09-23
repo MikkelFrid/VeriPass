@@ -1,0 +1,102 @@
+@layer components {
+    /* =============== Buttons =============== */
+    .btn {
+      @apply inline-flex items-center justify-center whitespace-nowrap
+        rounded-[calc(var(--radius)*0.75)]
+        text-sm font-medium transition-colors
+        border border-[rgb(var(--color-border))]
+        bg-[rgb(var(--color-muted))] text-[rgb(var(--color-foreground))]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--ring))]
+        disabled:pointer-events-none disabled:opacity-50;
+      min-height: 2.5rem; /* 40px */
+      padding-inline: 1rem;
+    }
+    .btn-ghost { @apply bg-transparent hover:bg-[rgb(var(--color-muted))]; }
+    .btn-link { @apply bg-transparent underline decoration-[rgb(var(--color-foreground))]; border-color: transparent; }
+    .btn-outline { @apply bg-transparent; }
+    .btn-primary {
+      background-color: rgb(var(--color-brand));
+      border-color: rgb(var(--color-brand));
+      color: white;
+    }
+    .btn-error   { @apply bg-red-600 border-red-600 text-white; }
+    .btn-neutral { @apply bg-gray-700 border-gray-700 text-white; }
+  
+    .btn-xs { @apply h-7 px-2 text-xs; }
+    .btn-sm { @apply h-8 px-3 text-sm; }
+    .btn-md { @apply h-10 px-4 text-sm; }
+    .btn-lg { @apply h-11 px-6 text-base; }
+  
+    /* =============== Inputs =============== */
+    .input {
+      @apply h-10 w-full rounded-[calc(var(--radius)*0.75)]
+        border border-[rgb(var(--color-border))]
+        bg-white px-3 py-2 text-sm text-[rgb(var(--color-foreground))]
+        shadow-sm outline-none placeholder:text-slate-400
+        focus-visible:ring-2 focus-visible:ring-[rgb(var(--ring))]
+        dark:bg-[rgb(var(--color-muted))];
+    }
+    .input-bordered { /* compatibility alias (border applied above) */ }
+  
+    /* =============== Cards =============== */
+    .card       { @apply rounded-[var(--radius)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] shadow; }
+    .card-body  { @apply p-6; }
+    .card-title { @apply text-xl font-medium leading-none tracking-tight; }
+    .card-actions { @apply flex gap-2; }
+  
+    /* =============== Badge =============== */
+    .badge       { @apply inline-flex items-center rounded-full border px-2 py-0.5 text-xs; }
+    .badge-outline { @apply bg-transparent; }
+    .badge-ghost   { @apply bg-transparent; }
+    .badge-soft    { @apply bg-[rgb(var(--color-muted))]; }
+    .badge-primary {
+      background-color: rgb(var(--color-brand));
+      border-color: rgb(var(--color-brand));
+      color: white;
+    }
+  
+    /* =============== Dropdown (simple) =============== */
+    .dropdown { @apply relative; }
+    .dropdown-end .dropdown-content { @apply right-0; }
+    .dropdown-content {
+      @apply absolute top-full mt-2 z-50 w-40 rounded-[var(--radius)]
+        border border-[rgb(var(--color-border))]
+        bg-[rgb(var(--color-background))] p-2 shadow;
+    }
+    .menu { @apply flex flex-col gap-1; }
+    .menu li > a,
+    .menu li > button {
+      @apply block w-full rounded px-3 py-2 text-sm text-[rgb(var(--color-foreground))] hover:bg-[rgb(var(--color-muted))] text-left;
+    }
+  
+    /* =============== Modal (basic dialog shell) =============== */
+    .modal {
+      @apply fixed inset-0 z-50 grid place-items-center bg-black/40;
+    }
+    .modal-box {
+      @apply w-[90vw] max-w-lg rounded-[var(--radius)]
+        border border-[rgb(var(--color-border))]
+        bg-[rgb(var(--color-background))] p-4 shadow-xl;
+    }
+    .modal-backdrop { display: none; } /* not needed; we’ll close via JS */
+  
+    /* =============== Tooltip (light shim) =============== */
+    .tooltip { @apply relative cursor-help; }
+    .tooltip::after {
+      content: attr(data-tip);
+      @apply pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-full
+        rounded bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity;
+    }
+    .tooltip:hover::after { @apply opacity-100; }
+  }
+  /* =============== Divider =============== */
+@layer components {
+  .divider {
+    @apply my-4 flex items-center gap-2 text-sm text-[rgb(var(--color-foreground))]/70;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    @apply h-px flex-1 bg-[rgb(var(--color-border))];
+  }
+}

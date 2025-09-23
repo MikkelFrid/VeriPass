@@ -1,0 +1,199 @@
+README.md:168:	 	- `styles/globals.css` uses `@import "tailwindcss";` and `@plugin "daisyui";`
+README.md:170:	•   DaisyUI v5 themes via `data-theme` (`corporate`/`black`). See `pages/_app.tsx` & `pages/_document.tsx`.
+README.md:171:	•   Removed `react-daisyui`. A light shim lives at `components/ui/daisy.tsx`.
+lib/email/sendTeamInviteEmail.ts:16:  const subject = `You've been invited to join ${team.name} on ${app.name}`;
+__project-tree.txt:235:│   │   ├── join.tsx
+delete-team.js:14:  input: process.stdin,
+pages/_app.tsx:32:      html.setAttribute('data-theme', isDark ? 'black' : 'corporate'); // DaisyUI v5 themes
+lib/theme.ts:17:      document.documentElement.setAttribute('data-theme', 'black');
+lib/theme.ts:22:      document.documentElement.setAttribute('data-theme', 'corporate');
+lib/theme.ts:29:        document.documentElement.setAttribute('data-theme', 'black');
+lib/theme.ts:33:        document.documentElement.setAttribute('data-theme', 'corporate');
+locales/en/common.json:32:  "team-invite": "is inviting you to join their team.",
+locales/en/common.json:47:  "accept-invite": "You can accept the invitation to join the team by clicking the button below.",
+locales/en/common.json:155:  "invitation-title": "You've been invited to join ",
+locales/en/common.json:161:  "avatar": "Avatar",
+locales/en/common.json:162:  "custom-avatar": "Click on the avatar to upload a custom one from your files.",
+locales/en/common.json:163:  "avatar-type": "Accepted file types: .png, .jpg. Max file size: 2MB.",
+locales/en/common.json:202:  "delete-invitation-warning": "Are you sure you want to delete this invitation link? Any future attempts to join your team using this link will fail.",
+tailwind.config.js:13:  // IMPORTANT: no require('daisyui') here on v5 — plugin is added in CSS via @plugin
+lib/nextAuth.ts:205:              .join(' '),
+lib/nextAuth.ts:326:          slackNotify()?.alert({
+pages/auth/sso/idp-select.tsx:28:                className="w-full btn btn-outline justify-start"
+pages/404.tsx:25:          className="btn btn-primary btn-md py-3 px-2 sm:px-4 text-white"
+pages/404.tsx:34:          className="btn btn-primary dark:border-zinc-600 dark:border-2 dark:text-zinc-200 btn-outline py-3 px-2 sm:px-4 btn-md"
+lib/email/freeEmailService.json:3812:  "card.zp.ua": true,
+middleware.ts:53:    .map(([key, values]) => `${key} ${values.join(' ')}`)
+middleware.ts:55:    .join('; ');
+pages/index.tsx:28:            <Link href="/" className="btn btn-ghost text-xl normal-case">
+pages/index.tsx:33:            <ul className="menu menu-horizontal flex items-center gap-2 sm:gap-4">
+pages/index.tsx:46:                  href="/auth/join"
+pages/index.tsx:47:                  className="btn btn-primary btn-md py-3 px-2 sm:px-4 text-white"
+pages/index.tsx:55:                  className="btn btn-primary dark:border-zinc-600 dark:border-2 dark:text-zinc-200 btn-outline py-3 px-2 sm:px-4 btn-md"
+check-locale.js:39:      path.join(file.path, file.name),
+check-locale.js:49:          `Missing key: ${path.join(file.path, file.name)} - ${id}`
+check-locale.js:60:          `Missing key: ${path.join(file.path, file.name)} - ${id}`
+check-locale.js:78:              `Missing key: ${path.join(file.path, file.name)} - ${id}`
+pages/auth/unlock-account.tsx:89:          className="mt-4 btn btn-outline w-full"
+pages/auth/sso/index.tsx:123:          <Link href="/auth/login" className="btn btn-outline w-full">
+pages/auth/sso/index.tsx:126:          <Link href="/auth/magic-link" className="btn btn-outline w-full">
+tests/e2e/support/fixtures/join-page.ts:31:    await this.page.goto('/auth/join');
+pages/auth/login.tsx:204:              className="btn btn-outline w-full"
+pages/auth/login.tsx:211:            <Link href="/auth/sso" className="btn btn-outline w-full">
+pages/auth/login.tsx:220:          href={`/auth/join${params}`}
+tests/e2e/support/fixtures/settings-page.ts:59:    await this.page.locator('input[name="name"]').fill(teamName);
+tests/e2e/support/fixtures/settings-page.ts:107:    await this.page.locator('input[name="slug"]').fill(teamSlug);
+tests/e2e/support/fixtures/settings-page.ts:121:    await this.page.locator('input[name="domain"]').fill(domain);
+tests/e2e/support/fixtures/settings-page.ts:135:    await expect(this.page.locator('input[name="name"]')).toHaveValue(teamName);
+tests/e2e/support/fixtures/settings-page.ts:139:    await expect(this.page.locator('input[name="slug"]')).toHaveValue(teamSlug);
+tests/e2e/support/fixtures/settings-page.ts:143:    await expect(this.page.locator('input[name="domain"]')).toHaveValue(domain);
+tests/e2e/support/fixtures/index.ts:3:export * from './join-page';
+pages/api/auth/join.ts:58:  // When join via invitation
+pages/api/auth/join.ts:136:  slackNotify()?.alert({
+package-lock.json:36:        "react-daisyui": "5.0.5",
+package-lock.json:64:        "daisyui": "4.12.24",
+package-lock.json:3686:    "node_modules/@inquirer/input": {
+package-lock.json:3688:      "resolved": "https://registry.npmjs.org/@inquirer/input/-/input-4.1.12.tgz",
+package-lock.json:3764:        "@inquirer/input": "^4.1.12",
+package-lock.json:8320:        "react-modal": "3.16.3",
+package-lock.json:12939:    "node_modules/daisyui": {
+package-lock.json:12941:      "resolved": "https://registry.npmjs.org/daisyui/-/daisyui-4.12.24.tgz",
+package-lock.json:12955:        "url": "https://opencollective.com/daisyui"
+package-lock.json:23694:    "node_modules/react-daisyui": {
+package-lock.json:23696:      "resolved": "https://registry.npmjs.org/react-daisyui/-/react-daisyui-5.0.5.tgz",
+package-lock.json:23700:        "daisyui": "^4.12.10",
+package-lock.json:23977:    "node_modules/react-modal": {
+package-lock.json:23979:      "resolved": "https://registry.npmjs.org/react-modal/-/react-modal-3.16.3.tgz",
+package-lock.json:24256:        "url-join": "5.0.0",
+package-lock.json:27310:    "node_modules/url-join": {
+package-lock.json:27312:      "resolved": "https://registry.npmjs.org/url-join/-/url-join-5.0.0.tgz",
+package.json:82:    "daisyui": "5.1.14",
+pages/500.tsx:27:          className="btn btn-primary dark:border-zinc-600 dark:border-2 dark:text-zinc-200 btn-outline py-3 px-2 sm:px-4 btn-md"
+styles/sdk-override.module.css:2:.sdk-input:focus,
+pages/_document.tsx:7:    <Html lang="en" className="h-full" data-theme="corporate">
+styles/globals.css:2:@plugin "daisyui";
+styles/globals.css:36:  input:not([type='checkbox']):not([type='radio']),
+styles/globals.css:47:  .btn {
+styles/globals.css:51:  .modal-box {
+styles/globals.css:55:  .btn-primary:focus-visible {
+styles/globals.css:59:  .btn-error:focus-visible {
+styles/globals.css:64:.btn-md {
+pnpm-lock.yaml:159:      daisyui:
+pnpm-lock.yaml:1080:  '@inquirer/input@4.2.4':
+pnpm-lock.yaml:3464:  daisyui@5.1.14:
+pnpm-lock.yaml:6084:  react-modal@3.16.3:
+pnpm-lock.yaml:6963:  url-join@5.0.0:
+pnpm-lock.yaml:8475:  '@inquirer/input@4.2.4(@types/node@24.0.1)':
+pnpm-lock.yaml:8503:      '@inquirer/input': 4.2.4(@types/node@24.0.1)
+pnpm-lock.yaml:9515:      react-modal: 3.16.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+pnpm-lock.yaml:11232:  daisyui@5.1.14: {}
+pnpm-lock.yaml:14431:  react-modal@3.16.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+pnpm-lock.yaml:14564:      url-join: 5.0.0
+pnpm-lock.yaml:15517:  url-join@5.0.0: {}
+components/defaultLanding/HeroSection.tsx:16:              href="/auth/join"
+components/defaultLanding/HeroSection.tsx:17:              className="btn btn-primary px-8 no-underline"
+components/defaultLanding/HeroSection.tsx:23:              className="btn btn-outline px-8"
+components/styles.ts:5:    ctoa: 'btn btn-md btn-primary',
+components/styles.ts:6:    destructive: 'btn btn-md btn-error',
+components/styles.ts:7:    cancel: 'btn-md',
+components/styles.ts:9:  input: `${styles['sdk-input']} input input-bordered`,
+components/styles.ts:11:  textarea: styles['sdk-input'],
+components/styles.ts:14:      ctoa: 'btn-md',
+components/styles.ts:15:      cancel: 'btn-md',
+components/styles.ts:18:  secretInput: 'input input-bordered',
+components/billing/Help.tsx:20:            className="btn btn-primary btn-outline btn-sm"
+components/defaultLanding/PricingSection.tsx:25:                className="card bg-base-100 shadow border border-gray-300 dark:border-gray-200 rounded-md"
+components/defaultLanding/PricingSection.tsx:27:                <div className="card-body">
+components/defaultLanding/PricingSection.tsx:28:                  <h3 className="card-title">
+components/defaultLanding/PricingSection.tsx:48:                  <div className="card-actions justify-center mt-4">
+components/defaultLanding/FeatureSection.tsx:22:                  className="card-compact card dark:border-gray-200 border border-gray-300"
+components/defaultLanding/FeatureSection.tsx:25:                  <div className="card-body">
+components/defaultLanding/FeatureSection.tsx:26:                    <h2 className="card-title">{feature.name}</h2>
+components/account/UploadAvatar.tsx:91:            <Card.Title>{t('avatar')}</Card.Title>
+components/account/UploadAvatar.tsx:93:              {t('custom-avatar')} <br />
+components/account/UploadAvatar.tsx:94:              {t('avatar-type')}
+components/account/UploadAvatar.tsx:148:              <input
+components/ui/daisy.tsx:9:  c ? `btn-${c === 'neutral' ? 'neutral' : c}` : 'btn-primary';
+components/ui/daisy.tsx:10:const sizeToBtn = (s?: Size) => (s ? `btn-${s}` : '');
+components/ui/daisy.tsx:24:          'btn',
+components/ui/daisy.tsx:27:          variant === 'outline' && 'btn-outline',
+components/ui/daisy.tsx:28:          variant === 'ghost' && 'btn-ghost',
+components/ui/daisy.tsx:29:          variant === 'link' && 'btn-link',
+components/ui/daisy.tsx:30:          variant === 'soft' && 'btn-soft',
+components/ui/daisy.tsx:51:      <input
+components/ui/daisy.tsx:54:          'input',
+components/ui/daisy.tsx:55:          bordered && 'input-bordered',
+components/ui/daisy.tsx:56:          size && `input-${size}`,
+components/ui/daisy.tsx:57:          color && `input-${color}`,
+components/ui/daisy.tsx:75:    <Comp className={clsx('card bg-base-100 shadow', className)} {...rest}>
+components/ui/daisy.tsx:76:      <div className={clsx('card-body', bodyClassName)}>{children}</div>
+components/ui/daisy.tsx:90:        'badge',
+components/ui/daisy.tsx:91:        color && `badge-${color}`,
+components/ui/daisy.tsx:92:        size && `badge-${size}`,
+components/ui/daisy.tsx:93:        variant === 'outline' && 'badge-outline',
+components/ui/daisy.tsx:94:        variant === 'ghost' && 'badge-ghost',
+components/ui/daisy.tsx:95:        variant === 'soft' && 'badge-soft',
+components/ui/daisy.tsx:108:    <div className={clsx('alert', status && `alert-${status}`, className)} role="alert" {...rest}>
+components/ui/daisy.tsx:117:    <dialog open={open} className={clsx('modal', className)} onClose={onClose} {...rest}>
+components/ui/daisy.tsx:118:      <div className="modal-box">{children}</div>
+components/ui/daisy.tsx:119:      <form method="dialog" className="modal-backdrop">
+components/ui/daisy.tsx:127:  return <input type="checkbox" className={clsx('checkbox', props.className)} {...props} />;
+components/defaultLanding/FAQSection.tsx:23:                className="card bg-base-100 shadow border border-gray-300 dark:border-gray-200"
+components/defaultLanding/FAQSection.tsx:25:                <div className="card-body">
+components/defaultLanding/FAQSection.tsx:26:                  <h3 className="card-title">Q. {faq.question}</h3>
+components/auth/JoinWithInvitation.tsx:73:      const response = await fetch('/api/auth/join', {
+components/billing/Subscriptions.tsx:18:      <h2 className="card-title text-xl font-medium leading-none tracking-tight">
+components/account/UpdateTheme.tsx:18:        <div className="dropdown w-60">
+components/account/UpdateTheme.tsx:30:            className="dropdown-content dark:border-gray-600 p-2 shadow-md bg-base-100 w-full rounded border px-2"
+components/auth/GoogleButton.tsx:17:      className="btn btn-outline w-full"
+components/invitation/InviteViaLink.tsx:109:            ? `Anyone with an email address ending with ${invitation.allowedDomains} can use this link to join your team.`
+components/invitation/InviteViaLink.tsx:110:            : 'Anyone can use this link to join your team.'}
+components/invitation/InviteViaLink.tsx:112:            className="btn btn-xs btn-link link-error"
+components/invitation/InviteViaLink.tsx:166:          ? `Anyone with an email address ending with ${formik.values.domains} can use this link to join your team.`
+components/invitation/InviteViaLink.tsx:167:          : 'Anyone can use this link to join your team.'}
+components/apiKey/APIKeys.tsx:88:                      badge: {
+components/auth/Join.tsx:53:      const response = await fetch('/api/auth/join', {
+components/auth/MagicLink.tsx:102:            className="btn btn-outline w-full"
+components/auth/MagicLink.tsx:106:          <Link href="/auth/sso" className="btn btn-outline w-full">
+components/auth/MagicLink.tsx:114:          href={`/auth/join${params}`}
+components/invitation/NotAuthenticated.tsx:22:          router.push(`/auth/join?token=${invitation.token}`);
+components/auth/GithubButton.tsx:17:      className="btn btn-outline w-full"
+components/team/TeamTab.tsx:125:        {navigations.map((menu) => {
+components/team/TeamTab.tsx:128:              href={menu.href}
+components/team/TeamTab.tsx:129:              key={menu.href}
+components/team/TeamTab.tsx:132:                menu.active
+components/team/TeamTab.tsx:137:              {menu.name}
+components/invitation/EmailDomainMismatch.tsx:23:      : `one of the following domains: ${allowedDomains.join(', ')}`;
+components/emailTemplates/TeamInvite.tsx:30:          You have been invited to join the {team.name} team on {app.name}.
+components/emailTemplates/TeamInvite.tsx:33:          Click the button below to accept the invitation and join the team.
+components/shared/shell/NavigationItems.tsx:22:  menu: MenuItem;
+components/shared/shell/NavigationItems.tsx:29:      {menus.map((menu) => (
+components/shared/shell/NavigationItems.tsx:30:        <li key={menu.name}>
+components/shared/shell/NavigationItems.tsx:31:          <NavigationItem menu={menu} />
+components/shared/shell/NavigationItems.tsx:32:          {menu.items && (
+components/shared/shell/NavigationItems.tsx:34:              {menu.items.map((subitem) => (
+components/shared/shell/NavigationItems.tsx:36:                  <NavigationItem menu={subitem} className="pl-9" />
+components/shared/shell/NavigationItems.tsx:47:const NavigationItem = ({ menu, className }: NavigationItemProps) => {
+components/shared/shell/NavigationItems.tsx:50:      href={menu.href}
+components/shared/shell/NavigationItems.tsx:52:        menu.active ? 'text-white bg-gray-800 font-semibold' : ''
+components/shared/shell/NavigationItems.tsx:55:      {menu.icon && (
+components/shared/shell/NavigationItems.tsx:56:        <menu.icon
+components/shared/shell/NavigationItems.tsx:60:            'text-gray-100': menu.active,
+components/shared/shell/NavigationItems.tsx:65:      {menu.name}
+components/shared/CopyToClipboardButton.tsx:23:      className="tooltip p-0"
+components/shared/table/TableBody.tsx:20:  badge?: {
+components/shared/table/TableBody.tsx:101:                            className="tooltip"
+components/shared/table/TableBody.tsx:116:                  {cell.badge ? (
+components/shared/table/TableBody.tsx:117:                    <Badge color={cell.badge.color}>{cell.badge.text}</Badge>
+components/shared/TeamDropdown.tsx:70:    <div className="dropdown w-full">
+components/shared/TeamDropdown.tsx:84:        className="dropdown-content dark:border-gray-600 p-2 shadow-md bg-base-100 w-full rounded border px-2"
+components/shared/Modal.tsx:24:        className="btn absolute right-2 top-2 btn-ghost rounded-full"
+components/shared/InputWithCopyButton.tsx:25:        className="input input-bordered w-full text-sm"
+components/shared/shell/Header.tsx:45:          <div className="dropdown dropdown-end">
+components/shared/shell/Header.tsx:62:              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border rounded w-40 space-y-1"
+components/shared/Card.tsx:12:        'card w-full rounded border bg-base-100 shadow',
+components/shared/Card.tsx:33:        'card-title text-xl font-medium leading-none tracking-tight',
+components/shared/Card.tsx:69:      className={clsx('card-body gap-4 p-6 dark:bg-black', className)}
+components/shared/Card.tsx:81:        'card-actions justify-end border-t bg-gray-50 p-2',
+components/shared/InputWithLabel.tsx:15:    classes.push('input-error');
+components/shared/InputWithLabel.tsx:27:      <Input className={classes.join(' ')} {...rest} />

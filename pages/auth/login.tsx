@@ -6,7 +6,7 @@ import type {
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { useFormik } from 'formik';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { type ReactElement, useEffect, useState, useRef } from 'react';
@@ -154,7 +154,7 @@ const Login: NextPageWithLayout<
                       <span className="label-text-alt">
                         <Link
                           href="/auth/forgot-password"
-                          className="text-sm text-primary hover:text-[color-mix(in_oklab,oklch(var(--p)),black_7%)]"
+                          className="text-sm text-[rgb(var(--color-brand))] hover:text-[rgb(var(--color-brand-strong))]"
                         >
                           {t('forgot-password')}
                         </Link>
@@ -178,14 +178,12 @@ const Login: NextPageWithLayout<
               />
             </div>
             <div className="mt-3 space-y-3">
-              <Button
-                type="submit"
-                color="primary"
-                loading={formik.isSubmitting}
-                active={formik.dirty}
-                fullWidth
-                size="md"
-              >
+            <Button
+  type="submit"
+  size="md"
+  className="w-full"
+  disabled={formik.isSubmitting}
+>
                 {t('sign-in')}
               </Button>
               <AgreeMessage text={t('sign-in')} />
@@ -198,27 +196,28 @@ const Login: NextPageWithLayout<
         )}
 
         <div className="space-y-3">
-          {authProviders.email && (
-            <Link
-              href={`/auth/magic-link${params}`}
-              className="btn btn-outline w-full"
-            >
-              &nbsp;{t('sign-in-with-email')}
-            </Link>
-          )}
+        {authProviders.email && (
+  <Button asChild variant="outline" className="w-full">
+    <Link href={`/auth/magic-link${params}`}>
+      &nbsp;{t('sign-in-with-email')}
+    </Link>
+  </Button>
+)}
 
-          {authProviders.saml && (
-            <Link href="/auth/sso" className="btn btn-outline w-full">
-              &nbsp;{t('continue-with-saml-sso')}
-            </Link>
-          )}
+{authProviders.saml && (
+  <Button asChild variant="outline" className="w-full">
+    <Link href="/auth/sso">
+      &nbsp;{t('continue-with-saml-sso')}
+    </Link>
+  </Button>
+)}
         </div>
       </div>
       <p className="text-center text-sm text-gray-600 mt-3">
         {t('dont-have-an-account')}
         <Link
           href={`/auth/join${params}`}
-          className="font-medium text-primary hover:text-[color-mix(in_oklab,oklch(var(--p)),black_7%)]"
+          className="font-medium text-[rgb(var(--color-brand))] hover:text-[rgb(var(--color-brand-strong))]"
         >
           &nbsp;{t('create-a-free-account')}
         </Link>
