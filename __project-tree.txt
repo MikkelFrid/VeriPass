@@ -120,6 +120,7 @@
 │   │   ├── index.ts
 │   │   ├── input.tsx
 │   │   ├── label.tsx
+│   │   ├── sheet.tsx
 │   │   └── types.ts
 │   └── webhook
 │       ├── CreateWebhook.tsx
@@ -128,6 +129,7 @@
 │       ├── Form.tsx
 │       ├── Webhooks.tsx
 │       └── index.ts
+├── components.json
 ├── delete-team.js
 ├── docker-compose.yml
 ├── eslint.config.cjs
@@ -154,6 +156,8 @@
 │   ├── app.ts
 │   ├── auth.ts
 │   ├── common.ts
+│   ├── components
+│   │   └── ui
 │   ├── email
 │   │   ├── freeEmailService.json
 │   │   ├── sendEmail.ts
@@ -170,6 +174,8 @@
 │   │   ├── team-api-key.ts
 │   │   ├── team-dsync.ts
 │   │   └── team-sso.ts
+│   ├── hooks
+│   │   └── use-mobile.ts
 │   ├── inferSSRProps.ts
 │   ├── jackson
 │   │   ├── config.ts
@@ -177,6 +183,8 @@
 │   │   ├── dsyncEvents.ts
 │   │   └── sso
 │   ├── jackson.ts
+│   ├── lib
+│   │   └── utils.ts
 │   ├── metrics.ts
 │   ├── nextAuth.ts
 │   ├── permissions.ts
@@ -190,6 +198,7 @@
 │   ├── stripe.ts
 │   ├── svix.ts
 │   ├── theme.ts
+│   ├── utils.ts
 │   └── zod
 │       ├── index.ts
 │       ├── primitives.ts
@@ -314,4 +323,4 @@
     ├── next-auth.d.ts
     └── next.ts
 
-75 directories, 240 files
+79 directories, 245 files

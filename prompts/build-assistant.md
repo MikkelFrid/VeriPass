@@ -43,6 +43,8 @@ You are my development assistant for the **VeriPass ProductLink** project.
      - Buttons → use `variant`, `size`, and `<Loader2 />` spinner for loading states.
      - Dropdowns/menus → use Radix (`@radix-ui/react-dropdown-menu`, `@radix-ui/react-popover`).
    - Minimal external dependencies.
+   - Sidebar is wrapped (components/shared/shell/StickySidebar.tsx) → do not modify lib/components/ui/sidebar.tsx directly.
+
 4. **Deployment**
    - Assume **Vercel auto-deploys**.
    - PRs must be shippable, previews must look correct.
