@@ -14,6 +14,8 @@ import LinkToPortal from '@/components/billing/LinkToPortal';
 import Subscriptions from '@/components/billing/Subscriptions';
 import ProductPricing from '@/components/billing/ProductPricing';
 
+import { AccountLayout } from '@/components/layouts';
+
 const Payments = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
   const { canAccess } = useCanAccess();
@@ -80,5 +82,8 @@ export async function getServerSideProps({
     },
   };
 }
+
+Payments.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
+
 
 export default Payments;

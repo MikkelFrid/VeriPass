@@ -2,6 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { NextPageWithLayout } from 'types';
 import { useTranslation } from 'next-i18next';
+import { AccountLayout } from '@/components/layouts';
 
 const Products: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
@@ -22,5 +23,7 @@ export async function getServerSideProps({
     },
   };
 }
+
+Products.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default Products;
