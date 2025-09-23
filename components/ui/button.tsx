@@ -1,44 +1,48 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
-import { Loader2 } from "lucide-react";
+'use client';
 
-export const buttonVariants = cva(
-  [
-    "inline-flex items-center justify-center whitespace-nowrap",
-    "rounded-[calc(var(--radius)*0.75)] text-sm font-medium transition-colors",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-brand))] focus-visible:ring-offset-2",
-    "disabled:pointer-events-none disabled:opacity-50",
-    "ring-offset-[rgb(var(--color-background))]",
-  ].join(" "),
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Loader2 } from 'lucide-react';
+import { cn } from '@/lib/lib/utils'; // adjust path if needed
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium ring-1 ring-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none data-[state=open]:bg-muted',
   {
     variants: {
       variant: {
-        default:
-          "bg-[rgb(var(--color-brand))] text-white hover:bg-[rgb(var(--color-brand-strong))]",
         brand:
-          "bg-[rgb(var(--color-brand))] text-white hover:bg-[rgb(var(--color-brand-strong))]",
+          'bg-brand text-brand-foreground hover:bg-brand/90 focus-visible:ring-brand',
+        primary:
+          'bg-brand text-brand-foreground hover:bg-brand/90 focus-visible:ring-brand',
         secondary:
-          "bg-[rgb(var(--color-panel))] text-[rgb(var(--color-foreground))] border border-[rgb(var(--color-border))] hover:bg-[rgb(var(--color-muted))]",
-        gold:
-          "bg-[rgb(var(--color-gold))] text-white hover:bg-[rgb(var(--color-brand-strong))]",
+          'bg-muted text-foreground hover:bg-muted/80 focus-visible:ring-muted',
         outline:
-          "border border-[rgb(var(--color-border))] bg-transparent text-[rgb(var(--color-foreground))] hover:bg-[rgb(var(--color-panel))]",
+          'bg-transparent text-foreground border border-border hover:bg-muted/60',
         ghost:
-          "bg-transparent text-[rgb(var(--color-foreground))] hover:bg-[rgb(var(--color-panel))]",
+          'bg-transparent text-foreground hover:bg-muted/60',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive',
         link:
-          "bg-transparent underline underline-offset-4 text-[rgb(var(--color-brand))] hover:opacity-90",
-        destructive: "bg-red-600 text-white hover:bg-red-700",
+          'bg-transparent underline underline-offset-4 text-foreground hover:no-underline',
       },
       size: {
-        sm: "h-9 px-3 text-xs",
-        md: "h-10 px-4 text-sm",
-        lg: "h-11 px-6 text-sm",
-        icon: "h-10 w-10",
+        default: 'h-10 px-4 py-2 text-sm',
+        sm: 'h-9 px-3 text-sm',
+        md: 'h-10 px-4 py-2 text-sm',
+        lg: 'h-11 px-6 text-base',
+        icon: 'h-10 w-10',
+      },
+      block: {
+        true: 'w-full',
+        false: '',
       },
     },
-    defaultVariants: { variant: "default", size: "md" },
+    compoundVariants: [{ variant: 'outline', size: 'icon', class: 'p-0' }],
+    defaultVariants: {
+      variant: 'primary',
+      size: 'md',
+      block: false,
+    },
   }
 );
 
@@ -47,96 +51,79 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   isLoading?: boolean;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
 }
 
-/**
- * Rules:
- * - When `asChild` is true, Button renders a Radix <Slot> and MUST pass exactly one element child.
- *   We intentionally DO NOT render icons/spinner/wrappers in `asChild` mode to satisfy this.
- * - When `asChild` is false, we render a native <button> and may include icons/spinner.
- */
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
       variant,
       size,
-      asChild,
-      isLoading,
-      leftIcon,
-      rightIcon,
+      block,
+      asChild = false,
+      isLoading = false,
       children,
       disabled,
-      ...props
+      ...rest
     },
     ref
   ) => {
-    const classes = twMerge(buttonVariants({ variant, size }), className);
+    const merged = cn(buttonVariants({ variant, size, block }), className);
 
-    if (asChild) {
-      // Ensure a single valid React element child
-      const onlyChild = React.Children.only(children) as React.ReactElement;
-
-      // In asChild mode, we cannot inject icons/spinner (would create multiple children).
-      // Apply classes/props to the single child via Slot.
-      return (
-        <Slot
-          className={classes}
-          // aria-busy is the only "loading" hint we can add without extra nodes
-          aria-busy={isLoading ? true : undefined}
-        >
-          {onlyChild}
-        </Slot>
-      );
+    // If asChild and we have exactly one valid React element, clone it.
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children as React.ReactElement<any>, {
+        className: cn((children as any).props?.className, merged),
+        'data-variant': variant,
+        'data-size': size,
+        'aria-busy': isLoading ? 'true' : undefined,
+        // Merge onClick behaviour safely
+        onClick: (e: any) => {
+          if (disabled || isLoading) {
+            e.preventDefault();
+            return;
+          }
+          (children as any).props?.onClick?.(e);
+          (rest as any).onClick?.(e);
+        },
+        // Keep child ref if present; React will warn if incompatible types; acceptable for anchors/links.
+        ref: (children as any).ref ?? (ref as any),
+        // Prepend loader to child content
+        children: (
+          <>
+            {isLoading && (
+              <Loader2
+                className="mr-2 h-4 w-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
+            {(children as any).props?.children ?? null}
+          </>
+        ),
+        ...rest,
+      });
     }
 
-    // Normal button mode – icons/spinner allowed
-    const isDisabled = disabled || isLoading;
-
+    // Fallback: render a real <button>
     return (
-      <button ref={ref} className={classes} disabled={isDisabled} {...props}>
-        {isLoading ? (
-          <Loader2
-            className={twMerge(
-              "mr-2 h-4 w-4 animate-spin",
-              size === "lg" && "h-5 w-5",
-              size === "sm" && "h-3.5 w-3.5",
-              size === "icon" && "mr-0"
-            )}
-            aria-hidden="true"
-          />
-        ) : leftIcon ? (
-          <span
-            className={twMerge(
-              "mr-2 inline-flex",
-              size === "lg" ? "h-5 w-5" : "h-4 w-4",
-              size === "icon" && "mr-0"
-            )}
-          >
-            {leftIcon}
-          </span>
-        ) : null}
-
-        {/* Label */}
-        <span className="inline-flex items-center">{children}</span>
-
-        {rightIcon ? (
-          <span
-            className={twMerge(
-              "ml-2 inline-flex",
-              size === "lg" ? "h-5 w-5" : "h-4 w-4",
-              size === "icon" && "ml-0"
-            )}
-          >
-            {rightIcon}
-          </span>
-        ) : null}
+      <button
+        ref={ref}
+        className={merged}
+        data-variant={variant}
+        data-size={size}
+        aria-busy={isLoading ? 'true' : undefined}
+        disabled={disabled || isLoading}
+        {...rest}
+      >
+        {isLoading && (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+        )}
+        {children}
       </button>
     );
   }
 );
+Button.displayName = 'Button';
 
-Button.displayName = "Button";
+export { Button, buttonVariants };
 export default Button;

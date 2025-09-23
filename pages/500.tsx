@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { AccountLayout } from '@/components/layouts';
+import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -18,16 +19,18 @@ const Custom500 = () => {
       <p className="text-lg md:text-xl lg:text-2xl dark:text-gray-500 my-12">
         {t('unable-to-find')}
       </p>
-      <div className="mt-8 space-x-5">
-        <button
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <Button
+          variant="outline"
+          size="md"
+          className="py-3 px-2 sm:px-4"
           onClick={(e) => {
             e.preventDefault();
             router.back();
           }}
-          className="btn btn-primary dark:border-zinc-600 dark:border-2 dark:text-zinc-200 btn-outline py-3 px-2 sm:px-4 btn-md"
         >
           {t('go-back')}
-        </button>
+        </Button>
         <p className="text-lg md:text-xl lg:text-2xl dark:text-gray-500 my-12">
           {t('try-again-later')}
         </p>

@@ -73,6 +73,7 @@ const UpdateName = ({ user }: { user: Partial<User> }) => {
         <Card.Footer>
           <Button
             type="submit"
+            variant='primary'
             disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             size="default"
           >

@@ -11,7 +11,7 @@ import PricingSection from '@/components/defaultLanding/PricingSection';
 import useTheme from 'hooks/useTheme';
 import env from '@/lib/env';
 import Head from 'next/head';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 
 const Home: NextPageWithLayout = () => {
   const { toggleTheme, selectedTheme } = useTheme();
@@ -43,12 +43,12 @@ const Home: NextPageWithLayout = () => {
               </button>
             )}
             <Button asChild>
-              <Link href="/auth/join" className="no-underline">
+              <Link href="/auth/join">
                 {t('sign-up')}
               </Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/auth/login" className="no-underline">
+              <Link href="/auth/login">
                 {t('sign-in')}
               </Link>
             </Button>

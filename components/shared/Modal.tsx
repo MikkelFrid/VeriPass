@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { useTranslation } from 'next-i18next';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
@@ -18,6 +19,15 @@ const Modal = ({ open, close, children }: ModalProps) => {
   return (
     <Dialog open={open} onOpenChange={(v) => { if (!v) close(); }}>
       <DialogContent className="dark:border dark:border-gray-100">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-2 top-2 rounded-full"
+          onClick={close}
+          aria-label="Close"
+        >
+          ×
+        </Button>
         {children}
       </DialogContent>
     </Dialog>

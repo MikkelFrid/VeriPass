@@ -20,6 +20,7 @@ module.exports = {
           DEFAULT: 'rgb(var(--color-brand) / <alpha-value>)',
           strong: 'rgb(var(--color-brand-strong) / <alpha-value>)',
         },
+        'brand-foreground': 'rgb(var(--color-brand-foreground) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
         panel: 'rgb(var(--color-panel) / <alpha-value>)',
         muted: 'rgb(var(--color-muted) / <alpha-value>)',

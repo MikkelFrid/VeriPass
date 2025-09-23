@@ -5,6 +5,7 @@ import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import router from 'next/router';
+import { Button } from '@/components/ui/button';
 
 const Custom404 = () => {
   const { t } = useTranslation('common');
@@ -19,22 +20,21 @@ const Custom404 = () => {
       <p className="text-lg md:text-xl lg:text-2xl dark:text-gray-500 my-12">
         {t('sorry-not-found')}
       </p>
-      <div className="mt-8 space-x-5">
-        <Link
-          href="/"
-          className="btn btn-primary btn-md py-3 px-2 sm:px-4 text-white"
-        >
-          {t('go-home')}
-        </Link>
-        <button
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <Button asChild variant="primary" size="md" className="py-3 px-2 sm:px-4">
+          <Link href="/">{t('go-home')}</Link>
+        </Button>
+        <Button
+          variant="outline"
+          size="md"
+          className="py-3 px-2 sm:px-4"
           onClick={(e) => {
             e.preventDefault();
             router.back();
           }}
-          className="btn btn-primary dark:border-zinc-600 dark:border-2 dark:text-zinc-200 btn-outline py-3 px-2 sm:px-4 btn-md"
         >
           {t('go-back')}
-        </button>
+        </Button>
       </div>
     </div>
   );

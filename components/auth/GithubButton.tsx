@@ -1,5 +1,5 @@
 import { signIn } from 'next-auth/react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { useTranslation } from 'next-i18next';
 import useInvitation from 'hooks/useInvitation';
 import env from '@/lib/env';
@@ -21,7 +21,6 @@ const GithubButton = () => {
           callbackUrl,
         });
       }}
-      size="default"
     >
       <svg
         className="mr-2 -ml-1 h-4 w-4"

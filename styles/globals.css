@@ -12,6 +12,8 @@
   --color-brand: 19 42 85;          /* #132A55 (primary) */
   --color-brand-strong: 47 109 147;  /* #2F6D93 (hover/active) */
 
+  --color-brand-foreground: 255 255 255;
+
   /* Accent (use sparingly) */
   --color-accent: 46 35 43;          /* #2E232B */
 

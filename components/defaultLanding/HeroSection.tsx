@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
   const { t } = useTranslation('common');
