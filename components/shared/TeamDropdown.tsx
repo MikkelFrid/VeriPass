@@ -19,7 +19,7 @@ type MenuItem = {
   id: string | number;
   name?: string | null;
   href: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 const TeamDropdown = () => {
@@ -58,8 +58,18 @@ const TeamDropdown = () => {
     {
       id: 3,
       items: [
-        { id: "all-teams", name: t("all-teams"), href: "/teams", icon: RectangleStackIcon },
-        { id: "new-team", name: t("new-team"), href: "/teams?newTeam=true", icon: FolderPlusIcon },
+        {
+          id: "all-teams",
+          name: t("all-teams"),
+          href: "/teams",
+          icon: RectangleStackIcon,
+        },
+        {
+          id: "new-team",
+          name: t("new-team"),
+          href: "/teams?newTeam=true",
+          icon: FolderPlusIcon,
+        },
       ],
     },
   ];
@@ -73,10 +83,7 @@ const TeamDropdown = () => {
     <div className="w-full">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <Button
-            variant="outline"
-            className="w-full h-10 justify-between font-bold"
-          >
+          <Button variant="outline" className="w-full h-10 justify-between font-bold">
             <span className="truncate">{label}</span>
             <ChevronUpDownIcon className="h-5 w-5 shrink-0" />
           </Button>
@@ -85,8 +92,8 @@ const TeamDropdown = () => {
         <DropdownMenu.Portal>
           <DropdownMenu.Content
             sideOffset={6}
-            className="z-50 w-[var(--dd-width,calc(100%))] min-w-[16rem] rounded-[var(--radius)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] p-2 shadow outline-none data-[side=bottom]:animate-in data-[side=top]:animate-in"
             align="start"
+            className="z-50 w-[var(--dd-width,calc(100%))] min-w-[16rem] rounded-[var(--radius)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] p-2 shadow outline-none data-[side=bottom]:animate-in data-[side=top]:animate-in"
           >
             {groups.map(({ id, name, items }, gi) => (
               <React.Fragment key={id}>
@@ -112,6 +119,7 @@ const TeamDropdown = () => {
                 )}
               </React.Fragment>
             ))}
+            <DropdownMenu.Arrow className="fill-[rgb(var(--color-background))]" />
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>

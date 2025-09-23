@@ -180,7 +180,7 @@ const Login: NextPageWithLayout<
             <div className="mt-3 space-y-3">
               <Button
                 type="submit"
-                size="md"
+                size="default"
                 className="w-full"
                 disabled={formik.isSubmitting}
               >

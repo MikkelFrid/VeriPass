@@ -3,7 +3,8 @@ import { mutate } from 'swr';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import React, { useState } from 'react';
-import { Button, Input } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';
+import { Button, Input } from '@/components/ui';
 import { useTranslation } from 'next-i18next';
 
 import type { ApiResponse } from 'types';
@@ -153,11 +154,12 @@ const InviteViaLink = ({ team }: InviteViaLinkProps) => {
         </select>
         <Button
           type="submit"
-          color="primary"
-          loading={formik.isSubmitting}
-          disabled={!formik.isValid}
+          disabled={!formik.isValid || formik.isSubmitting}
           className="flex-grow"
         >
+          {formik.isSubmitting && (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          )}
           {t('create-link')}
         </Button>
       </div>

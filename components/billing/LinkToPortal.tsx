@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
 
@@ -50,12 +51,12 @@ const LinkToPortal = ({ team }: LinkToPortalProps) => {
         <div>
           <Button
             type="button"
-            color="primary"
             size="sm"
             variant="outline"
-            loading={loading}
+            disabled={loading}
             onClick={() => openStripePortal()}
           >
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {t('billing-portal')}
             <ArrowTopRightOnSquareIcon className="w-5 h-5 ml-2" />
           </Button>

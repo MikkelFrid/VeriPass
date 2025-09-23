@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import { useTranslation } from 'next-i18next';
 
 import { Invitation } from '@prisma/client';
@@ -31,11 +31,10 @@ const EmailDomainMismatch = ({
         {t('accept-invitation-email-domain-instruction')}
       </p>
       <Button
-        fullWidth
-        color="error"
-        size="md"
-        variant="outline"
+        size="default"
+        variant="destructive"
         onClick={signOut}
+        className="w-full"
       >
         {t('logout')}
       </Button>

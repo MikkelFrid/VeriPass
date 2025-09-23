@@ -9,7 +9,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { type ReactElement, useState } from 'react';
-import { Button } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui';
 import { toast } from 'react-hot-toast';
 import type { NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
@@ -108,12 +109,13 @@ const SSO: NextPageWithLayout<
             )}
             <Button
               type="submit"
-              color="primary"
-              loading={formik.isSubmitting}
-              active={formik.dirty}
-              fullWidth
-              size="md"
+              disabled={formik.isSubmitting}
+              size="default"
+              className="w-full"
             >
+              {formik.isSubmitting && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
               {t('continue-with-saml-sso')}
             </Button>
           </div>

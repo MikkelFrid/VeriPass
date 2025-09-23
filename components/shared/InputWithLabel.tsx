@@ -1,4 +1,4 @@
-import { Input, InputProps } from '@/components/ui/daisy';
+import { Input, type InputProps } from '@/components/ui';
 
 interface InputWithLabelProps extends InputProps {
   label: string | React.ReactNode;

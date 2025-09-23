@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/daisy';
+import { Button, type ButtonProps } from '@/components/ui';
 import Badge from '@/components/shared/Badge';
 import { useTranslation } from 'next-i18next';
 
@@ -15,6 +15,7 @@ interface TableBodyCell {
   buttons?: {
     text: string;
     color?: string;
+    variant?: ButtonProps['variant'];
     onClick: () => void;
   }[];
   badge?: {
@@ -78,12 +79,16 @@ export const TableBody = ({
                   {!cell.buttons || cell.buttons?.length === 0 ? null : (
                     <div className="flex space-x-2">
                       {cell.buttons?.map((button: any, index: number) => {
+                        const variant: ButtonProps['variant'] =
+                          button.variant ??
+                          (button.color === 'error'
+                            ? 'destructive'
+                            : 'outline');
                         return (
                           <Button
                             key={row.id + '-button-' + index}
-                            size="xs"
-                            color={button.color}
-                            variant="outline"
+                            size="sm"
+                            variant={variant}
                             onClick={button.onClick}
                           >
                             {button.text}

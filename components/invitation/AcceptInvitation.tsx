@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
@@ -37,7 +37,11 @@ const AcceptInvitation = ({ invitation }: AcceptInvitationProps) => {
   return (
     <>
       <h3 className="text-center">{t('accept-invite')}</h3>
-      <Button onClick={acceptInvitation} fullWidth color="primary" size="md">
+      <Button
+        onClick={acceptInvitation}
+        size="default"
+        className="w-full"
+      >
         {t('accept-invitation')}
       </Button>
     </>

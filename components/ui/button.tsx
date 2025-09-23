@@ -9,17 +9,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-[rgb(var(--color-brand))] text-white hover:opacity-95",
+        destructive: "bg-red-600 text-white hover:bg-red-700",
         outline: "border border-[rgb(var(--color-border))] bg-transparent text-[rgb(var(--color-foreground))] hover:bg-[rgb(var(--color-muted))]",
         ghost: "bg-transparent text-[rgb(var(--color-foreground))] hover:bg-[rgb(var(--color-muted))]",
         link: "bg-transparent underline decoration-[rgb(var(--color-foreground))]",
       },
       size: {
-        sm: "h-8 px-3",
+        default: "h-10 px-4",
+        sm: "h-9 px-3",
         md: "h-10 px-4",
         lg: "h-11 px-6",
       },
     },
-    defaultVariants: { variant: "default", size: "md" },
+    defaultVariants: { variant: "default", size: "default" },
   }
 );
 
@@ -30,14 +32,17 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild, ...props }, ref) => {
+  ({ className, variant, size, asChild, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+    const childContent = children as unknown as React.ReactNode;
     return (
       <Comp
         ref={ref}
         className={twMerge(buttonVariants({ variant, size }), className)}
         {...props}
-      />
+      >
+        {childContent}
+      </Comp>
     );
   }
 );

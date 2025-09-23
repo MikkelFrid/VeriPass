@@ -1,12 +1,17 @@
 import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Card } from '@/components/shared';
+import { Button } from '@/components/ui';
 import useTheme from 'hooks/useTheme';
 import { useTranslation } from 'next-i18next';
+import { Check } from 'lucide-react';
 
 const UpdateTheme = () => {
   const { setTheme, themes, selectedTheme, applyTheme } = useTheme();
   const { t } = useTranslation('common');
+
+  const isSelected = (id: string) => selectedTheme?.id === id;
 
   return (
     <Card>
@@ -15,38 +20,49 @@ const UpdateTheme = () => {
           <Card.Title>{t('theme')}</Card.Title>
           <Card.Description>{t('change-theme')}</Card.Description>
         </Card.Header>
-        <div className="dropdown w-60">
-          <div
-            tabIndex={0}
-            className="border border-gray-300 dark:border-gray-600 flex h-10 items-center px-4 justify-between cursor-pointer rounded text-sm font-bold"
-          >
-            <div className="flex items-center gap-2">
-              <selectedTheme.icon className="w-5 h-5" /> {selectedTheme.name}
-            </div>
-            <ChevronUpDownIcon className="w-5 h-5" />
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content dark:border-gray-600 p-2 shadow-md bg-base-100 w-full rounded border px-2"
-          >
-            {themes.map((theme) => (
-              <li key={theme.id}>
-                <button
-                  className="w-full flex hover:bg-gray-100 hover:dark:text-black focus:bg-gray-100 focus:outline-none py-2 px-2 rounded text-sm font-medium gap-2 items-center"
-                  onClick={() => {
+
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger asChild>
+            <Button
+              variant="outline"
+              className="w-60 justify-between font-semibold"
+            >
+              <span className="flex items-center gap-2">
+                {/* selectedTheme.icon is a component */}
+                {selectedTheme?.icon ? (
+                  <selectedTheme.icon className="w-5 h-5" />
+                ) : null}
+                {selectedTheme?.name}
+              </span>
+              <ChevronUpDownIcon className="w-5 h-5 opacity-60" />
+            </Button>
+          </DropdownMenu.Trigger>
+
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content
+              align="start"
+              sideOffset={8}
+              className="z-50 min-w-[15rem] rounded-[calc(var(--radius)*0.75)] border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] p-2 shadow-md"
+            >
+              {themes.map((theme: any) => (
+                <DropdownMenu.Item
+                  key={theme.id}
+                  onSelect={() => {
                     applyTheme(theme.id);
                     setTheme(theme.id);
-                    if (document.activeElement) {
-                      (document.activeElement as HTMLElement).blur();
-                    }
                   }}
+                  className="flex cursor-pointer items-center gap-2 rounded px-2 py-2 text-sm leading-6 text-[rgb(var(--color-foreground))] outline-none data-[highlighted]:bg-[rgb(var(--color-muted))]"
                 >
-                  {theme.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  {theme.icon ? <theme.icon className="w-4 h-4" /> : null}
+                  <span className="flex-1">{theme.name}</span>
+                  {isSelected(theme.id) && <Check className="h-4 w-4" aria-hidden="true" />}
+                </DropdownMenu.Item>
+              ))}
+
+              <DropdownMenu.Arrow className="fill-[rgb(var(--color-background))]" />
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
       </Card.Body>
     </Card>
   );

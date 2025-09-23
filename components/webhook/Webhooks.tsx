@@ -4,7 +4,7 @@ import { Team } from '@prisma/client';
 import useWebhooks from 'hooks/useWebhooks';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import toast from 'react-hot-toast';
 import type { EndpointOut } from 'svix';
 
@@ -70,8 +70,7 @@ const Webhooks = ({ team }: { team: Team }) => {
             </p>
           </div>
           <Button
-            color="primary"
-            size="md"
+            size="default"
             onClick={() => setCreateWebhookVisible(!createWebhookVisible)}
           >
             {t('add-webhook')}

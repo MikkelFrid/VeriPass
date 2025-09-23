@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox } from '@/components/ui/daisy';
+import { Checkbox } from '@/components/ui';
 
 const CheckboxComponent = ({
   onChange,

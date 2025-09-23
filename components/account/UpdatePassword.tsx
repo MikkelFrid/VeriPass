@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
-import { Button } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
@@ -88,11 +89,12 @@ const UpdatePassword = () => {
             <div className="flex justify-end">
               <Button
                 type="submit"
-                color="primary"
-                loading={formik.isSubmitting}
-                disabled={!formik.dirty || !formik.isValid}
-                size="md"
+                disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+                size="default"
               >
+                {formik.isSubmitting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
                 {t('change-password')}
               </Button>
             </div>

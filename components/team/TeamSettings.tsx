@@ -5,7 +5,8 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Button } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 
@@ -92,11 +93,12 @@ const TeamSettings = ({ team }: { team: Team }) => {
               <div className="flex justify-end">
                 <Button
                   type="submit"
-                  color="primary"
-                  loading={formik.isSubmitting}
-                  disabled={!formik.isValid || !formik.dirty}
-                  size="md"
+                  disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                  size="default"
                 >
+                  {formik.isSubmitting && (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  )}
                   {t('save-changes')}
                 </Button>
               </div>

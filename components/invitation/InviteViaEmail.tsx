@@ -3,7 +3,8 @@ import * as Yup from 'yup';
 import { mutate } from 'swr';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
-import { Button, Input } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';
+import { Button, Input } from '@/components/ui';
 import { useTranslation } from 'next-i18next';
 
 import type { ApiResponse } from 'types';
@@ -84,11 +85,12 @@ const InviteViaEmail = ({ setVisible, team }: InviteViaEmailProps) => {
         </select>
         <Button
           type="submit"
-          color="primary"
-          loading={formik.isSubmitting}
-          disabled={!formik.isValid || !formik.dirty}
+          disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
           className="flex-grow"
         >
+          {formik.isSubmitting && (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          )}
           {t('send-invite')}
         </Button>
       </div>

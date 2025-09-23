@@ -11,6 +11,7 @@ import PricingSection from '@/components/defaultLanding/PricingSection';
 import useTheme from 'hooks/useTheme';
 import env from '@/lib/env';
 import Head from 'next/head';
+import { Button } from '@/components/ui';
 
 const Home: NextPageWithLayout = () => {
   const { toggleTheme, selectedTheme } = useTheme();
@@ -23,43 +24,37 @@ const Home: NextPageWithLayout = () => {
       </Head>
 
       <div className="container mx-auto">
-        <div className="navbar bg-base-100 px-0 sm:px-1">
-          <div className="flex-1">
-            <Link href="/" className="btn btn-ghost text-xl normal-case">
+        {/* Header / Navbar (no Daisy) */}
+        <header className="flex items-center justify-between py-3 px-0 sm:px-1">
+          <div className="flex items-center">
+            <Link href="/" className="text-xl font-semibold no-underline">
               BoxyHQ
             </Link>
           </div>
-          <div className="flex-none">
-            <ul className="menu menu-horizontal flex items-center gap-2 sm:gap-4">
-              {env.darkModeEnabled && (
-                <li>
-                  <button
-                    className="bg-none p-0 rounded-lg flex items-center justify-center"
-                    onClick={toggleTheme}
-                  >
-                    <selectedTheme.icon className="w-5 h-5" />
-                  </button>
-                </li>
-              )}
-              <li>
-                <Link
-                  href="/auth/join"
-                  className="btn btn-primary btn-md py-3 px-2 sm:px-4 text-white"
-                >
-                  {t('sign-up')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/auth/login"
-                  className="btn btn-primary dark:border-zinc-600 dark:border-2 dark:text-zinc-200 btn-outline py-3 px-2 sm:px-4 btn-md"
-                >
-                  {t('sign-in')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+          <nav className="flex items-center gap-2 sm:gap-4">
+            {env.darkModeEnabled && (
+              <button
+                type="button"
+                aria-label="Toggle theme"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[rgb(var(--color-border))] bg-[rgb(var(--color-background))] hover:bg-[rgb(var(--color-muted))]"
+                onClick={toggleTheme}
+              >
+                {selectedTheme?.icon ? <selectedTheme.icon className="w-5 h-5" /> : null}
+              </button>
+            )}
+            <Button asChild>
+              <Link href="/auth/join" className="no-underline">
+                {t('sign-up')}
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/auth/login" className="no-underline">
+                {t('sign-in')}
+              </Link>
+            </Button>
+          </nav>
+        </header>
+
         <HeroSection />
         <div className="divider"></div>
         <FeatureSection />

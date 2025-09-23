@@ -22,7 +22,7 @@ export const DialogContent = React.forwardRef<
       )}
       {...props}
     >
-      {children}
+      {children as React.ReactNode}
       <DialogClose className="absolute right-3 top-3 rounded-md p-1 hover:bg-[rgb(var(--color-muted))]">
         <X className="size-4" />
         <span className="sr-only">Close</span>

@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui';
 import { useTranslation } from 'next-i18next';
 
 import useTeam from 'hooks/useTeam';
@@ -64,14 +64,13 @@ const ProductPricing = ({ plans, subscriptions }: ProductPricingProps) => {
               <div className="flex justify-center flex-col gap-2 border-gray-200 px-8 h-10">
                 {plan.prices.map((price: Price) =>
                   hasActiveSubscription(price) ? (
-                    <Button
-                      key={price.id}
-                      variant="outline"
-                      size="md"
-                      fullWidth
-                      disabled
-                      className="rounded-full"
-                    >
+                  <Button
+                    key={price.id}
+                    variant="outline"
+                    size="default"
+                    disabled
+                    className="w-full rounded-full"
+                  >
                       {t('current')}
                     </Button>
                   ) : (

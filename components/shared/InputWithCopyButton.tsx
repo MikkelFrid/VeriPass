@@ -1,4 +1,4 @@
-import { Input, InputProps } from '@/components/ui/daisy';
+import { Input, type InputProps } from '@/components/ui';
 
 import { CopyToClipboardButton } from '@/components/shared';
 
@@ -20,12 +20,7 @@ const InputWithCopyButton = (props: InputWithCopyButtonProps) => {
         </label>
         <CopyToClipboardButton value={value?.toString() || ''} />
       </div>
-      <Input
-        id={id}
-        className="input input-bordered w-full text-sm"
-        {...rest}
-        value={value}
-      />
+      <Input id={id} className="text-sm" {...rest} value={value} />
       {description && (
         <label className="label">
           <span className="label-text-alt">{description}</span>

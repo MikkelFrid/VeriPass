@@ -46,9 +46,9 @@ const PricingSection = () => {
                   </div>
 
                   <div className="card-actions justify-center mt-4">
-                  <Button size="md" className="w-3/4 md:w-full rounded-md">
-  {t('buy-now')}
-</Button>
+                    <Button size="default" className="w-3/4 md:w-full rounded-md">
+                      {t('buy-now')}
+                    </Button>
                   </div>
                 </div>
               </article>

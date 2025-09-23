@@ -13,7 +13,8 @@ import { useFormik } from 'formik';
 import useInvitation from 'hooks/useInvitation';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Button } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui';
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
@@ -158,12 +159,13 @@ const JoinWithInvitation = ({
         <div className="space-y-3">
           <Button
             type="submit"
-            color="primary"
-            loading={formik.isSubmitting}
-            active={formik.dirty}
-            fullWidth
-            size="md"
+            disabled={formik.isSubmitting}
+            size="default"
+            className="w-full"
           >
+            {formik.isSubmitting && (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            )}
             {t('create-account')}
           </Button>
           <AgreeMessage text={t('create-account')} />
