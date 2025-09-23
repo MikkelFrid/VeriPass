@@ -11,7 +11,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRef, type ReactElement, useState } from 'react';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui'; // ✅ shadcn button
+import { Loader2 } from 'lucide-react';   // ✅ spinner
 import toast from 'react-hot-toast';
 import type { ApiResponse, NextPageWithLayout } from 'types';
 import * as Yup from 'yup';
@@ -83,12 +84,13 @@ const ForgotPassword: NextPageWithLayout<
           <div className="mt-4">
             <Button
               type="submit"
-              color="primary"
-              loading={formik.isSubmitting}
-              active={formik.dirty}
-              fullWidth
-              size="md"
+              size="sm"
+              className="w-full"
+              disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             >
+              {formik.isSubmitting && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
               {t('email-password-reset-link')}
             </Button>
           </div>

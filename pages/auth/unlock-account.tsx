@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui'; // ✅ shadcn button
 import type { GetServerSidePropsContext } from 'next';
 import { useState, type ReactElement, useEffect } from 'react';
-import type { Status } from '@/components/ui/daisy';
+import { Loader2 } from 'lucide-react';   // ✅ spinner
 import { useTranslation } from 'next-i18next';
 
 import {
@@ -22,11 +22,6 @@ interface UnlockAccountProps {
   enableRequestNewToken: boolean;
 }
 
-interface Message {
-  text: string | null;
-  status: Status | null;
-}
-
 const UnlockAccount = ({
   email,
   error,
@@ -35,7 +30,7 @@ const UnlockAccount = ({
 }: UnlockAccountProps) => {
   const [loading, setLoading] = useState(false);
   const [displayResendLink, setDisplayResendLink] = useState(false);
-  const [message, setMessage] = useState<Message>({ text: null, status: null });
+  const [message, setMessage] = useState<{ text: string | null; status: 'success' | 'error' | null }>({ text: null, status: null });
   const { t } = useTranslation('common');
 
   useEffect(() => {
@@ -85,11 +80,13 @@ const UnlockAccount = ({
 
       {displayResendLink && (
         <Button
-          wide
-          className="mt-4 btn btn-outline w-full"
           onClick={requestNewLink}
-          loading={loading}
+          size="sm"
+          variant="outline"
+          className="w-full mt-4"
+          disabled={loading}
         >
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {t('request-new-link')}
         </Button>
       )}

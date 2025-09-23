@@ -5,7 +5,8 @@ import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui'; // ✅ switch to shadcn
+import { Loader2 } from 'lucide-react';   // ✅ spinner for loading
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import * as Yup from 'yup';
@@ -72,16 +73,20 @@ const CreateTeam = ({ visible, setVisible }: CreateTeamProps) => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" variant="outline" onClick={onClose} size="md">
+          {/* Cancel button */}
+          <Button type="button" variant="outline" onClick={onClose} size="sm">
             {t('close')}
           </Button>
+
+          {/* Submit button with spinner */}
           <Button
             type="submit"
-            color="primary"
-            loading={formik.isSubmitting}
-            size="md"
-            disabled={!formik.dirty || !formik.isValid}
+            size="sm"
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           >
+            {formik.isSubmitting && (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            )}
             {t('create-team')}
           </Button>
         </Modal.Footer>

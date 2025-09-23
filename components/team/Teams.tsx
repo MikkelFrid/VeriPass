@@ -5,7 +5,7 @@ import useTeams from 'hooks/useTeams';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/daisy';
+import { Button } from '@/components/ui'; // ✅ shadcn button
 import toast from 'react-hot-toast';
 import type { ApiResponse } from 'types';
 import { useRouter } from 'next/router';
@@ -60,8 +60,7 @@ const Teams = () => {
             </p>
           </div>
           <Button
-            color="primary"
-            size="md"
+            size="sm"
             onClick={() => setCreateTeamVisible(!createTeamVisible)}
           >
             {t('create-team')}
@@ -95,7 +94,7 @@ const Teams = () => {
                       {
                         buttons: [
                           {
-                            color: 'error',
+                            variant: 'destructive', // ✅ red destructive style
                             text: t('leave-team'),
                             onClick: () => {
                               setTeam(team);

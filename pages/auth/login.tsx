@@ -10,7 +10,7 @@ import { Button } from '@/components/ui';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { type ReactElement, useEffect, useState, useRef } from 'react';
-import type { Status } from '@/components/ui/daisy';
+import type { Status } from '@/components/ui'; // ✅ switched away from daisy
 import { getCsrfToken, signIn, useSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -178,12 +178,12 @@ const Login: NextPageWithLayout<
               />
             </div>
             <div className="mt-3 space-y-3">
-            <Button
-  type="submit"
-  size="md"
-  className="w-full"
-  disabled={formik.isSubmitting}
->
+              <Button
+                type="submit"
+                size="md"
+                className="w-full"
+                disabled={formik.isSubmitting}
+              >
                 {t('sign-in')}
               </Button>
               <AgreeMessage text={t('sign-in')} />
@@ -196,21 +196,21 @@ const Login: NextPageWithLayout<
         )}
 
         <div className="space-y-3">
-        {authProviders.email && (
-  <Button asChild variant="outline" className="w-full">
-    <Link href={`/auth/magic-link${params}`}>
-      &nbsp;{t('sign-in-with-email')}
-    </Link>
-  </Button>
-)}
+          {authProviders.email && (
+            <Button asChild variant="outline" className="w-full">
+              <Link href={`/auth/magic-link${params}`}>
+                &nbsp;{t('sign-in-with-email')}
+              </Link>
+            </Button>
+          )}
 
-{authProviders.saml && (
-  <Button asChild variant="outline" className="w-full">
-    <Link href="/auth/sso">
-      &nbsp;{t('continue-with-saml-sso')}
-    </Link>
-  </Button>
-)}
+          {authProviders.saml && (
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/auth/sso">
+                &nbsp;{t('continue-with-saml-sso')}
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
       <p className="text-center text-sm text-gray-600 mt-3">
