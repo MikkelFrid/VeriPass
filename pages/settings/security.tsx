@@ -3,6 +3,7 @@ import type {
   InferGetServerSidePropsType,
 } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { AccountLayout } from '@/components/layouts';
 
 import env from '@/lib/env';
 import { UpdatePassword } from '@/components/account';
@@ -31,5 +32,7 @@ export const getServerSideProps = async ({
     },
   };
 };
+
+Security.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default Security;

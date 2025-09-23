@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import env from '@/lib/env';
 import { BOXYHQ_UI_CSS } from '@/components/styles';
+import { AccountLayout } from '@/components/layouts';
 
 const TeamSSO = ({ teamFeatures, SPConfigURL }) => {
   const { t } = useTranslation('common');
@@ -92,5 +93,7 @@ export async function getServerSideProps({
     },
   };
 }
+
+TeamSSO.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default TeamSSO;

@@ -8,6 +8,9 @@ import { toast } from 'react-hot-toast';
 import env from '@/lib/env';
 import { DirectoriesWrapper } from '@boxyhq/react-ui/dsync';
 import { BOXYHQ_UI_CSS } from '@/components/styles';
+import { AccountLayout } from '@/components/layouts';
+import directorySync from '@boxyhq/saml-jackson/dist/directory-sync';
+
 
 const DirectorySync = ({ teamFeatures }) => {
   const { isLoading, isError, team } = useTeam();
@@ -96,5 +99,7 @@ export async function getServerSideProps({
     },
   };
 }
+
+DirectorySync.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default DirectorySync;

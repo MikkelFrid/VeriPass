@@ -6,6 +6,7 @@ import useTeam from 'hooks/useTeam';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { AccountLayout } from '@/components/layouts'; // ← add this
 
 const TeamMembers = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
@@ -44,5 +45,7 @@ export async function getServerSideProps({
     },
   };
 }
+
+TeamMembers.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default TeamMembers;

@@ -1,3 +1,4 @@
+// pages/settings/account.tsx
 import type { NextPageWithLayout } from 'types';
 import type {
   GetServerSidePropsContext,
@@ -9,6 +10,7 @@ import { getSession } from '@/lib/session';
 import { getUserBySession } from 'models/user';
 import { UpdateAccount } from '@/components/account';
 import env from '@/lib/env';
+import { AccountLayout } from '@/components/layouts'; // ← ADD
 
 type AccountProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -45,5 +47,8 @@ export const getServerSideProps = async (
     },
   };
 };
+
+// ↓ ADD THIS
+Account.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default Account;

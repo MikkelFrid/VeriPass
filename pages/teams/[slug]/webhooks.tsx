@@ -6,6 +6,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import env from '@/lib/env';
+import { AccountLayout } from '@/components/layouts';
 
 const WebhookList = ({ teamFeatures }) => {
   const { t } = useTranslation('common');
@@ -47,5 +48,7 @@ export async function getServerSideProps({
     },
   };
 }
+
+WebhookList.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
 
 export default WebhookList;

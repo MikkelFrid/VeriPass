@@ -29,7 +29,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
       const html = document.documentElement;
       html.classList.toggle('dark', isDark); // still useful for Tailwind's `dark:` variants
-      html.setAttribute('data-theme', isDark ? 'black' : 'corporate'); // DaisyUI v5 themes
     }
   }, []);
 

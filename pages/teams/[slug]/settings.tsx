@@ -7,6 +7,7 @@ import type { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { TeamFeature } from 'types';
+import { AccountLayout } from '@/components/layouts'; // ← add this
 
 const Settings = ({ teamFeatures }: { teamFeatures: TeamFeature }) => {
   const { t } = useTranslation('common');
@@ -37,9 +38,7 @@ const Settings = ({ teamFeatures }: { teamFeatures: TeamFeature }) => {
   );
 };
 
-export async function getServerSideProps({
-  locale,
-}: GetServerSidePropsContext) {
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
       ...(locale ? await serverSideTranslations(locale, ['common']) : {}),
@@ -47,5 +46,9 @@ export async function getServerSideProps({
     },
   };
 }
+
+Settings.getLayout = (page: React.ReactElement) => (
+  <AccountLayout>{page}</AccountLayout>
+);
 
 export default Settings;

@@ -14,6 +14,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import type { NextPageWithLayout } from 'types';
+import { AccountLayout } from '@/components/layouts'; // ← ADD THIS
 
 interface RetracedEventsBrowserProps {
   host: string;
@@ -115,5 +116,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 }
+
+Events.getLayout = (page) => <AccountLayout>{page}</AccountLayout>;
+
 
 export default Events;
