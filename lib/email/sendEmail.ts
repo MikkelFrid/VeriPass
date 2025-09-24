@@ -1,14 +1,14 @@
 // lib/email/sendEmail.ts
-import { Resend } from 'resend';
-import type { ReactElement } from 'react';
 import env from '@/lib/env';
+import type { ReactElement } from 'react';
+import { Resend } from 'resend';
 
 type SendEmailArgs = {
   to: string | string[];
   subject: string;
-  from?: string; // optional override
-  react?: ReactElement; // send as React email template
-  html?: string; // or send raw html/text
+  from?: string;
+  react?: ReactElement;
+  html?: string;
   text?: string;
 };
 
@@ -20,42 +20,100 @@ export async function sendEmail({
   html,
   text,
 }: SendEmailArgs) {
+  console.log('[sendEmail] called', {
+    to,
+    subject,
+    from,
+    nodeEnv: process.env.NODE_ENV,
+    EMAIL_FROM: env.email.from,
+    EMAIL_FROM_DEV: process.env.EMAIL_FROM_DEV,
+  });
   if (!env.resend.apiKey) throw new Error('RESEND_API_KEY is not set');
 
-  const sender = from || env.email.from;
+  const isProd = process.env.NODE_ENV === 'production';
+  const devSender =
+    process.env.EMAIL_FROM_DEV || 'VeriPass <onboarding@resend.dev>';
+  const sender = from || (isProd ? env.email.from : devSender);
   if (!sender) throw new Error('EMAIL_FROM is not set');
 
-  const resend = new Resend(env.resend.apiKey);
+  // Optional ultra-verbose HTTP logging (see step 2)
+  const debugHttp = process.env.RESEND_DEBUG === '1';
+  const resend = new Resend(
+    env.resend.apiKey,
+    debugHttp
+      ? {
+          fetch: async (url, options) => {
+            // Very noisy but useful when debugging
+            console.log('[Resend] → Request', url, {
+              method: options?.method,
+              headers: options?.headers,
+              body: options?.body,
+            });
+            const res = await fetch(url, options);
+            const text = await res.text();
+            console.log('[Resend] ← Response', res.status, text);
+            return new Response(text, { status: res.status });
+          },
+        }
+      : undefined
+  );
 
-  let result;
+  try {
+    if (!isProd) {
+      console.log('[Resend] Sending email', {
+        from: sender,
+        to,
+        subject,
+        kind: react ? 'react' : html ? 'html' : text ? 'text' : 'unknown',
+      });
+    }
 
-  if (react) {
-    // Branch 1: React template
-    result = await resend.emails.send({
-      from: sender,
-      to,
-      subject,
-      react, // <- satisfies the "react" branch of the union
-    } as any);
-  } else if (html || text) {
-    // Branch 2: html/text body
-    result = await resend.emails.send({
-      from: sender,
-      to,
-      subject,
-      ...(html ? { html } : {}),
-      ...(text ? { text } : {}),
-    } as any);
-  } else {
-    throw new Error(
-      'sendEmail requires either `react` or `html`/`text` content'
+    let result;
+    if (react) {
+      result = await resend.emails.send({
+        from: sender,
+        to,
+        subject,
+        react,
+      } as any);
+    } else if (html || text) {
+      result = await resend.emails.send({
+        from: sender,
+        to,
+        subject,
+        ...(html ? { html } : {}),
+        ...(text ? { text } : {}),
+      } as any);
+    } else {
+      throw new Error(
+        'sendEmail requires either `react` or `html`/`text` content'
+      );
+    }
+
+    if ((result as any)?.error) {
+      const message = (result as any).error?.message || 'Unknown Resend error';
+      throw new Error(`Resend error: ${message}`);
+    }
+
+    if (!isProd) {
+      console.log('[Resend] Success', JSON.stringify(result, null, 2));
+    }
+    return result;
+  } catch (err: any) {
+    console.error(
+      '[Resend] Error',
+      JSON.stringify(
+        {
+          name: err?.name,
+          message: err?.message,
+          statusCode: err?.statusCode,
+          cause: err?.cause,
+          stack: err?.stack,
+        },
+        null,
+        2
+      )
     );
+    throw err;
   }
-
-  if ((result as any)?.error) {
-    const message = (result as any).error?.message || 'Unknown Resend error';
-    throw new Error(`Resend error: ${message}`);
-  }
-
-  return result;
 }

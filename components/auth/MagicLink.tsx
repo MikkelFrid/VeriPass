@@ -1,4 +1,5 @@
 import { InputWithLabel, Loading } from '@/components/shared';
+import { Button } from '@/components/ui/button';
 import { maxLengthPolicies } from '@/lib/common';
 import env from '@/lib/env';
 import { useFormik } from 'formik';
@@ -8,7 +9,6 @@ import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
@@ -29,41 +29,89 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
     : env.redirectIfAuthenticated;
 
   const formik = useFormik({
-    initialValues: {
-      email: '',
-    },
+    initialValues: { email: '' },
     validationSchema: Yup.object().shape({
       email: Yup.string().required().email().max(maxLengthPolicies.email),
     }),
     onSubmit: async (values) => {
-      const response = await signIn('email', {
-        email: values.email,
-        csrfToken,
-        redirect: false,
-        callbackUrl,
-      });
+      try {
+        // 1) Pre-check: does the user exist?
+        const existsRes = await fetch(
+          `/api/users?exists=1&email=${encodeURIComponent(values.email)}`,
+          { method: 'GET', headers: { 'Content-Type': 'application/json' } }
+        );
 
-      formik.resetForm();
+        if (!existsRes.ok) {
+          console.log(
+            '[MagicLink:UI] /api/users?exists failed',
+            existsRes.status
+          );
+          toast.error(t('email-login-error'));
+          return;
+        }
 
-      if (response?.error) {
+        const { exists } = await existsRes.json();
+
+        if (!exists) {
+          toast.error(
+            t('email-login-no-user') ||
+              'No account found for this email. Please sign up first.'
+          );
+          return;
+        }
+
+        // 2) If user exists, proceed with NextAuth magic link
+        const response = await signIn('email', {
+          email: values.email,
+          csrfToken,
+          redirect: false,
+          callbackUrl,
+        });
+
+        console.log('[MagicLink:UI] signIn response', response);
+
+        if (response?.error) {
+          switch (response.error) {
+            case 'Configuration':
+              toast.error(
+                t('email-login-config') ||
+                  'Email auth is not configured correctly.'
+              );
+              break;
+            case 'AccessDenied':
+              toast.error(
+                t('email-login-access-denied') ||
+                  'Access denied for this email.'
+              );
+              break;
+            default:
+              console.log(
+                '[MagicLink:UI] unhandled signIn error',
+                response.error,
+                response
+              );
+              toast.error(t('email-login-error'));
+              break;
+          }
+          return;
+        }
+
+        if (response?.ok) {
+          toast.success(
+            t('email-login-success') || 'Check your inbox for the sign-in link.'
+          );
+          return;
+        }
+
         toast.error(t('email-login-error'));
-        return;
-      }
-
-      if (response?.status === 200 && response?.ok) {
-        toast.success(t('email-login-success'));
-        return;
+      } finally {
+        formik.resetForm();
       }
     },
   });
 
-  if (status === 'loading') {
-    return <Loading />;
-  }
-
-  if (status === 'authenticated') {
-    router.push(env.redirectIfAuthenticated);
-  }
+  if (status === 'loading') return <Loading />;
+  if (status === 'authenticated') router.push(env.redirectIfAuthenticated);
 
   return (
     <>
@@ -100,7 +148,6 @@ const MagicLink = ({ csrfToken }: MagicLinkProps) => {
               {t('sign-in-with-password')}
             </Link>
           </Button>
-          {/* SSO temporarily disabled; route removed in cleanup. Re-enable when SSO is configured. */}
         </div>
       </div>
       <p className="text-center text-sm text-gray-600 mt-3">
